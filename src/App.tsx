@@ -1,6 +1,8 @@
 import AntennaNavbar from "./components/AntennaNavbar";
 import RobotHero from "./RobotHero";
 import AboutSection from "./components/AboutSection";
+import ServicesSection from "./components/ServicesSection";
+import TestimonialsSection from "./components/TestimonialsSection";
 
 const DEFAULT_NAV_ITEMS = [
   { label: "Home", href: "#top" },
@@ -23,6 +25,12 @@ function App() {
 
       {/* 2. About Section with Blurred Card & Bubble Background */}
       <AboutSection />
+
+      {/* 3. Services Section with Sticky Stacking Cards */}
+      <ServicesSection />
+
+      {/* 4. Testimonials Section – Infinite Scroll Columns */}
+      <TestimonialsSection />
     </main>
   );
 }
