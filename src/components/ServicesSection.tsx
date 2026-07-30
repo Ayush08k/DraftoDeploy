@@ -13,7 +13,10 @@ import {
   HiOutlineCheckCircle,
   HiOutlineArrowNarrowRight,
   HiOutlineChip,
+  HiOutlineChevronLeft,
+  HiOutlineChevronRight,
 } from 'react-icons/hi';
+import FloatingPathsBackground from './FloatingPathsBackground';
 
 const SERVICES = [
   {
@@ -144,14 +147,31 @@ export function ServicesSection() {
     };
   }, []);
 
+  // ── Scroll one card width left or right (mobile/tablet buttons) ─────────
+  const scrollCard = (dir: 'left' | 'right') => {
+    const track = trackRef.current;
+    if (!track) return;
+    // find approximate card width from first child
+    const card = track.firstElementChild as HTMLElement | null;
+    const cardWidth = card ? card.offsetWidth + 32 : 320;
+    track.scrollBy({ left: dir === 'right' ? cardWidth : -cardWidth, behavior: 'smooth' });
+  };
+
   return (
     <section
       ref={sectionRef}
       id="services"
       className="relative w-full h-screen overflow-hidden bg-zinc-950 text-white flex flex-col py-6 px-0"
     >
+      {/* ── Floating Paths Background (contained to this section) ── */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <FloatingPathsBackground position={1} className="w-full h-full">
+          <></>
+        </FloatingPathsBackground>
+      </div>
+
       {/* Background ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-cyan-500/10 blur-[150px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-cyan-500/8 blur-[150px] pointer-events-none rounded-full z-0" />
 
       {/* Section Header */}
       <div className="text-center space-y-2 max-w-3xl mx-auto relative z-20 px-4 pt-2 pb-4 flex-shrink-0">
@@ -174,12 +194,22 @@ export function ServicesSection() {
         </h2>
       </div>
 
-      {/* Horizontal Snap Scroll Cards Track */}
-      <div
-        ref={trackRef}
-        className="flex-1 w-full overflow-x-auto snap-x snap-mandatory flex items-center gap-6 sm:gap-8 px-6 sm:px-12 z-20"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-      >
+      {/* Horizontal Snap Scroll Cards Track + Mobile Nav Buttons */}
+      <div className="flex-1 relative flex items-center z-20">
+        {/* LEFT button — mobile & tablet only */}
+        <button
+          onClick={() => scrollCard('left')}
+          aria-label="Previous service"
+          className="lg:hidden absolute left-1 z-30 w-10 h-10 flex items-center justify-center rounded-full bg-zinc-800/90 border border-white/20 backdrop-blur-md text-white shadow-lg active:scale-95 transition-transform hover:border-[#00ffc6]/60 hover:text-[#00ffc6]"
+        >
+          <HiOutlineChevronLeft className="w-5 h-5" />
+        </button>
+
+        <div
+          ref={trackRef}
+          className="w-full overflow-x-auto snap-x snap-mandatory flex items-center gap-6 sm:gap-8 px-12 sm:px-16"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
         {SERVICES.map((service) => {
           const Icon = service.icon;
           return (
@@ -234,6 +264,16 @@ export function ServicesSection() {
             </div>
           );
         })}
+        </div>
+
+        {/* RIGHT button — mobile & tablet only */}
+        <button
+          onClick={() => scrollCard('right')}
+          aria-label="Next service"
+          className="lg:hidden absolute right-1 z-30 w-10 h-10 flex items-center justify-center rounded-full bg-zinc-800/90 border border-white/20 backdrop-blur-md text-white shadow-lg active:scale-95 transition-transform hover:border-[#00ffc6]/60 hover:text-[#00ffc6]"
+        >
+          <HiOutlineChevronRight className="w-5 h-5" />
+        </button>
       </div>
 
       {/* Scroll Progress Bar */}
