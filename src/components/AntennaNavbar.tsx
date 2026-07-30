@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import MobileSidebarDrawer from './MobileSidebarDrawer';
 import type { NavItem } from '../RobotHero';
 
@@ -10,6 +10,37 @@ export default function AntennaNavbar({
   leftItems: NavItem[];
 }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [visible, setVisible] = useState(true);
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!ticking.current) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+
+          if (currentScrollY <= 10) {
+            // Always show at the very top
+            setVisible(true);
+          } else if (currentScrollY < lastScrollY.current) {
+            // Scrolling UP → show navbar
+            setVisible(true);
+          } else if (currentScrollY > lastScrollY.current) {
+            // Scrolling DOWN → hide navbar
+            setVisible(false);
+          }
+
+          lastScrollY.current = currentScrollY;
+          ticking.current = false;
+        });
+        ticking.current = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: NavItem) => {
     if (item.label.toLowerCase() === 'home' || item.href === '#' || item.href === '#top') {
@@ -19,7 +50,13 @@ export default function AntennaNavbar({
   };
 
   return (
-    <header className="fixed top-4 inset-x-0 z-50 pointer-events-none flex justify-center px-4">
+    <header
+      className="fixed top-4 inset-x-0 z-50 pointer-events-none flex justify-center px-4"
+      style={{
+        transform: visible ? 'translateY(0)' : 'translateY(calc(-100% - 2rem))',
+        transition: 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+      }}
+    >
       <div className="w-full max-w-[1400px] mx-auto flex flex-col items-center justify-center relative pointer-events-auto">
         {/* Mobile Sidebar Trigger & Drawer */}
         <MobileSidebarDrawer navItemsLeft={leftItems} />

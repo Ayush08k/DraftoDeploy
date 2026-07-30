@@ -723,8 +723,8 @@ export interface RobotHeroProps {
 
 export function RobotHero({
   backgroundText = "DraftoDeploy",
-  backgroundTextColor = "#000000",
-  backgroundTextOpacity = 0.13,
+  backgroundTextColor = "#220707ff",
+  backgroundTextOpacity = 0.35,
   color = "#c4c4c4",
   scale = 1,
   pantallaColor = "#00ffc6",
@@ -772,6 +772,7 @@ export function RobotHero({
             fontSize: "clamp(4rem, 15vw, 14rem)",
             lineHeight: 1,
             transform: `translate(0px, 40px) rotate(0deg)`,
+            textShadow: `0 4px 24px rgba(34,7,7,0.35), 0 2px 6px rgba(34,7,7,0.25), 0 0 60px rgba(34,7,7,0.15)`,
           }}
         >
           {backgroundText}

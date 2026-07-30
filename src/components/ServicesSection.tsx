@@ -210,60 +210,60 @@ export function ServicesSection() {
           className="w-full overflow-x-auto snap-x snap-mandatory flex items-center gap-6 sm:gap-8 px-12 sm:px-16"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-        {SERVICES.map((service) => {
-          const Icon = service.icon;
-          return (
-            <div
-              key={service.id}
-              className="w-[85vw] sm:w-[500px] md:w-[580px] lg:w-[640px] flex-shrink-0 snap-center"
-            >
-              <div className={`relative overflow-hidden rounded-3xl border border-white/20 bg-zinc-900/90 backdrop-blur-2xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] bg-gradient-to-br ${service.gradient} hover:border-[#00ffc6]/50 transition-all duration-300 group`}>
-                <div className="absolute -right-16 -top-16 w-60 h-60 rounded-full blur-[80px] pointer-events-none opacity-20 bg-[#00ffc6]" />
+          {SERVICES.map((service) => {
+            const Icon = service.icon;
+            return (
+              <div
+                key={service.id}
+                className="w-[85vw] sm:w-[500px] md:w-[580px] lg:w-[640px] flex-shrink-0 snap-center"
+              >
+                <div className={`relative overflow-hidden rounded-3xl border border-white/20 bg-zinc-900/90 backdrop-blur-2xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] bg-gradient-to-br ${service.gradient} hover:border-[#00ffc6]/50 transition-all duration-300 group`}>
+                  <div className="absolute -right-16 -top-16 w-60 h-60 rounded-full blur-[80px] pointer-events-none opacity-20 bg-[#00ffc6]" />
 
-                <div className="relative z-10 space-y-5">
-                  <div className="flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
-                        <Icon className="w-6 h-6" style={{ color: service.accentColor }} />
+                  <div className="relative z-10 space-y-5">
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          <Icon className="w-6 h-6" style={{ color: service.accentColor }} />
+                        </div>
+                        <div>
+                          <div className="text-[11px] font-extrabold uppercase tracking-widest text-[#00ffc6]">Service {service.number}</div>
+                          <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">{service.title}</h3>
+                        </div>
                       </div>
-                      <div>
-                        <div className="text-[11px] font-extrabold uppercase tracking-widest text-[#00ffc6]">Service {service.number}</div>
-                        <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">{service.title}</h3>
-                      </div>
+                      <span className="text-3xl font-black text-white/20 select-none">{service.number}</span>
                     </div>
-                    <span className="text-3xl font-black text-white/20 select-none">{service.number}</span>
-                  </div>
 
-                  <div className="space-y-1.5">
-                    <div className="text-xs font-bold text-zinc-200">{service.tagline}</div>
-                    <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">{service.description}</p>
-                  </div>
+                    <div className="space-y-1.5">
+                      <div className="text-xs font-bold text-zinc-200">{service.tagline}</div>
+                      <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">{service.description}</p>
+                    </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                    {service.features.map((feat) => (
-                      <div key={feat} className="flex items-center gap-2 text-xs text-zinc-200 font-medium bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl backdrop-blur-sm">
-                        <HiOutlineCheckCircle className="w-4 h-4 text-[#00ffc6] flex-shrink-0" />
-                        <span className="truncate">{feat}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
-                    <div className="flex flex-wrap items-center gap-1.5">
-                      {service.tech.map((t) => (
-                        <span key={t} className="px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-bold text-zinc-300">{t}</span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                      {service.features.map((feat) => (
+                        <div key={feat} className="flex items-center gap-2 text-xs text-zinc-200 font-medium bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl backdrop-blur-sm">
+                          <HiOutlineCheckCircle className="w-4 h-4 text-[#00ffc6] flex-shrink-0" />
+                          <span className="truncate">{feat}</span>
+                        </div>
                       ))}
                     </div>
-                    <a href="#contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black text-xs font-extrabold uppercase tracking-wider hover:bg-[#00ffc6] transition-colors shadow-md group/btn">
-                      <span>Explore</span>
-                      <HiOutlineArrowNarrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </a>
+
+                    <div className="pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        {service.tech.map((t) => (
+                          <span key={t} className="px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-bold text-zinc-300">{t}</span>
+                        ))}
+                      </div>
+                      <a href="#contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black text-xs font-extrabold uppercase tracking-wider hover:bg-[#00ffc6] transition-colors shadow-md group/btn">
+                        <span>Explore</span>
+                        <HiOutlineArrowNarrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
         </div>
 
         {/* RIGHT button — mobile & tablet only */}
