@@ -16,17 +16,11 @@ import {
   Map,
   Sparkles,
   LogOut,
-  ShoppingBag,
-  ExternalLink,
 } from 'lucide-react';
 import type { NavItem } from '../RobotHero';
 
 interface MobileSidebarDrawerProps {
   navItemsLeft: NavItem[];
-  contactText: string;
-  contactHref: string;
-  ctaText: string;
-  onCtaClick?: () => void;
 }
 
 const DATA = {
@@ -73,10 +67,6 @@ const DATA = {
 
 export function MobileSidebarDrawer({
   navItemsLeft,
-  contactText,
-  contactHref,
-  ctaText,
-  onCtaClick,
 }: MobileSidebarDrawerProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [openSections, setOpenSections] = React.useState<Record<string, boolean>>({
@@ -164,26 +154,7 @@ export function MobileSidebarDrawer({
                       <ChevronRight className="w-3.5 h-3.5 text-zinc-400" />
                     </a>
                   ))}
-                  <a
-                    href={contactHref}
-                    onClick={() => setIsOpen(false)}
-                    className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-white hover:bg-white/15 transition-colors flex items-center justify-between"
-                  >
-                    <span>{contactText}</span>
-                    <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
-                  </a>
                 </div>
-
-                <button
-                  onClick={() => {
-                    setIsOpen(false);
-                    onCtaClick?.();
-                  }}
-                  className="w-full mt-3 py-3 rounded-xl bg-[#00ffc6] text-black font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,255,198,0.4)]"
-                >
-                  <ShoppingBag className="w-4 h-4" />
-                  <span>{ctaText}</span>
-                </button>
               </div>
 
               {/* Platform Collapsible Menu */}

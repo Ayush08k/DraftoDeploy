@@ -5,7 +5,6 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { PiShoppingBagBold } from "react-icons/pi";
 import { HiChevronDown } from "react-icons/hi";
 
 class HeartCurve extends THREE.Curve<THREE.Vector3> {
@@ -722,126 +721,10 @@ export interface RobotHeroProps {
   metalness?: number;
 }
 
-import MobileSidebarDrawer from "./components/MobileSidebarDrawer";
-
-function AntennaNavbar({
-  leftItems,
-  contactText,
-  contactHref,
-  contactTarget,
-  ctaText,
-  onCtaClick,
-}: {
-  leftItems: NavItem[];
-  contactText: string;
-  contactHref: string;
-  contactTarget?: string;
-  ctaText: string;
-  onCtaClick?: () => void;
-}) {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
-  const { scrollY } = useScroll();
-  const lineOpacity = useTransform(scrollY, [0, 50], [1, 0]);
-
-  return (
-    <nav className="sticky top-0 z-50 w-full pt-4 lg:pt-8 px-4 lg:px-8 pointer-events-none">
-      <div className="w-full max-w-[1400px] mx-auto flex flex-col relative pointer-events-auto">
-        {/* Mobile Sidebar Trigger & Drawer */}
-        <MobileSidebarDrawer
-          navItemsLeft={leftItems}
-          contactText={contactText}
-          contactHref={contactHref}
-          ctaText={ctaText}
-          onCtaClick={onCtaClick}
-        />
-
-        {/* Desktop Navbar (Large Screens) */}
-        <div className="hidden lg:flex flex-row items-center justify-between relative">
-          <div className="flex flex-wrap justify-start items-center gap-3 z-20">
-            {leftItems.map((item, idx) => (
-              <a
-                key={item.label}
-                href={item.href}
-                target={item.target}
-                rel={
-                  item.target === "_blank" ? "noopener noreferrer" : undefined
-                }
-                onMouseEnter={() => setHoveredIndex(idx)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                className="relative px-7 py-2.5 rounded-full bg-white text-black hover:bg-zinc-200 text-sm font-bold transition-all overflow-hidden shadow-[0_4px_14px_rgba(255,255,255,0.15)]"
-              >
-                {item.label}
-                {hoveredIndex === idx && (
-                  <motion.div
-                    layoutId="navbar-indicator-left"
-                    className="absolute inset-0 border-b-[3px] border-black"
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                  />
-                )}
-              </a>
-            ))}
-          </div>
-
-          <div className="flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center justify-center pointer-events-auto cursor-pointer group z-10">
-            <div className="relative flex items-center justify-center h-12 w-16">
-              <div className="absolute left-2 w-1.5 h-4 bg-zinc-300 rounded-l-md transition-transform duration-300 group-hover:-translate-x-1" />
-              <div className="absolute right-2 w-1.5 h-4 bg-zinc-300 rounded-r-md transition-transform duration-300 group-hover:translate-x-1" />
-
-              <div className="z-10 w-10 h-10 bg-white/10 border-2 border-white/20 backdrop-blur-md rounded-[12px] flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all duration-300 group-hover:bg-white/20 group-hover:shadow-[0_4px_25px_rgba(255,255,255,0.15)]">
-                <div className="w-[70%] h-[60%] bg-[#0a0a0a] rounded-lg flex items-center justify-center gap-1.5 overflow-hidden shadow-[inset_0_2px_4px_rgba(0,0,0,0.8)]">
-                  <div className="w-1.5 h-3 bg-[#00ffc6] rounded-[2px] shadow-[0_0_8px_#00ffc6] transition-transform duration-200 group-hover:scale-y-[0.2]" />
-                  <div className="w-1.5 h-3 bg-[#00ffc6] rounded-[2px] shadow-[0_0_8px_#00ffc6] transition-transform duration-200 group-hover:scale-y-[0.2]" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex justify-end items-center gap-3 z-20">
-            <a
-              href={contactHref}
-              target={contactTarget}
-              rel={
-                contactTarget === "_blank" ? "noopener noreferrer" : undefined
-              }
-              className="px-7 py-2.5 rounded-full bg-white text-black hover:bg-zinc-200 text-sm font-bold transition-all shadow-[0_4px_14px_rgba(255,255,255,0.15)]"
-            >
-              {contactText}
-            </a>
-            <button
-              onClick={onCtaClick}
-              className="px-7 py-2.5 rounded-full bg-[#00ffc6] text-black text-sm font-black hover:bg-[#00e5b2] transition-colors flex items-center gap-2 shadow-[0_0_20px_rgba(0,255,198,0.4)] cursor-pointer"
-            >
-              {ctaText}
-              <PiShoppingBagBold size={18} />
-            </button>
-          </div>
-        </div>
-
-        <motion.div
-          style={{ opacity: lineOpacity }}
-          className="w-full mt-4 lg:mt-6 border-b-2 border-dotted border-white/30"
-        />
-      </div>
-    </nav>
-  );
-}
-
 export function RobotHero({
   backgroundText = "DraftoDeploy",
   backgroundTextColor = "#000000",
   backgroundTextOpacity = 0.13,
-  navItemsLeft = [
-    { label: "Product", href: "#" },
-    { label: "About", href: "#" },
-    { label: "Specs", href: "#" },
-    { label: "Reviews", href: "#" },
-  ],
-  contactText = "Contact",
-  contactHref = "#",
-  contactTarget,
-  ctaText = "Buy Now",
-  onCtaClick,
   color = "#c4c4c4",
   scale = 1,
   pantallaColor = "#00ffc6",
@@ -869,6 +752,7 @@ export function RobotHero({
 
   return (
     <section
+      id="top"
       ref={containerRef}
       className="relative w-full h-dvh min-h-[600px] overflow-hidden"
       style={{
@@ -958,35 +842,22 @@ export function RobotHero({
         </Canvas>
       </div>
 
-      <div className="absolute inset-0 z-20 pointer-events-none flex flex-col">
-        <AntennaNavbar
-          leftItems={navItemsLeft}
-          contactText={contactText}
-          contactHref={contactHref}
-          contactTarget={contactTarget}
-          ctaText={ctaText}
-          onCtaClick={onCtaClick}
-        />
-
-        <div className="relative w-full max-w-[1400px] mx-auto px-8 flex-1 flex flex-col">
-          <div className="mt-auto flex justify-between items-end pb-12 w-full"></div>
-        </div>
-      </div>
-
-      {/* Non-clickable "Scroll for more" button indicator that fades out when user scrolls */}
+      {/* Plain frameless scroll indicator with plain text and two stacked down arrows below */}
       <motion.div
         style={{ opacity: scrollIndicatorOpacity, y: scrollIndicatorY }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex flex-col items-center gap-2 select-none"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex flex-col items-center gap-1 select-none text-center"
       >
-        <div className="px-5 py-2.5 rounded-full bg-black/40 border border-white/20 backdrop-blur-md text-white text-xs font-extrabold uppercase tracking-widest flex items-center gap-2 shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
-          <span>Scroll for more</span>
-          <motion.div
-            animate={{ y: [0, 4, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <HiChevronDown className="w-4 h-4 text-[#00ffc6]" />
-          </motion.div>
-        </div>
+        <span className="text-[11px] font-bold text-zinc-900 tracking-widest uppercase">
+          Scroll for details
+        </span>
+        <motion.div
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          className="flex flex-col items-center -space-y-1.5 text-zinc-900"
+        >
+          <HiChevronDown className="w-4 h-4" />
+          <HiChevronDown className="w-4 h-4 opacity-60" />
+        </motion.div>
       </motion.div>
 
       {/* Smooth transition gradient blend into the dark About section */}

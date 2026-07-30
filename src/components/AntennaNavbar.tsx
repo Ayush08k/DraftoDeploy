@@ -1,0 +1,54 @@
+'use client';
+
+import { useState } from 'react';
+import MobileSidebarDrawer from './MobileSidebarDrawer';
+import type { NavItem } from '../RobotHero';
+
+export default function AntennaNavbar({
+  leftItems,
+}: {
+  leftItems: NavItem[];
+}) {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: NavItem) => {
+    if (item.label.toLowerCase() === 'home' || item.href === '#' || item.href === '#top') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <header className="fixed top-4 inset-x-0 z-50 pointer-events-none flex justify-center px-4">
+      <div className="w-full max-w-[1400px] mx-auto flex flex-col items-center justify-center relative pointer-events-auto">
+        {/* Mobile Sidebar Trigger & Drawer */}
+        <MobileSidebarDrawer navItemsLeft={leftItems} />
+
+        {/* Desktop Navbar (Large Screens) */}
+        <div className="hidden lg:flex justify-center items-center w-full relative">
+          <div className="flex items-center gap-1 sm:gap-2 px-6 py-2.5 rounded-full bg-white/50 border border-white/80 backdrop-blur-3xl backdrop-saturate-200 shadow-[0_12px_40px_rgba(0,0,0,0.25)] z-20">
+            {leftItems.map((item, idx) => (
+              <a
+                key={item.label}
+                href={item.href}
+                target={item.target}
+                rel={
+                  item.target === '_blank' ? 'noopener noreferrer' : undefined
+                }
+                onClick={(e) => handleNavClick(e, item)}
+                onMouseEnter={() => setHoveredIndex(idx)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                className="relative px-4 py-1.5 text-xs sm:text-sm font-bold text-zinc-900 hover:text-black transition-colors"
+              >
+                {item.label}
+                {hoveredIndex === idx && (
+                  <div className="absolute inset-0 bg-black/10 rounded-full -z-10 transition-all duration-200" />
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}

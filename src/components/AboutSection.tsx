@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { BubbleBackground } from "./BubbleBackground";
-import { 
-  HiOutlineSparkles, 
-  HiOutlineLightningBolt, 
-  HiOutlineShieldCheck, 
+import {
+  HiOutlineSparkles,
+  HiOutlineLightningBolt,
+  HiOutlineShieldCheck,
   HiOutlineCube,
   HiOutlineGlobeAlt,
   HiOutlineCheckCircle,
@@ -31,11 +31,13 @@ export function AboutSection() {
 
   return (
     <section id="about" className="relative w-full overflow-hidden bg-zinc-950 text-white">
+      {/* Smooth transition gradient blend at the top of About section */}
+      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-zinc-950 via-zinc-950/40 to-transparent pointer-events-none z-20" />
       {/* 
         BubbleBackground is the background of the ENTIRE About section.
         The liquid bubbles move behind the blurred card container!
       */}
-      <BubbleBackground 
+      <BubbleBackground
         interactive={true}
         className="w-full py-24 px-4 sm:px-6 lg:px-8 min-h-[800px]"
         colors={{
@@ -48,7 +50,7 @@ export function AboutSection() {
         }}
       >
         <div className="max-w-5xl mx-auto relative z-10 space-y-12">
-          
+
           {/* Section Header */}
           <div className="text-center space-y-4 max-w-3xl mx-auto">
             <motion.div
@@ -94,7 +96,7 @@ export function AboutSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative rounded-3xl backdrop-blur-2xl bg-zinc-950/65 border border-white/20 p-8 sm:p-12 lg:p-14 shadow-[0_25px_60px_rgba(0,0,0,0.8)] space-y-12"
           >
-            
+
             {/* Card Inner Grid Narrative */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               <div className="lg:col-span-7 space-y-6">
@@ -106,7 +108,7 @@ export function AboutSection() {
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
                   Engineered for Designers, Developers & Visionaries
                 </h3>
-                
+
                 <p className="text-zinc-300 text-base sm:text-lg leading-relaxed">
                   DraftoDeploy eliminates the friction between design iterations and live deployment. By integrating real-time WebGL rendering, responsive component modularity, and edge execution, we empower teams to launch state-of-the-art web products in record time.
                 </p>
@@ -150,7 +152,7 @@ export function AboutSection() {
 
                   <div className="pt-4 border-t border-white/10 flex flex-wrap gap-2">
                     {techStack.map((tech) => (
-                      <span 
+                      <span
                         key={tech}
                         className="px-2.5 py-1 rounded-md bg-white/10 text-xs text-zinc-200 font-mono border border-white/10"
                       >
