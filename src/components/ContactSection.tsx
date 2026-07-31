@@ -61,15 +61,6 @@ export function ContactSection() {
     }, 1000);
   };
 
-  const openWhatsAppDirect = () => {
-    const text = encodeURIComponent(
-      `Hi DraftoDeploy! My name is ${formData.name || 'a client'} from ${formData.country}. I have a project inquiry.`
-    );
-    const cleanNum = formData.whatsapp.replace(/[^0-9]/g, '');
-    const num = cleanNum.length > 5 ? cleanNum : '15550000000';
-    window.open(`https://wa.me/${num}?text=${text}`, '_blank');
-  };
-
   return (
     <section
       id="contact"

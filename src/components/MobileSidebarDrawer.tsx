@@ -23,6 +23,7 @@ export function MobileSidebarDrawer({
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsOpen(false);
+    window.location.hash = href;
 
     if (href === '#top' || href === '#') {
       window.scrollTo({ top: 0, behavior: 'smooth' });

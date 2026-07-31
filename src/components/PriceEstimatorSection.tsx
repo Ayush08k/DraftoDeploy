@@ -21,7 +21,6 @@ import {
   HiOutlineAdjustments,
   HiOutlineDocumentText,
   HiOutlineChip,
-  HiOutlineViewGrid,
   HiOutlineSparkles as HiSparklesIcon,
 } from 'react-icons/hi';
 

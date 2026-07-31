@@ -43,9 +43,17 @@ export default function AntennaNavbar({
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: NavItem) => {
-    if (item.label.toLowerCase() === 'home' || item.href === '#' || item.href === '#top') {
+    if (item.href.startsWith('#')) {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.location.hash = item.href;
+      if (item.label.toLowerCase() === 'home' || item.href === '#top') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const el = document.querySelector(item.href);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
     }
   };
 
