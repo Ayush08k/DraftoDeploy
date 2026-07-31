@@ -71,7 +71,24 @@ export default function AntennaNavbar({
 
         {/* Desktop Navbar (Large Screens) */}
         <div className="hidden lg:flex justify-center items-center w-full relative">
-          <div className="flex items-center gap-1 sm:gap-2 px-6 py-2.5 rounded-full bg-white/50 border border-white/80 backdrop-blur-3xl backdrop-saturate-200 shadow-[0_12px_40px_rgba(0,0,0,0.25)] z-20">
+          <div className="flex items-center gap-1 sm:gap-2 px-5 py-2 rounded-full bg-white/60 border border-white/80 backdrop-blur-3xl backdrop-saturate-200 shadow-[0_12px_40px_rgba(0,0,0,0.25)] z-20">
+            {/* Logo before Home */}
+            <a
+              href="#top"
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.hash = '#top';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="flex items-center pr-3.5 pl-1 -my-2 border-r border-zinc-900/15 hover:opacity-90 transition-opacity"
+            >
+              <img
+                src="/logo.png"
+                alt="Drafto Deploy Logo"
+                className="h-11 sm:h-12 w-auto object-contain mix-blend-multiply scale-120 origin-left"
+              />
+            </a>
+
             {leftItems.map((item, idx) => (
               <a
                 key={item.label}

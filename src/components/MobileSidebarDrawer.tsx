@@ -44,12 +44,13 @@ export function MobileSidebarDrawer({
           <a
             href="#top"
             onClick={(e) => handleNavClick(e, '#top')}
-            className="flex items-center gap-2 text-white font-black text-sm tracking-tight"
+            className="flex items-center text-white font-black text-sm tracking-tight"
           >
-            <div className="w-7 h-7 rounded-lg bg-[#00ffc6]/15 border border-[#00ffc6]/30 flex items-center justify-center text-[#00ffc6]">
-              <Layers className="w-4 h-4" />
-            </div>
-            <span>DraftoDeploy</span>
+            <img
+              src="/logo.png"
+              alt="Drafto Deploy Logo"
+              className="h-10 sm:h-11 w-auto object-contain mix-blend-screen scale-115 origin-left"
+            />
           </a>
 
           <button
@@ -89,13 +90,11 @@ export function MobileSidebarDrawer({
                   <div>
                     <div className="p-5 border-b border-white/10 flex items-center justify-between bg-zinc-900/60">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-xl bg-[#00ffc6]/15 border border-[#00ffc6]/40 flex items-center justify-center text-[#00ffc6]">
-                          <Layers className="w-4.5 h-4.5" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-black text-white">DraftoDeploy</div>
-                          <div className="text-[10px] text-[#00ffc6] font-bold">Deploy Agency Navigation</div>
-                        </div>
+                        <img
+                          src="/logo.png"
+                          alt="Drafto Deploy Logo"
+                          className="h-7 w-auto object-contain mix-blend-screen"
+                        />
                       </div>
                       <button
                         onClick={() => setIsOpen(false)}

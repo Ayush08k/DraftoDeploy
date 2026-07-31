@@ -347,7 +347,7 @@ export const Html = () => {
 export interface ProjectItem {
   id: string;
   title: string;
-  category: 'AI Apps' | 'Web3 & Cloud' | 'Full Stack' | 'Mobile & UX';
+  category: string;
   description: string;
   longDescription: string;
   image: string;
@@ -358,110 +358,7 @@ export interface ProjectItem {
   featured?: boolean;
 }
 
-const PROJECTS_DATA: ProjectItem[] = [
-  {
-    id: 'drafto-ai-copilot',
-    title: 'Drafto AI Code Architect',
-    category: 'AI Apps',
-    description: 'Autonomous AI agent engineering production-ready React micro-frontend architectures with automated WebGL visual testing.',
-    longDescription: 'Drafto AI Code Architect transforms natural language system requirements into high-performance web applications. Powered by custom LLM pipelines, real-time WebGPU shaders, and automated CI/CD validation.',
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
-    tags: ['React 19', 'Three.js TSL', 'WebGPU', 'TypeScript', 'Node.js'],
-    metrics: [
-      { label: 'Build Speed', value: '10x Faster' },
-      { label: 'Lighthouse Score', value: '99/100' },
-      { label: 'Active Users', value: '45k+' }
-    ],
-    liveUrl: 'https://example.com/drafto-ai',
-    githubUrl: 'https://github.com',
-    featured: true,
-  },
-  {
-    id: 'quantum-mesh-cloud',
-    title: 'QuantumMesh Neural Cloud',
-    category: 'Web3 & Cloud',
-    description: 'Distributed WebGPU compute network streaming 3D graphics and AI inferencing to edge devices.',
-    longDescription: 'QuantumMesh harnesses decentralized GPU power to render real-time photorealistic scenes and execute complex neural networks directly inside the browser with zero server latency.',
-    image: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1200&q=80',
-    tags: ['WebGPU', 'Rust', 'WebAssembly', 'TailwindCSS', 'GraphQL'],
-    metrics: [
-      { label: 'Latency', value: '< 15ms' },
-      { label: 'Uptime', value: '99.99%' },
-      { label: 'Nodes Active', value: '12,400' }
-    ],
-    liveUrl: 'https://example.com/quantum-mesh',
-    githubUrl: 'https://github.com',
-    featured: true,
-  },
-  {
-    id: 'nexus-design-engine',
-    title: 'Nexus Realtime Design System',
-    category: 'Full Stack',
-    description: 'Enterprise design system token generator with dynamic glassmorphism shaders and live color accessibility engine.',
-    longDescription: 'Nexus empowers cross-functional design teams to iterate seamlessly with unified token synchronization across Figma, React, React Native, and iOS Native apps.',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-    tags: ['Framer Motion', 'Vite', 'Tailwind', 'Design Tokens'],
-    metrics: [
-      { label: 'Design Velocity', value: '+300%' },
-      { label: 'Components', value: '150+' },
-      { label: 'Figma Sync', value: 'Realtime' }
-    ],
-    liveUrl: 'https://example.com/nexus',
-    githubUrl: 'https://github.com',
-    featured: false,
-  },
-  {
-    id: 'cyber-pulse-mobile',
-    title: 'CyberPulse Biometric Hub',
-    category: 'Mobile & UX',
-    description: 'Next-gen mobile telemetry dashboard with interactive 3D particle visualizer and health analytics.',
-    longDescription: 'CyberPulse combines sensor fusion algorithms with high-FPS canvas charts to display biometrics, sleep metrics, and activity tracking in an immersive cyberpunk theme.',
-    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80',
-    tags: ['React Native', 'Three.js', 'RxJS', 'PWA'],
-    metrics: [
-      { label: 'FPS', value: '60 Smooth' },
-      { label: 'App Store Rating', value: '4.9 ★' },
-      { label: 'Downloads', value: '250k+' }
-    ],
-    liveUrl: 'https://example.com/cyberpulse',
-    githubUrl: 'https://github.com',
-    featured: true,
-  },
-  {
-    id: 'synthwave-audio-lab',
-    title: 'SynthWave Spatial Audio DAW',
-    category: 'AI Apps',
-    description: 'Browser-based 3D spatial audio synthesizer powered by Web Audio API and interactive node graph editing.',
-    longDescription: 'SynthWave allows music producers and game developers to position sound sources in 3D binaural space with real-time room acoustic impulse response simulation.',
-    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80',
-    tags: ['Web Audio API', 'Canvas 2D', 'TypeScript', 'Web Workers'],
-    metrics: [
-      { label: 'Audio Latency', value: '3.2ms' },
-      { label: 'Presets', value: '500+' },
-      { label: 'Export', value: '24-bit WAV' }
-    ],
-    liveUrl: 'https://example.com/synthwave',
-    githubUrl: 'https://github.com',
-    featured: false,
-  },
-  {
-    id: 'hyperion-fintech-suite',
-    title: 'Hyperion Algorithmic Terminal',
-    category: 'Full Stack',
-    description: 'High-frequency crypto and equities trading terminal featuring WebGPU candle chart rendering.',
-    longDescription: 'Hyperion renders millions of tick data points smoothly per second. Includes automated AI backtesting strategies, customizable order books, and real-time WebSocket feeds.',
-    image: 'https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&w=1200&q=80',
-    tags: ['WebSockets', 'WebGPU', 'Chart.js', 'Go', 'PostgreSQL'],
-    metrics: [
-      { label: 'Ticks/sec', value: '1M+' },
-      { label: 'Execution', value: '< 1ms' },
-      { label: 'Volume Traded', value: '$2.4B' }
-    ],
-    liveUrl: 'https://example.com/hyperion',
-    githubUrl: 'https://github.com',
-    featured: false,
-  }
-];
+const PROJECTS_DATA: ProjectItem[] = [];
 
 // Projects Showcase Section Component
 const ProjectsCatalogSection = () => {
@@ -469,7 +366,10 @@ const ProjectsCatalogSection = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeModalProject, setActiveModalProject] = useState<ProjectItem | null>(null);
 
-  const categories = ['All', 'AI Apps', 'Web3 & Cloud', 'Full Stack', 'Mobile & UX'];
+  const categories = useMemo(
+    () => ['All', ...Array.from(new Set(PROJECTS_DATA.map((p) => p.category)))],
+    []
+  );
 
   const filteredProjects = PROJECTS_DATA.filter((project) => {
     const matchesCategory = selectedCategory === 'All' || project.category === selectedCategory;
