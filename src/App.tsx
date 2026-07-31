@@ -4,14 +4,14 @@ import AboutSection from "./components/AboutSection";
 import ServicesSection from "./components/ServicesSection";
 import TestimonialsSection from "./components/TestimonialsSection";
 import PriceEstimatorSection from "./components/PriceEstimatorSection";
+import ContactSection from "./components/ContactSection";
 
 const DEFAULT_NAV_ITEMS = [
   { label: "Home", href: "#top" },
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Estimator", href: "#estimator" },
-  { label: "Blog", href: "#blog" },
-  { label: "Speed Showcase", href: "#showcase" },
+  { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -35,6 +35,9 @@ function App() {
 
       {/* 5. Price Estimator Section – Interactive Services & Addons Calculator */}
       <PriceEstimatorSection />
+
+      {/* 6. Contact Section – Inquiry Form & WhatsApp Direct Chat */}
+      <ContactSection />
     </main>
   );
 }

@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Particles from './ParticlesBackground';
 import {
   HiOutlineCalculator,
   HiOutlineCode,
@@ -330,6 +331,9 @@ export function PriceEstimatorSection() {
       id="estimator"
       className="relative w-full min-h-screen bg-zinc-950 text-white py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
+      {/* Interactive Canvas Particles Background */}
+      <Particles className="absolute inset-0 z-0 pointer-events-none" quantity={130} color="#00ffc6" staticity={40} ease={60} />
+
       {/* Dynamic Background Mesh & Glows */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-cyan-500/10 blur-[180px] pointer-events-none rounded-full" />
       <div className="absolute bottom-10 right-1/4 w-[600px] h-[600px] bg-purple-600/10 blur-[160px] pointer-events-none rounded-full" />
