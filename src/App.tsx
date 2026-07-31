@@ -3,6 +3,7 @@ import RobotHero from "./RobotHero";
 import AboutSection from "./components/AboutSection";
 import ServicesSection from "./components/ServicesSection";
 import TestimonialsSection from "./components/TestimonialsSection";
+import PriceEstimatorSection from "./components/PriceEstimatorSection";
 
 const DEFAULT_NAV_ITEMS = [
   { label: "Home", href: "#top" },
@@ -31,8 +32,12 @@ function App() {
 
       {/* 4. Testimonials Section – Infinite Scroll Columns */}
       <TestimonialsSection />
+
+      {/* 5. Price Estimator Section – Interactive Services & Addons Calculator */}
+      <PriceEstimatorSection />
     </main>
   );
 }
 
 export default App;
+

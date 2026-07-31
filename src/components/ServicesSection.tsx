@@ -91,6 +91,14 @@ const SERVICES = [
     features: ['Comprehensive Codebase Audit & Refactoring', 'Zero-Downtime Database & Cloud Migration', 'Page Speed & Bundle Size Optimization', 'Security Vulnerability Patching & Testing'],
     tech: ['TypeScript', 'Vite', 'Docker', 'Jest/Cypress', 'CI/CD Pipelines'],
   },
+  {
+    id: 'custom-software', number: '10', title: 'Custom Software',
+    tagline: 'Bespoke Enterprise & Dedicated Software Systems',
+    description: 'Custom desktop, web, and enterprise software solutions engineered from scratch to fit your exact business workflows, proprietary algorithms, and internal data structures.',
+    icon: HiOutlineChip, gradient: 'from-rose-500/20 via-pink-500/20 to-red-500/20', accentColor: '#f43f5e',
+    features: ['Bespoke Enterprise Software Architecture', 'Proprietary Algorithm & Workflow Automation', 'Cross-Platform Desktop & Cloud System Sync', 'High Concurrency & Custom Data Storage'],
+    tech: ['Electron', 'React 19', 'Go', 'Rust', 'PostgreSQL', 'Docker'],
+  },
 ];
 
 export function ServicesSection() {
@@ -227,11 +235,9 @@ export function ServicesSection() {
                           <Icon className="w-6 h-6" style={{ color: service.accentColor }} />
                         </div>
                         <div>
-                          <div className="text-[11px] font-extrabold uppercase tracking-widest text-[#00ffc6]">Service {service.number}</div>
                           <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">{service.title}</h3>
                         </div>
                       </div>
-                      <span className="text-3xl font-black text-white/20 select-none">{service.number}</span>
                     </div>
 
                     <div className="space-y-1.5">

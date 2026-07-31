@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Menu,
@@ -69,55 +70,64 @@ export function MobileSidebarDrawer({
   navItemsLeft,
 }: MobileSidebarDrawerProps) {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
   const [openSections, setOpenSections] = React.useState<Record<string, boolean>>({
     Playground: true,
   });
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleSection = (title: string) => {
     setOpenSections((prev) => ({ ...prev, [title]: !prev[title] }));
   };
 
   return (
-    <div className="lg:hidden pointer-events-auto">
-      {/* Mobile Bar Top Header Trigger */}
-      <div className="flex items-center justify-between w-full px-2 py-1">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-white/20 flex items-center justify-center text-[#00ffc6]">
-            <GalleryVerticalEnd className="w-4 h-4" />
+    <>
+      <div className="lg:hidden pointer-events-auto w-full">
+        {/* Mobile Bar Top Header Trigger */}
+        <div className="flex items-center justify-between w-full px-2 py-1">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-white/20 flex items-center justify-center text-[#00ffc6]">
+              <GalleryVerticalEnd className="w-4 h-4" />
+            </div>
+            <span className="font-black text-sm text-white tracking-tight">DraftoDeploy</span>
           </div>
-          <span className="font-black text-sm text-white tracking-tight">DraftoDeploy</span>
-        </div>
 
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="p-2.5 rounded-full bg-zinc-900/90 border border-white/20 text-white backdrop-blur-md hover:bg-zinc-800 transition-colors shadow-lg cursor-pointer"
-          aria-label="Toggle Mobile Menu"
-        >
-          {isOpen ? <X className="w-5 h-5 text-[#00ffc6]" /> : <Menu className="w-5 h-5 text-[#00ffc6]" />}
-        </button>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-2.5 rounded-full bg-zinc-900/90 border border-white/20 text-white backdrop-blur-md hover:bg-zinc-800 transition-colors shadow-lg cursor-pointer"
+            aria-label="Toggle Mobile Menu"
+          >
+            {isOpen ? <X className="w-5 h-5 text-[#00ffc6]" /> : <Menu className="w-5 h-5 text-[#00ffc6]" />}
+          </button>
+        </div>
       </div>
 
-      {/* Slide-over Drawer Backdrop & Content */}
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
-              className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm"
-            />
+      {/* Slide-over Drawer Backdrop & Content via React Portal */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {isOpen && (
+              <>
+                {/* Backdrop */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setIsOpen(false)}
+                  className="fixed inset-0 z-[9998] bg-black/70 backdrop-blur-sm pointer-events-auto"
+                />
 
-            {/* Sidebar Drawer */}
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 z-50 h-full w-[85vw] max-w-sm bg-zinc-950 border-l border-white/15 shadow-2xl flex flex-col overflow-y-auto text-white"
-            >
+                {/* Sidebar Drawer */}
+                <motion.div
+                  initial={{ x: '100%' }}
+                  animate={{ x: 0 }}
+                  exit={{ x: '100%' }}
+                  transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                  className="fixed top-0 right-0 bottom-0 z-[9999] h-screen h-dvh w-[85vw] max-w-sm bg-zinc-950 border-l border-white/15 shadow-2xl flex flex-col overflow-y-auto text-white pointer-events-auto"
+                >
               {/* Sidebar Header */}
               <div className="p-4 border-b border-white/10 flex items-center justify-between bg-zinc-900/50">
                 <div className="flex items-center gap-3">
@@ -263,8 +273,10 @@ export function MobileSidebarDrawer({
             </motion.div>
           </>
         )}
-      </AnimatePresence>
-    </div>
+      </AnimatePresence>,
+      document.body
+    )}
+    </>
   );
 }
 
