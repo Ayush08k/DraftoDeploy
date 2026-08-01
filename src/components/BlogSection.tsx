@@ -3324,14 +3324,14 @@ export function BlogSection() {
   };
 
   return (
-    <section id="blog" className="w-full min-h-screen py-24 px-4 sm:px-8 md:px-12 lg:px-20 text-white relative">
+    <section id="blog" className="w-full min-h-screen py-16 sm:py-24 px-3 sm:px-8 md:px-12 lg:px-20 text-white relative">
       {/* Subtle ambient background lighting */}
       <div className="absolute top-1/4 left-1/3 w-[650px] h-[650px] bg-red-600/10 rounded-full blur-[170px] pointer-events-none -z-10" />
       <div className="absolute bottom-1/3 right-1/4 w-[650px] h-[650px] bg-blue-600/10 rounded-full blur-[170px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto">
         {/* Top Telemetry Status Marquee Bar */}
-        <div className="mb-10 p-3 rounded-2xl bg-zinc-950/60 border border-white/10 backdrop-blur-2xl flex items-center justify-between overflow-x-auto gap-6 text-xs text-zinc-300 scrollbar-none shadow-lg">
+        <div className="mb-10 p-2.5 sm:p-3 rounded-2xl bg-zinc-950/60 border border-white/10 backdrop-blur-2xl flex items-center justify-between overflow-x-auto gap-4 sm:gap-6 text-xs text-zinc-300 no-scrollbar shadow-lg">
           <div className="flex items-center gap-2 shrink-0">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="font-bold text-white uppercase tracking-wider">35 Production Case Studies</span>
@@ -3355,7 +3355,7 @@ export function BlogSection() {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-bold uppercase tracking-widest mb-4 shadow-[0_0_20px_rgba(239,68,68,0.2)]">
             <BookOpen className="w-4 h-4" /> Comprehensive System Architecture Case Studies
           </div>
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-tight">
+          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black tracking-tight text-white leading-tight">
             Software <span className="bg-gradient-to-r from-red-400 via-rose-400 to-amber-400 bg-clip-text text-transparent">Architecture & Case Studies</span>
           </h1>
           <p className="mt-4 text-zinc-300 text-base sm:text-xl max-w-3xl leading-relaxed font-normal">
@@ -3453,7 +3453,7 @@ export function BlogSection() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+                  className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-sm font-bold transition-all duration-300 flex items-center gap-1.5 sm:gap-2 cursor-pointer ${
                     selectedCategory === cat
                       ? 'bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-lg shadow-red-600/30 scale-105 border border-red-400/40'
                       : 'bg-zinc-950/40 text-zinc-400 hover:text-white hover:bg-zinc-900 border border-white/10 backdrop-blur-xl'
@@ -3478,7 +3478,7 @@ export function BlogSection() {
                 placeholder="Search 35 case studies..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 rounded-xl bg-zinc-950/40 border border-white/15 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/70 focus:ring-1 focus:ring-red-500/70 transition-all backdrop-blur-xl"
+                className="w-full pl-10 pr-4 py-2.5 sm:py-2 rounded-xl bg-zinc-950/40 border border-white/15 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/70 focus:ring-1 focus:ring-red-500/70 transition-all backdrop-blur-xl"
               />
               {searchQuery && (
                 <button 
@@ -3530,7 +3530,7 @@ export function BlogSection() {
 
         {/* Grid View vs Compact List View */}
         {viewMode === 'grid' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
             {filteredPosts.map((post, idx) => (
               <motion.article
                 key={post.id}
@@ -3667,7 +3667,7 @@ export function BlogSection() {
       {/* Futuristic Reader Modal */}
       <AnimatePresence>
         {activeModalPost && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-10 bg-black/90 backdrop-blur-2xl">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-6 md:p-10 bg-black/90 backdrop-blur-2xl">
             {/* Structured JSON-LD metadata */}
             <script
               type="application/ld+json"
@@ -3692,10 +3692,10 @@ export function BlogSection() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               onScroll={handleModalScroll}
-              className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-zinc-950/95 border border-zinc-700/80 rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.9)] p-5 sm:p-10 text-white scrollbar-thin scrollbar-thumb-zinc-700"
+              className="relative w-full max-w-4xl max-h-[100vh] sm:max-h-[92vh] overflow-y-auto bg-zinc-950/95 border border-zinc-700/80 rounded-none sm:rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.9)] p-4 sm:p-10 text-white"
             >
               {/* Sticky Top Progress Header Bar */}
-              <div className="sticky -top-6 -mx-5 sm:-mx-10 -mt-5 sm:-mt-10 mb-8 z-30 bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-800 px-6 py-3 flex items-center justify-between">
+              <div className="sticky -top-4 sm:-top-10 -mx-4 sm:-mx-10 -mt-4 sm:-mt-10 mb-6 sm:mb-8 z-30 bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-800 px-4 sm:px-6 py-3 flex items-center justify-between">
                 <div className="flex items-center gap-3 truncate pr-4">
                   <div className="px-2.5 py-0.5 rounded-full bg-red-600/20 border border-red-500/40 text-[10px] font-extrabold text-red-400 uppercase tracking-wider shrink-0">
                     {activeModalPost.category}
@@ -3798,7 +3798,7 @@ export function BlogSection() {
 
                     {/* Code snippet with copy button */}
                     {sec.codeSnippet && (
-                      <div className="my-4 rounded-2xl bg-zinc-950 border border-zinc-800 p-4 font-mono text-xs overflow-x-auto text-emerald-400 shadow-inner relative group/code">
+                      <div className="my-4 rounded-2xl bg-zinc-950 border border-zinc-800 p-3 sm:p-4 font-mono text-xs overflow-x-auto text-emerald-400 shadow-inner relative group/code">
                         <div className="text-[10px] uppercase text-zinc-500 mb-2 border-b border-zinc-800 pb-1.5 flex justify-between items-center">
                           <span className="flex items-center gap-1.5"><Terminal className="w-3.5 h-3.5 text-emerald-400" /> Architecture Blueprint & Code</span>
                           <div className="flex items-center gap-2">
@@ -3816,7 +3816,7 @@ export function BlogSection() {
                             </button>
                           </div>
                         </div>
-                        <pre><code>{sec.codeSnippet.code}</code></pre>
+                        <pre className="overflow-x-auto whitespace-pre"><code>{sec.codeSnippet.code}</code></pre>
                       </div>
                     )}
                   </div>

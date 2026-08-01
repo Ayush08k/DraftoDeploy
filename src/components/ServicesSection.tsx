@@ -118,7 +118,7 @@ export function ServicesSection() {
       ([entry]) => {
         sectionVisible = entry.isIntersecting;
       },
-      { threshold: 0.8 } // fire when 80% of the section is on screen
+      { threshold: 0.1 } // reduced threshold for mobile compatibility
     );
     observer.observe(section);
 
@@ -169,7 +169,7 @@ export function ServicesSection() {
     <section
       ref={sectionRef}
       id="services"
-      className="relative w-full h-screen overflow-hidden bg-zinc-950 text-white flex flex-col py-6 px-0"
+      className="relative w-full min-h-screen lg:h-screen overflow-hidden bg-zinc-950 text-white flex flex-col py-6 px-0"
     >
       {/* ── Floating Paths Background (contained to this section) ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -208,14 +208,14 @@ export function ServicesSection() {
         <button
           onClick={() => scrollCard('left')}
           aria-label="Previous service"
-          className="lg:hidden absolute left-1 z-30 w-10 h-10 flex items-center justify-center rounded-full bg-zinc-800/90 border border-white/20 backdrop-blur-md text-white shadow-lg active:scale-95 transition-transform hover:border-[#00ffc6]/60 hover:text-[#00ffc6]"
+          className="lg:hidden absolute left-1 z-30 w-11 h-11 flex items-center justify-center rounded-full bg-zinc-800/90 border border-white/20 backdrop-blur-md text-white shadow-lg active:scale-95 transition-transform hover:border-[#00ffc6]/60 hover:text-[#00ffc6]"
         >
           <HiOutlineChevronLeft className="w-5 h-5" />
         </button>
 
         <div
           ref={trackRef}
-          className="w-full overflow-x-auto snap-x snap-mandatory flex items-center gap-6 sm:gap-8 px-12 sm:px-16"
+          className="w-full overflow-x-auto snap-x snap-mandatory flex items-center gap-4 sm:gap-6 lg:gap-8 px-8 sm:px-12 lg:px-16 no-scrollbar"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {SERVICES.map((service) => {
@@ -223,7 +223,7 @@ export function ServicesSection() {
             return (
               <div
                 key={service.id}
-                className="w-[85vw] sm:w-[500px] md:w-[580px] lg:w-[640px] flex-shrink-0 snap-center"
+                className="w-[82vw] sm:w-[420px] md:w-[520px] lg:w-[640px] flex-shrink-0 snap-center"
               >
                 <div className={`relative overflow-hidden rounded-3xl border border-white/20 bg-zinc-900/90 backdrop-blur-2xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] bg-gradient-to-br ${service.gradient} hover:border-[#00ffc6]/50 transition-all duration-300 group`}>
                   <div className="absolute -right-16 -top-16 w-60 h-60 rounded-full blur-[80px] pointer-events-none opacity-20 bg-[#00ffc6]" />
@@ -276,7 +276,7 @@ export function ServicesSection() {
         <button
           onClick={() => scrollCard('right')}
           aria-label="Next service"
-          className="lg:hidden absolute right-1 z-30 w-10 h-10 flex items-center justify-center rounded-full bg-zinc-800/90 border border-white/20 backdrop-blur-md text-white shadow-lg active:scale-95 transition-transform hover:border-[#00ffc6]/60 hover:text-[#00ffc6]"
+          className="lg:hidden absolute right-1 z-30 w-11 h-11 flex items-center justify-center rounded-full bg-zinc-800/90 border border-white/20 backdrop-blur-md text-white shadow-lg active:scale-95 transition-transform hover:border-[#00ffc6]/60 hover:text-[#00ffc6]"
         >
           <HiOutlineChevronRight className="w-5 h-5" />
         </button>

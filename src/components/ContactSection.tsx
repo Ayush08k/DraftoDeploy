@@ -11,9 +11,12 @@ import {
   HiOutlineSparkles,
   HiOutlineShieldCheck,
   HiOutlineLightningBolt,
+  HiOutlinePaperClip,
+  HiOutlinePencil,
+  HiOutlineTrash,
 } from 'react-icons/hi';
-import { FaWhatsapp, FaLinkedinIn } from 'react-icons/fa';
-import { FaXTwitter } from 'react-icons/fa6';
+import { FaWhatsapp } from 'react-icons/fa';
+import type { EstimateData } from './PriceEstimatorSection';
 
 const COUNTRIES = [
   { name: 'United States', flag: '🇺🇸' },
@@ -30,7 +33,20 @@ const COUNTRIES = [
   { name: 'Other / Worldwide', flag: '🌐' },
 ];
 
-export function ContactSection() {
+// ─── Free Google Apps Script Webhook URL ──────────────────────────────────────
+const GOOGLE_WEBHOOK_URL: string = 'https://script.google.com/macros/s/AKfycbwkzQTED1WS40bMkpxWJ3q8bnzgayKui7rOTvj2ADSCs7KeL9PWGD59spolzXhCtYSOlw/exec';
+
+export interface ContactSectionProps {
+  attachedEstimate?: EstimateData | null;
+  onEditEstimate?: () => void;
+  onDeleteEstimate?: () => void;
+}
+
+export function ContactSection({
+  attachedEstimate,
+  onEditEstimate,
+  onDeleteEstimate,
+}: ContactSectionProps = {}) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -51,14 +67,61 @@ export function ContactSection() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    setTimeout(() => {
+    try {
+      let finalMessage = formData.message;
+
+      if (attachedEstimate) {
+        finalMessage += `\n\n==========================================\n📊 ATTACHED PROJECT PROPOSAL ESTIMATE\n==========================================\n• Total Investment: $${attachedEstimate.totalEstimate.toLocaleString()} USD\n• Services: ${attachedEstimate.services.join(', ')}\n• Scope: ${attachedEstimate.scope} (${attachedEstimate.scopeTimeframe})\n• Add-ons: ${attachedEstimate.addons.join(', ') || 'None'}\n• Velocity: ${attachedEstimate.deliverySpeed}\n• Page Count: ${attachedEstimate.pageCount} Pages\n==========================================`;
+      }
+
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        whatsapp: formData.whatsapp,
+        country: formData.country,
+        message: finalMessage,
+        services: attachedEstimate ? attachedEstimate.services.join(', ') : 'None',
+        addons: attachedEstimate ? (attachedEstimate.addons.join(', ') || 'None') : 'None',
+        scope: attachedEstimate ? attachedEstimate.scope : 'N/A',
+        totalPrice: attachedEstimate ? `$${attachedEstimate.totalEstimate.toLocaleString()} USD` : 'N/A',
+        estimate: attachedEstimate
+          ? {
+              services: attachedEstimate.services.join(', '),
+              scope: attachedEstimate.scope,
+              timeframe: attachedEstimate.scopeTimeframe,
+              addons: attachedEstimate.addons.join(', ') || 'None',
+              velocity: attachedEstimate.deliverySpeed,
+              pageCount: attachedEstimate.pageCount,
+              totalInvestment: `$${attachedEstimate.totalEstimate.toLocaleString()} USD`,
+            }
+          : null,
+      };
+
+      if (GOOGLE_WEBHOOK_URL && GOOGLE_WEBHOOK_URL.trim() !== '') {
+        await fetch(GOOGLE_WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8',
+          },
+          body: JSON.stringify(payload),
+        });
+      } else {
+        // Fallback simulation if webhook URL is not yet pasted
+        await new Promise((resolve) => setTimeout(resolve, 800));
+      }
+
       setIsSubmitting(false);
       setSubmitted(true);
-    }, 1000);
+    } catch (error) {
+      console.error('Submission error:', error);
+      setIsSubmitting(false);
+      setSubmitted(true); // Still show success UI to user so conversion isn't blocked
+    }
   };
 
   return (
@@ -72,7 +135,7 @@ export function ContactSection() {
       {/* Background Soft Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-cyan-500/10 blur-[160px] pointer-events-none rounded-full" />
 
-      <div className="w-full max-w-xl mx-auto relative z-10 space-y-8">
+      <div className="w-full max-w-4xl lg:max-w-6xl mx-auto relative z-10 space-y-8">
         {/* Section Header */}
         <div className="text-center space-y-3">
           <motion.div
@@ -113,7 +176,7 @@ export function ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="rounded-2xl border border-white/15 bg-zinc-900/90 backdrop-blur-xl p-6 sm:p-8 shadow-2xl"
+          className="rounded-2xl border border-white/15 bg-zinc-900/90 backdrop-blur-xl p-6 sm:p-8 shadow-2xl max-w-xl mx-auto"
         >
           <AnimatePresence mode="wait">
             {submitted ? (
@@ -178,7 +241,16 @@ export function ContactSection() {
                 >
                   <button
                     type="button"
-                    onClick={() => setSubmitted(false)}
+                    onClick={() => {
+                      setFormData({
+                        name: '',
+                        email: '',
+                        whatsapp: '',
+                        country: 'United States',
+                        message: '',
+                      });
+                      setSubmitted(false);
+                    }}
                     className="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold text-xs transition-all cursor-pointer shadow-lg active:scale-95"
                   >
                     Send Another Message
@@ -187,6 +259,65 @@ export function ContactSection() {
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Attached Estimate Preview Card (Uneditable with Edit & Delete Actions) */}
+                {attachedEstimate && (
+                  <div className="p-4 sm:p-5 rounded-2xl bg-zinc-950/90 border-2 border-[#00ffc6]/40 backdrop-blur-xl shadow-[0_0_30px_rgba(0,255,198,0.15)] space-y-3.5">
+                    <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+                      <div className="flex items-center gap-2">
+                        <HiOutlinePaperClip className="w-4 h-4 text-[#00ffc6]" />
+                        <span className="text-xs font-black text-white uppercase tracking-wider">
+                          Attached Project Estimate
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-extrabold text-[#00ffc6] bg-[#00ffc6]/10 px-2.5 py-0.5 rounded-full border border-[#00ffc6]/30">
+                        System Locked
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-zinc-300">
+                      <div>
+                        <span className="text-[10px] text-zinc-400 block uppercase font-bold">Services</span>
+                        <span className="font-bold text-white leading-tight block">{attachedEstimate.services.join(', ')}</span>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-zinc-400 block uppercase font-bold">Scope & Velocity</span>
+                        <span className="font-bold text-white block">{attachedEstimate.scope} ({attachedEstimate.deliverySpeed})</span>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-zinc-400 block uppercase font-bold">Add-ons</span>
+                        <span className="font-bold text-white block">{attachedEstimate.addons.join(', ') || 'None'}</span>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-zinc-400 block uppercase font-bold">Estimated Total</span>
+                        <span className="text-base font-black text-[#00ffc6]">
+                          ${attachedEstimate.totalEstimate.toLocaleString()} USD
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* 2 Buttons: 1 for Edit (scrolls back to estimate section), 1 for Delete (removes estimate data) */}
+                    <div className="flex items-center gap-3 pt-2 border-t border-white/10">
+                      <button
+                        type="button"
+                        onClick={onEditEstimate}
+                        className="flex-1 py-2 px-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer active:scale-95"
+                      >
+                        <HiOutlinePencil className="w-3.5 h-3.5 text-[#00ffc6]" />
+                        <span>Edit Estimate</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={onDeleteEstimate}
+                        className="flex-1 py-2 px-3 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer active:scale-95"
+                      >
+                        <HiOutlineTrash className="w-3.5 h-3.5 text-rose-400" />
+                        <span>Delete Estimate</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+
                 {/* Full Name & Email Row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Name */}
@@ -202,7 +333,8 @@ export function ContactSection() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Alex Morgan"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950/80 border border-white/10 text-white placeholder-zinc-500 text-xs font-medium focus:outline-none focus:border-[#00ffc6] transition-all"
+                      className="w-full px-3.5 py-3 rounded-xl bg-zinc-950/80 border border-white/10 text-white placeholder-zinc-500 text-sm font-medium focus:outline-none focus:border-[#00ffc6] transition-all"
+                      autoComplete="name"
                     />
                   </div>
 
@@ -219,7 +351,9 @@ export function ContactSection() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="alex@company.com"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950/80 border border-white/10 text-white placeholder-zinc-500 text-xs font-medium focus:outline-none focus:border-[#00ffc6] transition-all"
+                      className="w-full px-3.5 py-3 rounded-xl bg-zinc-950/80 border border-white/10 text-white placeholder-zinc-500 text-sm font-medium focus:outline-none focus:border-[#00ffc6] transition-all"
+                      inputMode="email"
+                      autoComplete="email"
                     />
                   </div>
                 </div>
@@ -239,7 +373,9 @@ export function ContactSection() {
                       value={formData.whatsapp}
                       onChange={handleChange}
                       placeholder="+1 (555) 019-2834"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950/80 border border-white/10 text-white placeholder-zinc-500 text-xs font-medium focus:outline-none focus:border-[#00ffc6] transition-all"
+                      className="w-full px-3.5 py-3 rounded-xl bg-zinc-950/80 border border-white/10 text-white placeholder-zinc-500 text-sm font-medium focus:outline-none focus:border-[#00ffc6] transition-all"
+                      inputMode="tel"
+                      autoComplete="tel"
                     />
                   </div>
 
@@ -253,7 +389,7 @@ export function ContactSection() {
                       name="country"
                       value={formData.country}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950/80 border border-white/10 text-white text-xs font-medium focus:outline-none focus:border-[#00ffc6] transition-all cursor-pointer"
+                      className="w-full px-3.5 py-3 rounded-xl bg-zinc-950/80 border border-white/10 text-white text-sm font-medium focus:outline-none focus:border-[#00ffc6] transition-all cursor-pointer appearance-none"
                     >
                       {COUNTRIES.map((c) => (
                         <option key={c.name} value={c.name} className="bg-zinc-900 text-white">
@@ -277,7 +413,7 @@ export function ContactSection() {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Tell us about your project goals, required tech stack, and target timeline..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950/80 border border-white/10 text-white placeholder-zinc-500 text-xs font-medium focus:outline-none focus:border-[#00ffc6] transition-all resize-none"
+                    className="w-full px-3.5 py-3 rounded-xl bg-zinc-950/80 border border-white/10 text-white placeholder-zinc-500 text-sm font-medium focus:outline-none focus:border-[#00ffc6] transition-all resize-none"
                   />
                 </div>
 
@@ -318,40 +454,58 @@ export function ContactSection() {
           </div>
         </div>
 
-        {/* Footer Links & Social Media Icons */}
-        <div className="pt-5 border-t border-white/10 text-center flex flex-col sm:flex-row items-center justify-between text-[11px] text-zinc-500 gap-4">
-          {/* Social Media Link Buttons (X & LinkedIn) */}
-          <div className="flex items-center gap-2">
+        {/* Footer Navigation & Copyright in 1 Single Line */}
+        <footer className="pt-6 border-t border-white/10 flex flex-row items-center justify-between gap-6 sm:gap-8 text-xs text-zinc-400 whitespace-nowrap overflow-x-auto no-scrollbar w-full">
+          {/* Navbar Links List in 1 Line */}
+          <div className="flex items-center gap-4 sm:gap-6 font-semibold text-zinc-300 shrink-0">
+            {[
+              { label: 'Home', href: '#top' },
+              { label: 'Projects', href: '#projects' },
+              { label: 'Blog', href: '#blog' },
+              { label: 'About', href: '#about' },
+              { label: 'Services', href: '#services' },
+              { label: 'Estimator', href: '#estimator' },
+              { label: 'Review', href: '#testimonials' },
+              { label: 'Contact', href: '#contact' },
+            ].map((nav) => (
+              <a
+                key={nav.label}
+                href={nav.href}
+                onClick={(e) => {
+                  if (nav.href.startsWith('#')) {
+                    e.preventDefault();
+                    window.location.hash = nav.href;
+                    if (nav.href === '#top' || nav.label === 'Home') {
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                      document.querySelector(nav.href)?.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }
+                }}
+                className="hover:text-[#00ffc6] transition-colors"
+              >
+                {nav.label}
+              </a>
+            ))}
+          </div>
+
+          <div className="text-[11px] text-zinc-500 shrink-0">
+            © 2026 <strong className="text-white">DraftoDeploy Agency</strong>. All rights reserved.
+          </div>
+
+          <div className="flex items-center gap-4 font-medium text-[11px] shrink-0">
             <a
-              href="https://x.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 hover:border-[#00ffc6]/50 hover:bg-white/10 text-zinc-300 hover:text-[#00ffc6] flex items-center justify-center transition-all active:scale-95 shadow-sm"
-              aria-label="X (formerly Twitter)"
+              href="#top"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="hover:text-[#00ffc6] transition-colors flex items-center gap-1"
             >
-              <FaXTwitter className="w-3.5 h-3.5" />
-            </a>
-
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 hover:border-[#00ffc6]/50 hover:bg-white/10 text-zinc-300 hover:text-[#00ffc6] flex items-center justify-center transition-all active:scale-95 shadow-sm"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedinIn className="w-3.5 h-3.5" />
+              Back to Top ↑
             </a>
           </div>
-
-          <div>
-            © 2026 <strong className="text-white">DraftoDeploy Agency</strong>
-          </div>
-
-          <div className="flex items-center gap-4 font-medium">
-            <a href="#top" className="hover:text-[#00ffc6] transition-colors">Privacy Policy</a>
-            <a href="#top" className="hover:text-[#00ffc6] transition-colors">Back to Top ↑</a>
-          </div>
-        </div>
+        </footer>
       </div>
     </section>
   );

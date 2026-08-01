@@ -233,7 +233,21 @@ const ADDONS: AddonOption[] = [
   },
 ];
 
-export function PriceEstimatorSection() {
+export interface EstimateData {
+  services: string[];
+  scope: string;
+  scopeTimeframe: string;
+  addons: string[];
+  deliverySpeed: string;
+  pageCount: number;
+  totalEstimate: number;
+}
+
+export interface PriceEstimatorSectionProps {
+  onRequestProposal?: (estimate: EstimateData) => void;
+}
+
+export function PriceEstimatorSection({ onRequestProposal }: PriceEstimatorSectionProps = {}) {
   const [selectedServices, setSelectedServices] = useState<string[]>(['fullstack']);
   const [selectedScope, setSelectedScope] = useState<string>('growth');
   const [selectedAddons, setSelectedAddons] = useState<string[]>(['cicd', 'seo']);
@@ -325,6 +339,35 @@ export function PriceEstimatorSection() {
     setTimeout(() => setCopied(false), 2500);
   };
 
+  const handleRequestProposal = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const selectedServiceNames = selectedServices
+      .map((id) => SERVICES.find((s) => s.id === id)?.title)
+      .filter(Boolean) as string[];
+    const selectedAddonNames = selectedAddons
+      .map((id) => ADDONS.find((a) => a.id === id)?.title)
+      .filter(Boolean) as string[];
+
+    const estimateData: EstimateData = {
+      services: selectedServiceNames,
+      scope: scopeTierObj.name,
+      scopeTimeframe: scopeTierObj.timeframe,
+      addons: selectedAddonNames,
+      deliverySpeed: deliverySpeed === 'express' ? 'Express 2x (Fast Track)' : 'Standard Velocity',
+      pageCount,
+      totalEstimate,
+    };
+
+    if (onRequestProposal) {
+      onRequestProposal(estimateData);
+    }
+
+    const contactEl = document.getElementById('contact');
+    if (contactEl) {
+      contactEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section
       id="estimator"
@@ -376,27 +419,28 @@ export function PriceEstimatorSection() {
         </div>
 
         {/* Futuristic 3-Step Navigation Bar */}
-        <div className="max-w-3xl mx-auto flex items-center justify-between p-2 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl">
+        <div className="max-w-3xl mx-auto flex items-center justify-between gap-1 p-1.5 sm:p-2 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl">
           {[
-            { step: 1, label: '1. Select Services', count: selectedServices.length },
-            { step: 2, label: '2. Project Scope', count: scopeTierObj.name.split(' ')[0] },
-            { step: 3, label: '3. Add-ons & Velocity', count: selectedAddons.length },
-          ].map(({ step, label, count }) => {
+            { step: 1, label: 'Services', fullLabel: '1. Select Services', count: selectedServices.length },
+            { step: 2, label: 'Scope', fullLabel: '2. Project Scope', count: scopeTierObj.name.split(' ')[0] },
+            { step: 3, label: 'Add-ons', fullLabel: '3. Add-ons & Velocity', count: selectedAddons.length },
+          ].map(({ step, label, fullLabel, count }) => {
             const isActive = activeStep === step;
             return (
               <button
                 key={step}
                 onClick={() => setActiveStep(step)}
                 type="button"
-                className={`flex-1 py-3 px-3 sm:px-5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 ${
+                className={`flex-1 py-2.5 sm:py-3 px-2 sm:px-5 rounded-xl text-[11px] sm:text-sm font-bold transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 ${
                   isActive
                     ? 'bg-[#00ffc6] text-black shadow-[0_0_20px_rgba(0,255,198,0.4)]'
                     : 'text-zinc-400 hover:text-white hover:bg-white/5'
                 }`}
               >
-                <span>{label}</span>
+                <span className="hidden sm:inline">{fullLabel}</span>
+                <span className="sm:hidden">{label}</span>
                 <span
-                  className={`text-[10px] px-2 py-0.5 rounded-full font-black ${
+                  className={`text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full font-black ${
                     isActive ? 'bg-black/20 text-black' : 'bg-white/10 text-[#00ffc6]'
                   }`}
                 >
@@ -440,7 +484,7 @@ export function PriceEstimatorSection() {
                     )}
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                     {SERVICES.map((service) => {
                       const Icon = service.icon;
                       const isSelected = selectedServices.includes(service.id);
@@ -609,7 +653,7 @@ export function PriceEstimatorSection() {
                         <button
                           type="button"
                           onClick={() => setPageCount((p) => Math.max(1, p - 1))}
-                          className="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-black text-base flex items-center justify-center transition-all active:scale-95"
+                          className="w-11 h-11 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-black text-base flex items-center justify-center transition-all active:scale-95"
                         >
                           -
                         </button>
@@ -626,7 +670,7 @@ export function PriceEstimatorSection() {
                         <button
                           type="button"
                           onClick={() => setPageCount((p) => Math.min(40, p + 1))}
-                          className="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-black text-base flex items-center justify-center transition-all active:scale-95"
+                          className="w-11 h-11 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-black text-base flex items-center justify-center transition-all active:scale-95"
                         >
                           +
                         </button>
@@ -850,7 +894,8 @@ export function PriceEstimatorSection() {
                 <div className="space-y-3 pt-2">
                   <a
                     href="#contact"
-                    className="w-full py-4 rounded-2xl bg-[#00ffc6] hover:bg-[#00e6b3] text-black font-black uppercase tracking-wider text-xs flex items-center justify-center gap-2 transition-all duration-300 shadow-[0_0_30px_rgba(0,255,198,0.4)] group"
+                    onClick={handleRequestProposal}
+                    className="w-full py-4 rounded-2xl bg-[#00ffc6] hover:bg-[#00e6b3] text-black font-black uppercase tracking-wider text-xs flex items-center justify-center gap-2 transition-all duration-300 shadow-[0_0_30px_rgba(0,255,198,0.4)] group cursor-pointer"
                   >
                     <span>Request Proposal</span>
                     <HiOutlineArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

@@ -206,7 +206,7 @@ const TestimonialsColumn = ({
             {items.map(({ text, image, name, role, stars }, i) => (
               <div
                 key={`${loopIdx}-${i}`}
-                className="relative p-6 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl backdrop-saturate-150 shadow-2xl shadow-black/50 max-w-xs w-full group hover:border-[#00ffc6]/50 hover:bg-white/15 transition-all duration-300"
+                className="relative p-5 sm:p-6 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl backdrop-saturate-150 shadow-2xl shadow-black/50 max-w-xs w-full group hover:border-[#00ffc6]/50 hover:bg-white/15 transition-all duration-300"
               >
                 {/* Glow on hover */}
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#00ffc6]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
@@ -293,7 +293,7 @@ export function TestimonialsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex items-center justify-center gap-8 sm:gap-14 pt-4 flex-wrap"
+            className="flex items-center justify-center gap-6 sm:gap-14 pt-4 flex-wrap"
           >
             {[
               { value: "150+", label: "Projects Delivered" },
@@ -309,7 +309,7 @@ export function TestimonialsSection() {
         </div>
 
         {/* Infinite Scroll Columns */}
-        <div className="relative z-10 flex gap-5 justify-center items-start max-w-5xl mx-auto h-[640px] overflow-hidden">
+        <div className="relative z-10 flex gap-3 sm:gap-5 justify-center items-start max-w-5xl mx-auto h-[500px] sm:h-[640px] overflow-hidden px-2">
           {/* Edge fade masks */}
           <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black to-transparent z-20 pointer-events-none" />
           <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black to-transparent z-20 pointer-events-none" />

@@ -4,11 +4,10 @@ import RobotHero from "./RobotHero";
 import AboutSection from "./components/AboutSection";
 import ServicesSection from "./components/ServicesSection";
 import TestimonialsSection from "./components/TestimonialsSection";
-import PriceEstimatorSection from "./components/PriceEstimatorSection";
+import PriceEstimatorSection, { type EstimateData } from "./components/PriceEstimatorSection";
 import ContactSection from "./components/ContactSection";
 import ProjectsPage from "./ProjectsPage";
-import BlogSection from "./components/BlogSection";
-import AuroraBackground from "./components/aurora-background";
+import BlogPage from "./BlogPage";
 
 const DEFAULT_NAV_ITEMS = [
   { label: "Home", href: "#top" },
@@ -23,6 +22,7 @@ const DEFAULT_NAV_ITEMS = [
 
 function App() {
   const [currentHash, setCurrentHash] = useState(() => window.location.hash || "#top");
+  const [attachedEstimate, setAttachedEstimate] = useState<EstimateData | null>(null);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -36,6 +36,17 @@ function App() {
   const isProjectsPage = currentHash === "#projects" || window.location.pathname === "/projects";
   const isBlogPage = currentHash === "#blog" || window.location.pathname === "/blog";
 
+  const handleEditEstimate = () => {
+    const estimatorEl = document.getElementById("estimator");
+    if (estimatorEl) {
+      estimatorEl.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleDeleteEstimate = () => {
+    setAttachedEstimate(null);
+  };
+
   return (
     <main className="w-full min-h-screen bg-zinc-950 text-white overflow-x-hidden relative">
       {/* Global Fixed Navbar */}
@@ -44,11 +55,7 @@ function App() {
       {isProjectsPage ? (
         <ProjectsPage />
       ) : isBlogPage ? (
-        <div className="pt-12">
-          <AuroraBackground>
-            <BlogSection />
-          </AuroraBackground>
-        </div>
+        <BlogPage />
       ) : (
         <>
           {/* 1. Hero Section */}
@@ -60,19 +67,20 @@ function App() {
           {/* 3. Services Section with Sticky Stacking Cards */}
           <ServicesSection />
 
-          {/* 4. Blog Section with SEO Technical Case Studies */}
-          <AuroraBackground>
-            <BlogSection />
-          </AuroraBackground>
-
-          {/* 5. Testimonials Section – Infinite Scroll Columns */}
+          {/* 4. Testimonials Section – Infinite Scroll Columns */}
           <TestimonialsSection />
 
-          {/* 6. Price Estimator Section – Interactive Services & Addons Calculator */}
-          <PriceEstimatorSection />
+          {/* 5. Price Estimator Section – Interactive Services & Addons Calculator */}
+          <PriceEstimatorSection
+            onRequestProposal={(estimate) => setAttachedEstimate(estimate)}
+          />
 
-          {/* 7. Contact Section – Inquiry Form & WhatsApp Direct Chat */}
-          <ContactSection />
+          {/* 6. Contact Section – Inquiry Form & Attached Estimate Handler */}
+          <ContactSection
+            attachedEstimate={attachedEstimate}
+            onEditEstimate={handleEditEstimate}
+            onDeleteEstimate={handleDeleteEstimate}
+          />
         </>
       )}
     </main>
