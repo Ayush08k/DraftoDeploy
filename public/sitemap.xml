@@ -6,56 +6,56 @@
 
   <!-- Homepage -->
   <url>
-    <loc>https://www.draftodeploy.com/</loc>
+    <loc>https://draftodeploy.vercel.app/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Projects Page -->
   <url>
-    <loc>https://www.draftodeploy.com/#projects</loc>
+    <loc>https://draftodeploy.vercel.app/#projects</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <!-- Blog Page -->
   <url>
-    <loc>https://www.draftodeploy.com/#blog</loc>
+    <loc>https://draftodeploy.vercel.app/#blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <!-- About Section -->
   <url>
-    <loc>https://www.draftodeploy.com/#about</loc>
+    <loc>https://draftodeploy.vercel.app/#about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Services Section -->
   <url>
-    <loc>https://www.draftodeploy.com/#services</loc>
+    <loc>https://draftodeploy.vercel.app/#services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Price Estimator -->
   <url>
-    <loc>https://www.draftodeploy.com/#estimator</loc>
+    <loc>https://draftodeploy.vercel.app/#estimator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Reviews / Testimonials -->
   <url>
-    <loc>https://www.draftodeploy.com/#testimonials</loc>
+    <loc>https://draftodeploy.vercel.app/#testimonials</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Contact -->
   <url>
-    <loc>https://www.draftodeploy.com/#contact</loc>
+    <loc>https://draftodeploy.vercel.app/#contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
