@@ -16,7 +16,7 @@ const DEFAULT_NAV_ITEMS = [
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Estimator", href: "#estimator" },
-  { label: "Review", href: "#testimonials" },
+  { label: "Review", href: "#reviews" },
   { label: "Contact", href: "#contact" },
 ];
 

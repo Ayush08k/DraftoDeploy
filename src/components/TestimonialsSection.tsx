@@ -250,7 +250,10 @@ const TestimonialsColumn = ({
 export function TestimonialsSection() {
   return (
     <AuroraBackground className="py-20 px-4">
-      <section id="testimonials" className="relative w-full min-h-screen text-white overflow-hidden">
+      <section id="reviews" className="relative w-full min-h-screen text-white overflow-hidden">
+        {/* Support legacy #testimonials anchor link */}
+        <div id="testimonials" className="absolute -top-20" />
+
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto relative z-10 mb-16">
           <motion.div
@@ -261,7 +264,7 @@ export function TestimonialsSection() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs font-bold tracking-widest uppercase text-[#00ffc6] shadow-[0_0_20px_rgba(0,255,198,0.2)]"
           >
             <HiOutlineChatAlt2 className="w-4 h-4" />
-            Client Testimonials
+            Client Reviews
           </motion.div>
 
           <motion.h2
