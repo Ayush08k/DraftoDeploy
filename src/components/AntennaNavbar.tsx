@@ -80,7 +80,7 @@ export default function AntennaNavbar({
                 window.location.hash = '#top';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="flex items-center pr-3.5 pl-1 -my-2 border-r border-zinc-900/15 hover:opacity-90 transition-opacity"
+              className="flex items-center pr-3 pl-1 -my-2 hover:opacity-90 transition-opacity"
             >
               <img
                 src="/logo.png"

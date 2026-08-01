@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronRight, Layers } from 'lucide-react';
+import { Menu, X, ChevronRight } from 'lucide-react';
 import type { NavItem } from '../RobotHero';
 
 interface MobileSidebarDrawerProps {

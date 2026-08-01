@@ -6,19 +6,17 @@ import { useMemo, useRef, useState, useEffect, Suspense } from 'react';
 import * as THREE from 'three/webgpu';
 import { bloom } from 'three/examples/jsm/tsl/display/BloomNode.js';
 import { Mesh } from 'three';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
-  ExternalLink, 
   Sparkles, 
-  ArrowUpRight, 
   Code2, 
-  Globe, 
   Star,
   Search,
   X,
   ChevronDown,
-  FileText
+  ShieldCheck
 } from 'lucide-react';
+
 
 import {
   abs,
@@ -33,46 +31,12 @@ import {
   uv,
   vec2,
   vec3,
-  pass,
-  mix,
-  add
+  pass
 } from 'three/tsl';
 
 // High-reliability textures + Procedural Data URI fallbacks
 const TEXTUREMAP = { src: 'https://i.postimg.cc/XYwvXN8D/img-4.png' };
 const DEPTHMAP = { src: 'https://i.postimg.cc/2SHKQh2q/raw-4.webp' };
-
-// Create fallback procedural canvas texture data URIs if network/CORS delays
-const createFallbackTexture = (type: 'raw' | 'depth') => {
-  if (typeof document === 'undefined') return '';
-  const canvas = document.createElement('canvas');
-  canvas.width = 512;
-  canvas.height = 512;
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return '';
-
-  if (type === 'raw') {
-    const grad = ctx.createLinearGradient(0, 0, 512, 512);
-    grad.addColorStop(0, '#e11d48');
-    grad.addColorStop(0.5, '#4c0519');
-    grad.addColorStop(1, '#09090b');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 512, 512);
-
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 36px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('DRAFTO DEPLOY', 256, 256);
-  } else {
-    const grad = ctx.createRadialGradient(256, 256, 20, 256, 256, 250);
-    grad.addColorStop(0, '#ffffff');
-    grad.addColorStop(0.5, '#888888');
-    grad.addColorStop(1, '#000000');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 512, 512);
-  }
-  return canvas.toDataURL();
-};
 
 extend(THREE as any);
 
@@ -118,22 +82,14 @@ const WIDTH = 300;
 const HEIGHT = 300;
 
 const Scene = () => {
-  // Use fallback texture if primary image suspended/errored
-  const fallbackRaw = useMemo(() => createFallbackTexture('raw'), []);
-  const fallbackDepth = useMemo(() => createFallbackTexture('depth'), []);
-
   const textures = useTexture(
-    [TEXTUREMAP.src, DEPTHMAP.src],
-    (loaded) => {
-      // Successfully loaded textures
-    }
+    [TEXTUREMAP.src, DEPTHMAP.src]
   );
 
   const rawMap = textures[0] || null;
   const depthMap = textures[1] || null;
 
   const meshRef = useRef<Mesh>(null);
-  const [visible, setVisible] = useState(true);
 
   const { material, uniforms } = useMemo(() => {
     const uPointer = uniform(new THREE.Vector2(0));
@@ -191,7 +147,7 @@ const Scene = () => {
       if ('opacity' in mat) {
         mat.opacity = THREE.MathUtils.lerp(
           mat.opacity,
-          visible ? 1 : 0,
+          1,
           0.07
         );
       }
@@ -335,12 +291,25 @@ export const Html = () => {
         <ambientLight intensity={1.5} />
         <directionalLight position={[5, 5, 5]} intensity={2} />
         <Suspense fallback={<FallbackScene />}>
-          <PostProcessing fullScreenEffect={true} />
+          <PostProcessing />
           <Scene />
         </Suspense>
       </Canvas>
     </div>
   );
+};
+
+// Dynamically import all images from Assets/project images directory
+const imageModules = import.meta.glob<{ default: string }>('../Assets/project images/*.png', { eager: true });
+
+const getProjectImage = (filename: string): string => {
+  const key = Object.keys(imageModules).find((k) =>
+    k.toLowerCase().endsWith(filename.toLowerCase())
+  );
+  if (key && imageModules[key]) {
+    return imageModules[key].default || (imageModules[key] as unknown as string);
+  }
+  return '';
 };
 
 // Projects Catalog Data
@@ -358,13 +327,866 @@ export interface ProjectItem {
   featured?: boolean;
 }
 
-const PROJECTS_DATA: ProjectItem[] = [];
+const PROJECTS_DATA: ProjectItem[] = [
+  {
+    id: 'ai-business-dashboard',
+    title: 'AI Business Analytics Dashboard',
+    category: 'AI & ML',
+    description: 'Enterprise intelligence suite with automated revenue forecasting, churn analytics, and AI executive summaries.',
+    longDescription: 'An enterprise-grade business intelligence platform leveraging LLMs and machine learning algorithms to analyze organizational metrics in real-time. Features automated data ingestion pipelines, dynamic predictive charts, and natural language query generation for non-technical stakeholders.',
+    image: getProjectImage('ai business dashboard.png'),
+    tags: ['Python', 'React', 'TypeScript', 'FastAPI', 'PyTorch', 'Tailwind CSS'],
+    metrics: [
+      { label: 'Forecast Accuracy', value: '98.4%' },
+      { label: 'Processing Speed', value: '45ms' },
+      { label: 'Active Users', value: '120k+' }
+    ],
+    liveUrl: 'https://example.com/ai-business',
+    githubUrl: 'https://github.com/example/ai-business',
+    featured: true
+  },
+  {
+    id: 'e-commerce-ecosystem',
+    title: 'OmniChannel E-Commerce Suite',
+    category: 'E-Commerce',
+    description: 'High-concurrency headless store platform with sub-second page loads, automated inventory sync, and multi-currency checkout.',
+    longDescription: 'Architected for massive digital retail volume, this storefront utilizes Next.js App Router, edge caching, and serverless payment webhooks. Includes custom inventory management, intelligent cart recommendations, and international checkout support with 15+ payment gateways.',
+    image: getProjectImage('E-commerce.png'),
+    tags: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Node.js', 'Stripe API', 'PostgreSQL'],
+    metrics: [
+      { label: 'Conversion Boost', value: '+34%' },
+      { label: 'Lighthouse Score', value: '99/100' },
+      { label: 'Monthly GMV', value: '$4.2M' }
+    ],
+    liveUrl: 'https://example.com/ecommerce',
+    githubUrl: 'https://github.com/example/ecommerce',
+    featured: true
+  },
+  {
+    id: 'ai-code-review',
+    title: 'AI Automated Code Reviewer',
+    category: 'AI & ML',
+    description: 'Developer tool performing instant static code analysis, vulnerability detection, and automated PR inline refactoring.',
+    longDescription: 'Integrated into GitHub & GitLab workflows, this AI engine analyzes code diffs for security bugs, memory leaks, and performance bottlenecks before code hits staging. Generates automated fix suggestions and enforces clean code standards across engineering teams.',
+    image: getProjectImage('ai code review.png'),
+    tags: ['Python', 'Rust', 'TypeScript', 'Docker', 'OpenAI API', 'React'],
+    metrics: [
+      { label: 'Bugs Caught', value: '15,000+' },
+      { label: 'Review Speed', value: '< 2 min' },
+      { label: 'Dev Time Saved', value: '40%' }
+    ],
+    liveUrl: 'https://example.com/ai-code-review',
+    githubUrl: 'https://github.com/example/ai-code-review',
+    featured: true
+  },
+  {
+    id: 'crypto-tracker',
+    title: 'Crypto Tracker & Web3 Wallet',
+    category: 'Fintech',
+    description: 'Real-time multi-chain portfolio tracker with Web3 wallet integration, token swap routing, and instant price alerts.',
+    longDescription: 'A comprehensive Web3 dashboard providing real-time telemetry across Ethereum, Solana, and Layer 2 networks. Features live WebSocket price feeds, automated impermanent loss calculators for liquidity providers, and non-custodial wallet management.',
+    image: getProjectImage('crypto tracker.png'),
+    tags: ['TypeScript', 'React', 'Web3.js', 'Tailwind CSS', 'Node.js', 'Chart.js'],
+    metrics: [
+      { label: 'Chains Supported', value: '14+' },
+      { label: 'Latency', value: '12ms' },
+      { label: 'Assets Tracked', value: '$850M' }
+    ],
+    liveUrl: 'https://example.com/crypto-tracker',
+    githubUrl: 'https://github.com/example/crypto-tracker',
+    featured: true
+  },
+  {
+    id: 'devdock',
+    title: 'DevDock Cloud Workstation',
+    category: 'Developer Tools',
+    description: 'DevOps portal for provisioning ephemeral development environments, monitoring server health, and managing containers.',
+    longDescription: 'Eliminating the "works on my machine" problem, DevDock provisions isolated Docker and Kubernetes environments in seconds. Includes real-time pod logs, automated SSL termination, and resource quota management.',
+    image: getProjectImage('devdock.png'),
+    tags: ['Go', 'TypeScript', 'React', 'Docker', 'Kubernetes', 'Tailwind CSS'],
+    metrics: [
+      { label: 'Provision Time', value: '8.2s' },
+      { label: 'Active Containers', value: '50k+' },
+      { label: 'Cloud Cost Cut', value: '28%' }
+    ],
+    liveUrl: 'https://example.com/devdock',
+    githubUrl: 'https://github.com/example/devdock',
+    featured: true
+  },
+  {
+    id: 'agency-portfolio',
+    title: 'Agency Portfolio Studio',
+    category: 'Web Apps',
+    description: 'Ultra-slick digital portfolio experience for modern design studios with WebGL shaders and interactive case studies.',
+    longDescription: 'Created for top-tier creative agencies, this interactive platform combines custom Three.js fragment shaders, fluid page transitions, and smooth scroll physics to showcase high-impact branding and software engineering visual case studies.',
+    image: getProjectImage('agency portfolio.png'),
+    tags: ['React', 'Three.js', 'Framer Motion', 'Tailwind CSS', 'TypeScript'],
+    metrics: [
+      { label: 'Avg Session', value: '4m 12s' },
+      { label: 'Frame Rate', value: '60 FPS' },
+      { label: 'Award Score', value: '9.8/10' }
+    ],
+    liveUrl: 'https://example.com/agency-portfolio',
+    githubUrl: 'https://github.com/example/agency-portfolio'
+  },
+  {
+    id: 'ai-content-generator',
+    title: 'AI Content & Copy Generator',
+    category: 'AI & ML',
+    description: 'Multimodal generative AI workspace for producing SEO articles, ad copy, marketing graphics, and social posts.',
+    longDescription: 'Empowering marketing agencies and growth teams, this content suite combines natural language generation with AI image diffusion models. Includes automated brand tone alignment, SEO keyword density optimization, and export to CMS platforms.',
+    image: getProjectImage('ai content generator.png'),
+    tags: ['TypeScript', 'Next.js', 'Node.js', 'Tailwind CSS', 'OpenAI API', 'Python'],
+    metrics: [
+      { label: 'Articles Generated', value: '250k+' },
+      { label: 'Time Saved', value: '75%' },
+      { label: 'SEO Rank Gain', value: '+45%' }
+    ],
+    liveUrl: 'https://example.com/ai-content',
+    githubUrl: 'https://github.com/example/ai-content'
+  },
+  {
+    id: 'ai-predictive',
+    title: 'AI Predictive Intelligence Engine',
+    category: 'AI & ML',
+    description: 'Machine learning analytics engine for customer churn prediction, dynamic pricing models, and demand forecasting.',
+    longDescription: 'High-throughput predictive analytics framework that processes historical transactional data to identify customer risk profiles, recommend optimal pricing strategies, and forecast inventory stock requirements months in advance.',
+    image: getProjectImage('ai predictive.png'),
+    tags: ['Python', 'TensorFlow', 'FastAPI', 'React', 'Chart.js', 'PostgreSQL'],
+    metrics: [
+      { label: 'Churn Reduction', value: '22%' },
+      { label: 'Model Accuracy', value: '96.8%' },
+      { label: 'Data Points/Sec', value: '1.2M' }
+    ],
+    liveUrl: 'https://example.com/ai-predictive',
+    githubUrl: 'https://github.com/example/ai-predictive'
+  },
+  {
+    id: 'ai-travel-planner',
+    title: 'AI Smart Itinerary Travel Planner',
+    category: 'AI & ML',
+    description: 'Personalized trip planner generating tailored day-by-day travel itineraries based on budget, style, and real-time data.',
+    longDescription: 'Leverages geospatial APIs and AI location algorithms to craft custom travel routes, recommend local dining spots, schedule flight transitions, and optimize daily activity schedules for seamless vacations.',
+    image: getProjectImage('ai travel planner.png'),
+    tags: ['TypeScript', 'React', 'Tailwind CSS', 'Node.js', 'Google Maps API', 'Python'],
+    metrics: [
+      { label: 'Trips Planned', value: '80k+' },
+      { label: 'User Rating', value: '4.9/5' },
+      { label: 'Plan Time', value: '15 secs' }
+    ],
+    liveUrl: 'https://example.com/ai-travel',
+    githubUrl: 'https://github.com/example/ai-travel'
+  },
+  {
+    id: 'apex',
+    title: 'Apex Financial Operations Hub',
+    category: 'Fintech',
+    description: 'High-throughput payment routing engine and cryptographic general ledger built for enterprise scale operations.',
+    longDescription: 'An ultra-reliable financial backend handling multi-currency settlements, automated reconciliations, fraud monitoring, and double-entry ledger security with zero latency bottlenecks.',
+    image: getProjectImage('apex.png'),
+    tags: ['Go', 'TypeScript', 'React', 'PostgreSQL', 'Redis', 'Kafka'],
+    metrics: [
+      { label: 'Daily Volume', value: '$120M' },
+      { label: 'Uptime', value: '99.999%' },
+      { label: 'Settlement Time', value: '120ms' }
+    ],
+    liveUrl: 'https://example.com/apex',
+    githubUrl: 'https://github.com/example/apex'
+  },
+  {
+    id: 'assethub',
+    title: 'AssetHub Digital Asset Manager',
+    category: 'Cloud & DevOps',
+    description: 'Centralized cloud media library featuring automated image compression, smart AI tagging, and instant CDN delivery.',
+    longDescription: 'Designed for design and engineering teams, AssetHub organizes terabytes of digital assets with smart AI tagging, vector previews, automated responsive webp conversion, and global CDN links.',
+    image: getProjectImage('assethub.png'),
+    tags: ['TypeScript', 'React', 'AWS S3', 'Node.js', 'GraphQL', 'Tailwind CSS'],
+    metrics: [
+      { label: 'Assets Stored', value: '4.5M+' },
+      { label: 'Bandwidth Saved', value: '42%' },
+      { label: 'CDN Speed', value: '18ms' }
+    ],
+    liveUrl: 'https://example.com/assethub',
+    githubUrl: 'https://github.com/example/assethub'
+  },
+  {
+    id: 'bookself',
+    title: 'Bookself Interactive Library & Reader',
+    category: 'Web Apps',
+    description: 'Modern digital reading workspace with smart text highlighting, audio narration sync, and reader analytics.',
+    longDescription: 'A refined web reading platform for e-books and technical papers with full offline access, customizable typography styles, interactive note-taking, and community book clubs.',
+    image: getProjectImage('bookself.png'),
+    tags: ['TypeScript', 'React', 'Tailwind CSS', 'Node.js', 'PWA', 'IndexedDB'],
+    metrics: [
+      { label: 'Books Indexed', value: '100k+' },
+      { label: 'Daily Active', value: '45k' },
+      { label: 'Offline Sync', value: '100%' }
+    ],
+    liveUrl: 'https://example.com/bookself',
+    githubUrl: 'https://github.com/example/bookself'
+  },
+  {
+    id: 'chatbot-ecommerce',
+    title: 'E-Commerce AI Conversational Bot',
+    category: 'AI & ML',
+    description: 'Intelligent support bot handling instant order tracking, product matching, returns, and FAQs 24/7.',
+    longDescription: 'Custom trained on store catalog datasets, this conversational AI assistant resolves customer inquiries instantly, suggests cross-sell items during chats, and integrates into WhatsApp and web widgets.',
+    image: getProjectImage('chatbot for ecommerce.png'),
+    tags: ['Python', 'LangChain', 'TypeScript', 'React', 'Node.js', 'WebSockets'],
+    metrics: [
+      { label: 'Deflection Rate', value: '78%' },
+      { label: 'Response Time', value: '0.8s' },
+      { label: 'CSAT Score', value: '4.8/5' }
+    ],
+    liveUrl: 'https://example.com/chatbot-ecom',
+    githubUrl: 'https://github.com/example/chatbot-ecom'
+  },
+  {
+    id: 'coding-sandbox',
+    title: 'Cloud Coding Sandbox & Compiler',
+    category: 'Developer Tools',
+    description: 'Browser-based code execution environment supporting 20+ languages with live multi-developer pair programming.',
+    longDescription: 'Provides instantly ready, isolated Docker container runtimes in the browser. Supports real-time collaborative editing, terminal access, package installations, and one-click deployment URLs.',
+    image: getProjectImage('coding sandbox.png'),
+    tags: ['TypeScript', 'React', 'Node.js', 'Docker', 'WebAssembly', 'Tailwind CSS'],
+    metrics: [
+      { label: 'Languages', value: '24 Supported' },
+      { label: 'Execution', value: '< 100ms' },
+      { label: 'Code Sessions', value: '1.8M' }
+    ],
+    liveUrl: 'https://example.com/coding-sandbox',
+    githubUrl: 'https://github.com/example/coding-sandbox'
+  },
+  {
+    id: 'collabedit',
+    title: 'CollabEdit Real-Time Workspace',
+    category: 'Developer Tools',
+    description: 'Real-time collaborative document platform featuring CRDT-based multi-user sync and inline commentary.',
+    longDescription: 'Built with conflict-free replicated data types, CollabEdit allows hundreds of team members to write technical specifications, documentation, and markdown notes simultaneously without edit conflicts.',
+    image: getProjectImage('collabedit.png'),
+    tags: ['TypeScript', 'React', 'Node.js', 'WebSockets', 'Tailwind CSS', 'Yjs'],
+    metrics: [
+      { label: 'Concurrent Users', value: '5,000+' },
+      { label: 'Sync Latency', value: '15ms' },
+      { label: 'Zero Conflicts', value: '100%' }
+    ],
+    liveUrl: 'https://example.com/collabedit',
+    githubUrl: 'https://github.com/example/collabedit'
+  },
+  {
+    id: 'customer-sentiment-analyzer',
+    title: 'Customer Sentiment Intelligence',
+    category: 'AI & ML',
+    description: 'NLP platform analyzing customer feedback, social sentiment, and support tickets into actionable insight scores.',
+    longDescription: 'Utilizes transformer models to scan customer interaction channels in real time, detecting sentiment trends, product pain points, and urgent support escalations automatically.',
+    image: getProjectImage('customer sentiment analyzer.png'),
+    tags: ['Python', 'HuggingFace', 'FastAPI', 'React', 'TypeScript', 'Tailwind CSS'],
+    metrics: [
+      { label: 'Accuracy', value: '94.2%' },
+      { label: 'Text/Min', value: '500,000' },
+      { label: 'Insights Speed', value: 'Real-Time' }
+    ],
+    liveUrl: 'https://example.com/sentiment-analyzer',
+    githubUrl: 'https://github.com/example/sentiment-analyzer'
+  },
+  {
+    id: 'docusigner',
+    title: 'DocuSigner Electronic Signature Suite',
+    category: 'Web Apps',
+    description: 'Secure digital document signing solution with cryptographic verification, workflow templates, and audit logs.',
+    longDescription: 'Compliant enterprise electronic signature app providing PDF document generation, signature placement, automated recipient routing, and tamper-evident cryptographic hash verification.',
+    image: getProjectImage('docusigner.png'),
+    tags: ['TypeScript', 'React', 'Node.js', 'PDF.js', 'PostgreSQL', 'Tailwind CSS'],
+    metrics: [
+      { label: 'Signed Docs', value: '1.2M+' },
+      { label: 'Compliance', value: 'eIDAS/ESIGN' },
+      { label: 'Completion Rate', value: '94%' }
+    ],
+    liveUrl: 'https://example.com/docusigner',
+    githubUrl: 'https://github.com/example/docusigner'
+  },
+  {
+    id: 'e-commerce-retail',
+    title: 'Modern Retail Storefront',
+    category: 'E-Commerce',
+    description: 'Ultra-fast storefront UI featuring dynamic product filtering, instant cart updates, and rich product galleries.',
+    longDescription: 'Optimized for high conversion rates, this retail application features micro-interactions, responsive grid views, multi-tier pricing, and seamless integration with headless commerce backends.',
+    image: getProjectImage('e commerce.png'),
+    tags: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Shopify API', 'GraphQL'],
+    metrics: [
+      { label: 'Page Load', value: '0.4s' },
+      { label: 'Mobile Sales', value: '+52%' },
+      { label: 'Bounce Rate', value: '-18%' }
+    ],
+    liveUrl: 'https://example.com/retail-store',
+    githubUrl: 'https://github.com/example/retail-store'
+  },
+  {
+    id: 'ecotrack',
+    title: 'EcoTrack Carbon Footprint Monitor',
+    category: 'Cloud & DevOps',
+    description: 'Sustainability telemetry engine tracking enterprise carbon emissions, energy usage, and green compliance.',
+    longDescription: 'Ingests facility sensor data, cloud compute metrics, and logistics routes to compute real-time carbon equivalent scores and guide corporate ESG reporting.',
+    image: getProjectImage('ecotrack.png'),
+    tags: ['TypeScript', 'React', 'Python', 'Tailwind CSS', 'PostgreSQL', 'D3.js'],
+    metrics: [
+      { label: 'CO2 Reduction', value: '18%' },
+      { label: 'Sensors Monitored', value: '10,000+' },
+      { label: 'Reports Built', value: '5,000+' }
+    ],
+    liveUrl: 'https://example.com/ecotrack',
+    githubUrl: 'https://github.com/example/ecotrack'
+  },
+  {
+    id: 'expense-tracker',
+    title: 'Smart Expense & Budget Tracker',
+    category: 'Fintech',
+    description: 'Financial dashboard featuring intelligent receipt scanning, automated category splitting, and spending analytics.',
+    longDescription: 'Personal and team finance app equipped with optical character recognition for physical receipts, automated recurring subscription detection, and custom budget goal alerts.',
+    image: getProjectImage('expense tracker.png'),
+    tags: ['TypeScript', 'React', 'Node.js', 'Tailwind CSS', 'Chart.js', 'MongoDB'],
+    metrics: [
+      { label: 'Receipt OCR', value: '99.1%' },
+      { label: 'Savings Found', value: '$450/mo avg' },
+      { label: 'Active Trackers', value: '90k+' }
+    ],
+    liveUrl: 'https://example.com/expense-tracker',
+    githubUrl: 'https://github.com/example/expense-tracker'
+  },
+  {
+    id: 'feedo',
+    title: 'Feedo Customer Feedback Engine',
+    category: 'Web Apps',
+    description: 'In-app feedback widgets, feature upvoting boards, and public product roadmap management system.',
+    longDescription: 'Captures direct product feedback from web and mobile users, allowing product managers to prioritize feature backlogs through public upvoting and automated sentiment tagging.',
+    image: getProjectImage('feedo.png'),
+    tags: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'PostgreSQL'],
+    metrics: [
+      { label: 'Feedback Collected', value: '500k+' },
+      { label: 'Upvotes Cast', value: '2.1M' },
+      { label: 'Time to Implement', value: '-30%' }
+    ],
+    liveUrl: 'https://example.com/feedo',
+    githubUrl: 'https://github.com/example/feedo'
+  },
+  {
+    id: 'formforge',
+    title: 'FormForge Dynamic Form Builder',
+    category: 'Developer Tools',
+    description: 'No-code drag-and-drop form builder supporting complex conditional logic branches and automated webhooks.',
+    longDescription: 'Enables teams to design interactive multi-page surveys, registration forms, and checkout flows without writing code. Supports custom CSS themes, spam protection, and 50+ integrations.',
+    image: getProjectImage('formforge.png'),
+    tags: ['TypeScript', 'React', 'Tailwind CSS', 'Node.js', 'MongoDB'],
+    metrics: [
+      { label: 'Forms Created', value: '140k+' },
+      { label: 'Submissions', value: '12M+' },
+      { label: 'Completion', value: '88%' }
+    ],
+    liveUrl: 'https://example.com/formforge',
+    githubUrl: 'https://github.com/example/formforge'
+  },
+  {
+    id: 'gitvisual',
+    title: 'GitVisual Repository Explorer',
+    category: 'Developer Tools',
+    description: 'Interactive Git commit tree visualization tool mapping repository architecture, code frequency, and author diffs.',
+    longDescription: 'Transforms dense Git commit logs into beautiful interactive node graphs. Helps engineering leads understand codebase evolution, spot refactoring targets, and onboard new developers.',
+    image: getProjectImage('gitvisual.png'),
+    tags: ['TypeScript', 'React', 'D3.js', 'GitHub API', 'Tailwind CSS'],
+    metrics: [
+      { label: 'Repos Visualized', value: '85k+' },
+      { label: 'Graph Render', value: '< 50ms' },
+      { label: 'Stars on GitHub', value: '4.8k' }
+    ],
+    liveUrl: 'https://example.com/gitvisual',
+    githubUrl: 'https://github.com/example/gitvisual'
+  },
+  {
+    id: 'gym-tracker',
+    title: 'GymTrack Fitness & Workout Planner',
+    category: 'Web Apps',
+    description: 'Workout logging application featuring animated exercise guides, custom routine building, and strength graphs.',
+    longDescription: 'Designed for fitness enthusiasts and trainers, GymTrack tracks weights, reps, rest intervals, and target muscle activation maps across workout routines.',
+    image: getProjectImage('gym tracker.png'),
+    tags: ['TypeScript', 'React', 'Tailwind CSS', 'Node.js', 'Chart.js'],
+    metrics: [
+      { label: 'Workouts Logged', value: '3.2M' },
+      { label: 'Exercise Library', value: '800+' },
+      { label: 'User Retention', value: '72%' }
+    ],
+    liveUrl: 'https://example.com/gym-tracker',
+    githubUrl: 'https://github.com/example/gym-tracker'
+  },
+  {
+    id: 'habitforge',
+    title: 'HabitForge Daily Streak Engine',
+    category: 'Web Apps',
+    description: 'Gamified habit formation tracker with streak reminders, daily check-ins, and performance statistics.',
+    longDescription: 'Builds positive daily routines through gamified streak counters, customizable notification schedules, dark mode UI, and progress sharing with friends.',
+    image: getProjectImage('habitforge.png'),
+    tags: ['TypeScript', 'React', 'Tailwind CSS', 'Node.js', 'PWA'],
+    metrics: [
+      { label: 'Streaks Kept', value: '1.4M+' },
+      { label: 'Daily Active', value: '65k' },
+      { label: 'Completion Rate', value: '82%' }
+    ],
+    liveUrl: 'https://example.com/habitforge',
+    githubUrl: 'https://github.com/example/habitforge'
+  },
+  {
+    id: 'invoiceflow',
+    title: 'InvoiceFlow Automated Billing Suite',
+    category: 'Fintech',
+    description: 'Recurring billing and invoicing suite supporting automatic payment collection, tax calculations, and PDF receipts.',
+    longDescription: 'Automates client invoicing for freelancers and SaaS companies. Includes automatic payment reminders, tax compliance engine, currency conversion, and accounting ledger export.',
+    image: getProjectImage('invoiceflow.png'),
+    tags: ['TypeScript', 'React', 'Next.js', 'Stripe API', 'PostgreSQL', 'Tailwind CSS'],
+    metrics: [
+      { label: 'Invoices Sent', value: '850k+' },
+      { label: 'Paid On-Time', value: '+35%' },
+      { label: 'Volume Processed', value: '$95M' }
+    ],
+    liveUrl: 'https://example.com/invoiceflow',
+    githubUrl: 'https://github.com/example/invoiceflow'
+  },
+  {
+    id: 'kube',
+    title: 'Kube Cluster Management Console',
+    category: 'Cloud & DevOps',
+    description: 'DevOps portal for monitoring Kubernetes clusters, pod health, resource telemetry, and auto-scaling rules.',
+    longDescription: 'A lightweight Kubernetes administration dashboard that provides terminal access into pods, visual pod topology maps, metrics graphs, and instant alerting on crash loops.',
+    image: getProjectImage('kube.png'),
+    tags: ['Go', 'TypeScript', 'React', 'Kubernetes API', 'Docker', 'Tailwind CSS'],
+    metrics: [
+      { label: 'Clusters Managed', value: '1,200+' },
+      { label: 'Metrics Polling', value: '100ms' },
+      { label: 'Downtime Prevented', value: '99.9%' }
+    ],
+    liveUrl: 'https://example.com/kube',
+    githubUrl: 'https://github.com/example/kube'
+  },
+  {
+    id: 'learnloom',
+    title: 'LearnLoom Interactive LMS',
+    category: 'Web Apps',
+    description: 'E-learning platform featuring video course streaming, coding challenges, student discussions, and certificates.',
+    longDescription: 'A modern learning management system built for online academies and enterprise employee training. Supports video progress tracking, automated coding quizzes, and downloadable completion certificates.',
+    image: getProjectImage('learnloom.png'),
+    tags: ['TypeScript', 'Next.js', 'React', 'Tailwind CSS', 'Node.js', 'PostgreSQL'],
+    metrics: [
+      { label: 'Students Enrolled', value: '350k+' },
+      { label: 'Courses Hosted', value: '1,400+' },
+      { label: 'Completion Rate', value: '74%' }
+    ],
+    liveUrl: 'https://example.com/learnloom',
+    githubUrl: 'https://github.com/example/learnloom'
+  },
+  {
+    id: 'localbite',
+    title: 'LocalBite Gourmet Food Delivery',
+    category: 'E-Commerce',
+    description: 'On-demand food ordering platform with live GPS courier tracking, restaurant menu management, and instant chat.',
+    longDescription: 'Connects local diners with artisanal restaurants. Features interactive menu customizers, live driver geolocation maps via WebSockets, and instant contact options.',
+    image: getProjectImage('localbite.png'),
+    tags: ['TypeScript', 'React', 'Tailwind CSS', 'Node.js', 'WebSockets', 'Google Maps API'],
+    metrics: [
+      { label: 'Orders Delivered', value: '2.1M+' },
+      { label: 'Avg Delivery Time', value: '24 mins' },
+      { label: 'Restaurant Partners', value: '850+' }
+    ],
+    liveUrl: 'https://example.com/localbite',
+    githubUrl: 'https://github.com/example/localbite'
+  },
+  {
+    id: 'mailblast',
+    title: 'MailBlast Email Marketing Automation',
+    category: 'Web Apps',
+    description: 'High-volume email delivery platform with visual campaign builder, AB testing, and audience segmentation.',
+    longDescription: 'Handles millions of transactional and promotional emails per hour. Includes drag-and-drop newsletter editing, automated drip campaigns, link click heatmaps, and ISP deliverability scoring.',
+    image: getProjectImage('mailblast.png'),
+    tags: ['TypeScript', 'React', 'Node.js', 'Tailwind CSS', 'Redis', 'PostgreSQL'],
+    metrics: [
+      { label: 'Emails / Hour', value: '5,000,000' },
+      { label: 'Deliverability', value: '99.4%' },
+      { label: 'Open Rate Boost', value: '+24%' }
+    ],
+    liveUrl: 'https://example.com/mailblast',
+    githubUrl: 'https://github.com/example/mailblast'
+  },
+  {
+    id: 'medical-diagnosis',
+    title: 'AI Medical Diagnostics Assistant',
+    category: 'AI & ML',
+    description: 'Clinical support tool analyzing patient vitals and medical imaging to assist physicians in early diagnosis.',
+    longDescription: 'Engineered in compliance with medical privacy standards, this AI model assists radiologists and clinicians by scanning medical scans and lab reports to highlight diagnostic indicators.',
+    image: getProjectImage('medical diagnosis.png'),
+    tags: ['Python', 'PyTorch', 'FastAPI', 'React', 'TypeScript', 'Tailwind CSS'],
+    metrics: [
+      { label: 'Scan Sensitivity', value: '97.8%' },
+      { label: 'Analysis Time', value: '1.4s' },
+      { label: 'Hospitals Tested', value: '12' }
+    ],
+    liveUrl: 'https://example.com/medical-diagnosis',
+    githubUrl: 'https://github.com/example/medical-diagnosis'
+  },
+  {
+    id: 'mindmap',
+    title: 'MindMap Infinite Canvas Workspace',
+    category: 'Developer Tools',
+    description: 'Infinite canvas node diagramming web app for visual brainstorming, system architecture maps, and user flows.',
+    longDescription: 'Features smooth canvas panning, node connecting physics, real-time multi-user cursor collaboration, export to SVG/PNG, and auto-layout algorithms for complex diagrams.',
+    image: getProjectImage('mindmap.png'),
+    tags: ['TypeScript', 'React', 'Tailwind CSS', 'Canvas API', 'Zustand'],
+    metrics: [
+      { label: 'Nodes Rendered', value: '100,000+' },
+      { label: 'Pan Smoothness', value: '60 FPS' },
+      { label: 'Diagrams Exported', value: '300k+' }
+    ],
+    liveUrl: 'https://example.com/mindmap',
+    githubUrl: 'https://github.com/example/mindmap'
+  },
+  {
+    id: 'music-player',
+    title: 'SoundSphere Audio Streaming Studio',
+    category: 'Web Apps',
+    description: 'Hi-fi music streaming web player featuring spatial audio equalizers, live lyrics, and custom visualizers.',
+    longDescription: 'A slick audio web application delivering lossless audio playback, responsive canvas frequency spectrum visualizers, collaborative queue management, and playlist sharing.',
+    image: getProjectImage('music.png'),
+    tags: ['TypeScript', 'React', 'Web Audio API', 'Tailwind CSS', 'Node.js'],
+    metrics: [
+      { label: 'Tracks Streamed', value: '10M+' },
+      { label: 'Audio Quality', value: '320kbps' },
+      { label: 'Active Listeners', value: '140k' }
+    ],
+    liveUrl: 'https://example.com/music-player',
+    githubUrl: 'https://github.com/example/music-player'
+  },
+  {
+    id: 'pagepulse',
+    title: 'PagePulse Web Vitals & SEO Monitor',
+    category: 'Cloud & DevOps',
+    description: 'Automated site performance auditor testing Lighthouse scores, Core Web Vitals, and uptime 24/7.',
+    longDescription: 'Monitors global domain fleets for performance degradation, broken links, SEO metadata errors, and server response slowdowns with instant SMS and Slack alerts.',
+    image: getProjectImage('pagepulse.png'),
+    tags: ['TypeScript', 'Node.js', 'React', 'Puppeteer', 'Tailwind CSS', 'Chart.js'],
+    metrics: [
+      { label: 'Domains Monitored', value: '45,000+' },
+      { label: 'Check Frequency', value: 'Every 60s' },
+      { label: 'Alert Latency', value: '< 2s' }
+    ],
+    liveUrl: 'https://example.com/pagepulse',
+    githubUrl: 'https://github.com/example/pagepulse'
+  },
+  {
+    id: 'parksmart',
+    title: 'ParkSmart IoT Parking Management',
+    category: 'Cloud & DevOps',
+    description: 'Smart city parking platform displaying real-time space availability, digital spot reservations, and gate entry.',
+    longDescription: 'Integrates IoT parking sensor telemetry to display live availability maps across multi-story garages, allowing drivers to reserve and pay for parking spots before arrival.',
+    image: getProjectImage('parksmart.png'),
+    tags: ['Python', 'TypeScript', 'React', 'MQTT', 'Node.js', 'Tailwind CSS'],
+    metrics: [
+      { label: 'Spaces Tracked', value: '25,000+' },
+      { label: 'Traffic Saved', value: '30%' },
+      { label: 'Reservations', value: '400k+' }
+    ],
+    liveUrl: 'https://example.com/parksmart',
+    githubUrl: 'https://github.com/example/parksmart'
+  },
+  {
+    id: 'siteguard',
+    title: 'SiteGuard Web Application Firewall',
+    category: 'Cloud & DevOps',
+    description: 'Cybersecurity suite monitoring DDoS threats, SQL injection attacks, rate limiting, and SSL security.',
+    longDescription: 'Real-time security telemetry center that blocks malicious traffic patterns before hitting origin servers. Includes interactive attack geolocation maps and IP whitelist rules.',
+    image: getProjectImage('siteguard.png'),
+    tags: ['Go', 'TypeScript', 'React', 'Tailwind CSS', 'PostgreSQL', 'Grafana'],
+    metrics: [
+      { label: 'Attacks Blocked', value: '8.4M' },
+      { label: 'Filter Speed', value: '2ms' },
+      { label: 'Protection Score', value: '100%' }
+    ],
+    liveUrl: 'https://example.com/siteguard',
+    githubUrl: 'https://github.com/example/siteguard'
+  },
+  {
+    id: 'smart-recommendation',
+    title: 'Smart Product Recommendation Engine',
+    category: 'AI & ML',
+    description: 'AI recommendation API delivering real-time personalized product suggestions for e-commerce platforms.',
+    longDescription: 'Analyzes user browsing behavior and past purchase histories using collaborative filtering algorithms to present high-converting product recommendation carousels in real time.',
+    image: getProjectImage('smart recommendation.png'),
+    tags: ['Python', 'Scikit-Learn', 'FastAPI', 'React', 'TypeScript', 'Tailwind CSS'],
+    metrics: [
+      { label: 'AOV Increase', value: '+28%' },
+      { label: 'Rec CTR', value: '14.6%' },
+      { label: 'API Response', value: '18ms' }
+    ],
+    liveUrl: 'https://example.com/smart-rec',
+    githubUrl: 'https://github.com/example/smart-rec'
+  },
+  {
+    id: 'social-network',
+    title: 'ConnectVerse Social Community Hub',
+    category: 'Web Apps',
+    description: 'Real-time social platform featuring live activity feeds, group channels, media posts, and direct messaging.',
+    longDescription: 'Built with scalable WebSocket architectures, ConnectVerse offers fluid media sharing, threaded discussion channels, customizable user profiles, and instant push notifications.',
+    image: getProjectImage('social.png'),
+    tags: ['TypeScript', 'React', 'Node.js', 'WebSockets', 'Tailwind CSS', 'MongoDB'],
+    metrics: [
+      { label: 'Monthly Active', value: '500k+' },
+      { label: 'Posts / Day', value: '1.2M' },
+      { label: 'Message Speed', value: '10ms' }
+    ],
+    liveUrl: 'https://example.com/social',
+    githubUrl: 'https://github.com/example/social'
+  },
+  {
+    id: 'starbucks',
+    title: 'OrderExpress Coffee & Retail App',
+    category: 'E-Commerce',
+    description: 'Order-ahead mobile web app featuring custom drink builders, digital rewards cards, and store locator.',
+    longDescription: 'Allows customers to customize orders, pay using digital gift cards, earn loyalty points, and pick up fresh beverages at nearby store locations without waiting in line.',
+    image: getProjectImage('starbucks.png'),
+    tags: ['TypeScript', 'React', 'Tailwind CSS', 'Node.js', 'Stripe API', 'Mapbox'],
+    metrics: [
+      { label: 'Daily Orders', value: '45,000+' },
+      { label: 'Wait Time Cut', value: '80%' },
+      { label: 'Loyalty Users', value: '250k' }
+    ],
+    liveUrl: 'https://example.com/orderexpress',
+    githubUrl: 'https://github.com/example/orderexpress'
+  },
+  {
+    id: 'statlink',
+    title: 'StatLink Real-time Data Telemetry',
+    category: 'Cloud & DevOps',
+    description: 'High-frequency metric visualizer rendering 3D data streams, server load graphs, and alert thresholds.',
+    longDescription: 'Engineered for high-frequency telemetry, StatLink processes millions of data points per second, rendering live 3D surface charts and line graphs for mission-critical server infrastructure.',
+    image: getProjectImage('statlink.png'),
+    tags: ['TypeScript', 'React', 'Three.js', 'D3.js', 'Tailwind CSS', 'WebSockets'],
+    metrics: [
+      { label: 'Events / Sec', value: '2,500,000' },
+      { label: 'FPS Latency', value: '60 FPS' },
+      { label: 'Servers Monitored', value: '8,000+' }
+    ],
+    liveUrl: 'https://example.com/statlink',
+    githubUrl: 'https://github.com/example/statlink'
+  },
+  {
+    id: 'super-app',
+    title: 'Super App Ecosystem Suite',
+    category: 'Web Apps',
+    description: 'Multi-service platform combining ride-hailing, food delivery, peer-to-peer payments, and messaging in one app.',
+    longDescription: 'An all-in-one digital companion integrating multiple urban services into a single unified design system, shared digital wallet, and single sign-on security core.',
+    image: getProjectImage('super.png'),
+    tags: ['TypeScript', 'React', 'Tailwind CSS', 'Node.js', 'PostgreSQL', 'Redis'],
+    metrics: [
+      { label: 'Total Downloads', value: '5.0M+' },
+      { label: 'Services Hosted', value: '8 Apps' },
+      { label: 'Daily Transactions', value: '650k' }
+    ],
+    liveUrl: 'https://example.com/super-app',
+    githubUrl: 'https://github.com/example/super-app'
+  },
+  {
+    id: 'support-desk',
+    title: 'Omnichannel Customer Support Desk',
+    category: 'Web Apps',
+    description: 'Helpdesk ticketing platform organizing email, live chat, and social inquiries into a unified agent inbox.',
+    longDescription: 'Empowers support teams to resolve issues faster using collision detection, internal note mentions, automated canned responses, and SLA performance dashboards.',
+    image: getProjectImage('support.png'),
+    tags: ['TypeScript', 'React', 'Node.js', 'Tailwind CSS', 'PostgreSQL', 'WebSockets'],
+    metrics: [
+      { label: 'Tickets Solved', value: '1.8M+' },
+      { label: 'Resolution Time', value: '-45%' },
+      { label: 'Agent CSAT', value: '98%' }
+    ],
+    liveUrl: 'https://example.com/support-desk',
+    githubUrl: 'https://github.com/example/support-desk'
+  },
+  {
+    id: 'taskflow',
+    title: 'TaskFlow Agile Project Management',
+    category: 'Developer Tools',
+    description: 'Kanban & Scrum management application with drag-and-drop task boards, sprint velocity, and time tracking.',
+    longDescription: 'A streamlined project management tool for agile engineering teams. Features interactive Kanban boards, automated sprint roll-overs, time tracking timers, and burndown chart analytics.',
+    image: getProjectImage('taskflow.png'),
+    tags: ['TypeScript', 'React', 'Tailwind CSS', 'Node.js', 'PostgreSQL'],
+    metrics: [
+      { label: 'Tasks Completed', value: '4.2M+' },
+      { label: 'Sprint Speed', value: '+28%' },
+      { label: 'Active Teams', value: '15k' }
+    ],
+    liveUrl: 'https://example.com/taskflow',
+    githubUrl: 'https://github.com/example/taskflow'
+  },
+  {
+    id: 'tasksync',
+    title: 'TaskSync Distributed Workflow Automation',
+    category: 'Developer Tools',
+    description: 'Automated integration engine connecting API endpoints via custom trigger conditions and data transformations.',
+    longDescription: 'Like an enterprise integration glue, TaskSync connects cloud services via visual workflow pipelines, allowing teams to automate data syncs between databases, webhooks, and third-party tools.',
+    image: getProjectImage('tasksync.png'),
+    tags: ['TypeScript', 'Node.js', 'React', 'Tailwind CSS', 'Redis', 'Docker'],
+    metrics: [
+      { label: 'Workflows Run', value: '50M/mo' },
+      { label: 'Integrations', value: '200+' },
+      { label: 'Reliability', value: '99.99%' }
+    ],
+    liveUrl: 'https://example.com/tasksync',
+    githubUrl: 'https://github.com/example/tasksync'
+  },
+  {
+    id: 'whisper-chat',
+    title: 'WhisperChat Encrypted Messaging App',
+    category: 'Web Apps',
+    description: 'End-to-end encrypted messaging application with self-destructing text options and zero server data retention.',
+    longDescription: 'Prioritizing privacy above all, WhisperChat encrypts all messages and file transfers client-side using Web Crypto standards before sending them over WebSockets.',
+    image: getProjectImage('whisper chat.png'),
+    tags: ['TypeScript', 'React', 'Web Crypto API', 'Node.js', 'WebSockets', 'Tailwind CSS'],
+    metrics: [
+      { label: 'Encryption', value: 'AES-GCM 256' },
+      { label: 'Data Retained', value: '0 Bytes' },
+      { label: 'Messages Sent', value: '8M+' }
+    ],
+    liveUrl: 'https://example.com/whisper-chat',
+    githubUrl: 'https://github.com/example/whisper-chat'
+  },
+  {
+    id: 'zenith',
+    title: 'Zenith Enterprise ERP Cloud',
+    category: 'Fintech',
+    description: 'Comprehensive business ERP system handling supply chain logistics, payroll, auditing, and warehouse inventory.',
+    longDescription: 'An enterprise cloud solution consolidating core business operations into a single secure platform with role-based access control, automated audit logging, and financial forecasting.',
+    image: getProjectImage('zenith.png'),
+    tags: ['TypeScript', 'React', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'Docker'],
+    metrics: [
+      { label: 'Enterprise Clients', value: '450+' },
+      { label: 'Inventory Items', value: '12M+' },
+      { label: 'Efficiency Gain', value: '38%' }
+    ],
+    liveUrl: 'https://example.com/zenith',
+    githubUrl: 'https://github.com/example/zenith'
+  }
+];
+
+// Vibrant theme color accents for distinct card hover effects
+const CARD_ACCENTS = [
+  {
+    borderHover: 'hover:border-rose-500',
+    shadowHover: 'hover:shadow-[0_12px_35px_rgba(244,63,94,0.3)]',
+    textHover: 'group-hover:text-rose-400',
+    badgeBg: 'bg-rose-500/10',
+    badgeText: 'text-rose-400',
+    badgeBorder: 'border-rose-500/30',
+    metricText: 'text-rose-400',
+  },
+  {
+    borderHover: 'hover:border-cyan-500',
+    shadowHover: 'hover:shadow-[0_12px_35px_rgba(6,182,212,0.3)]',
+    textHover: 'group-hover:text-cyan-400',
+    badgeBg: 'bg-cyan-500/10',
+    badgeText: 'text-cyan-400',
+    badgeBorder: 'border-cyan-500/30',
+    metricText: 'text-cyan-400',
+  },
+  {
+    borderHover: 'hover:border-emerald-500',
+    shadowHover: 'hover:shadow-[0_12px_35px_rgba(16,185,129,0.3)]',
+    textHover: 'group-hover:text-emerald-400',
+    badgeBg: 'bg-emerald-500/10',
+    badgeText: 'text-emerald-400',
+    badgeBorder: 'border-emerald-500/30',
+    metricText: 'text-emerald-400',
+  },
+  {
+    borderHover: 'hover:border-purple-500',
+    shadowHover: 'hover:shadow-[0_12px_35px_rgba(168,85,247,0.3)]',
+    textHover: 'group-hover:text-purple-400',
+    badgeBg: 'bg-purple-500/10',
+    badgeText: 'text-purple-400',
+    badgeBorder: 'border-purple-500/30',
+    metricText: 'text-purple-400',
+  },
+  {
+    borderHover: 'hover:border-amber-500',
+    shadowHover: 'hover:shadow-[0_12px_35px_rgba(245,158,11,0.3)]',
+    textHover: 'group-hover:text-amber-400',
+    badgeBg: 'bg-amber-500/10',
+    badgeText: 'text-amber-400',
+    badgeBorder: 'border-amber-500/30',
+    metricText: 'text-amber-400',
+  },
+  {
+    borderHover: 'hover:border-blue-500',
+    shadowHover: 'hover:shadow-[0_12px_35px_rgba(59,130,246,0.3)]',
+    textHover: 'group-hover:text-blue-400',
+    badgeBg: 'bg-blue-500/10',
+    badgeText: 'text-blue-400',
+    badgeBorder: 'border-blue-500/30',
+    metricText: 'text-blue-400',
+  },
+  {
+    borderHover: 'hover:border-pink-500',
+    shadowHover: 'hover:shadow-[0_12px_35px_rgba(236,72,153,0.3)]',
+    textHover: 'group-hover:text-pink-400',
+    badgeBg: 'bg-pink-500/10',
+    badgeText: 'text-pink-400',
+    badgeBorder: 'border-pink-500/30',
+    metricText: 'text-pink-400',
+  },
+  {
+    borderHover: 'hover:border-orange-500',
+    shadowHover: 'hover:shadow-[0_12px_35px_rgba(249,115,22,0.3)]',
+    textHover: 'group-hover:text-orange-400',
+    badgeBg: 'bg-orange-500/10',
+    badgeText: 'text-orange-400',
+    badgeBorder: 'border-orange-500/30',
+    metricText: 'text-orange-400',
+  },
+  {
+    borderHover: 'hover:border-indigo-500',
+    shadowHover: 'hover:shadow-[0_12px_35px_rgba(99,102,241,0.3)]',
+    textHover: 'group-hover:text-indigo-400',
+    badgeBg: 'bg-indigo-500/10',
+    badgeText: 'text-indigo-400',
+    badgeBorder: 'border-indigo-500/30',
+    metricText: 'text-indigo-400',
+  },
+  {
+    borderHover: 'hover:border-teal-500',
+    shadowHover: 'hover:shadow-[0_12px_35px_rgba(20,184,166,0.3)]',
+    textHover: 'group-hover:text-teal-400',
+    badgeBg: 'bg-teal-500/10',
+    badgeText: 'text-teal-400',
+    badgeBorder: 'border-teal-500/30',
+    metricText: 'text-teal-400',
+  },
+  {
+    borderHover: 'hover:border-violet-500',
+    shadowHover: 'hover:shadow-[0_12px_35px_rgba(139,92,246,0.3)]',
+    textHover: 'group-hover:text-violet-400',
+    badgeBg: 'bg-violet-500/10',
+    badgeText: 'text-violet-400',
+    badgeBorder: 'border-violet-500/30',
+    metricText: 'text-violet-400',
+  },
+  {
+    borderHover: 'hover:border-lime-500',
+    shadowHover: 'hover:shadow-[0_12px_35px_rgba(132,204,22,0.3)]',
+    textHover: 'group-hover:text-lime-400',
+    badgeBg: 'bg-lime-500/10',
+    badgeText: 'text-lime-400',
+    badgeBorder: 'border-lime-500/30',
+    metricText: 'text-lime-400',
+  },
+];
 
 // Projects Showcase Section Component
 const ProjectsCatalogSection = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [activeModalProject, setActiveModalProject] = useState<ProjectItem | null>(null);
 
   const categories = useMemo(
     () => ['All', ...Array.from(new Set(PROJECTS_DATA.map((p) => p.category)))],
@@ -381,7 +1203,7 @@ const ProjectsCatalogSection = () => {
   });
 
   return (
-    <section id="projects-grid-section" className="w-full min-h-screen bg-zinc-950 py-24 px-4 sm:px-8 md:px-12 lg:px-20 relative text-white">
+    <section id="projects-grid-section" className="w-full min-h-screen bg-transparent py-24 px-4 sm:px-8 md:px-12 lg:px-20 relative text-white">
       {/* Background ambient lighting */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-red-600/10 rounded-full blur-[140px] pointer-events-none -z-10" />
       <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none -z-10" />
@@ -399,6 +1221,14 @@ const ProjectsCatalogSection = () => {
             <p className="mt-3 text-zinc-400 text-base max-w-xl">
               Explore our showcase of cutting-edge web graphics, AI-driven architectures, and high-performance applications.
             </p>
+
+            {/* Privacy & Confidentiality Notice */}
+            <div className="mt-4 p-3.5 sm:p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs sm:text-sm text-zinc-400 flex items-start gap-3 max-w-2xl backdrop-blur-md">
+              <ShieldCheck className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+              <div className="leading-relaxed">
+                <span className="font-semibold text-white">Privacy Notice:</span> We do not provide live project demos or GitHub repository links as per client confidentiality agreements. The project names displayed are placeholders with actual titles hidden for privacy, and showcase images are utilized with explicit owner permission.
+              </div>
+            </div>
           </div>
 
           {/* Search bar */}
@@ -441,196 +1271,89 @@ const ProjectsCatalogSection = () => {
 
         {/* Projects Grid */}
         {filteredProjects.length === 0 ? (
-          <div className="text-center py-20 bg-zinc-900/40 rounded-3xl border border-zinc-800/60">
+          <div className="text-center py-20 bg-zinc-900/40 rounded-3xl border-2 border-zinc-800/60">
             <Code2 className="w-12 h-12 text-zinc-600 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-zinc-300">No projects found</h3>
             <p className="text-zinc-500 text-sm mt-1">Try matching different keywords or category filter.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filteredProjects.map((project, idx) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: idx * 0.06 }}
-                onClick={() => setActiveModalProject(project)}
-                className="group relative bg-zinc-900/70 border border-zinc-800/90 hover:border-red-500/50 rounded-xl overflow-hidden cursor-pointer flex flex-col justify-between transition-all duration-300 hover:shadow-[0_10px_30px_rgba(225,29,72,0.12)] hover:-translate-y-1"
-              >
-                <div>
-                  {/* Image container */}
-                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-zinc-950">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 group-hover:brightness-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-                    
-                    {/* Badge */}
-                    <div className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-[11px] font-semibold text-red-400">
-                      {project.category}
-                    </div>
-
-                    {project.featured && (
-                      <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full bg-amber-500/20 backdrop-blur-md border border-amber-500/40 text-[9px] font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1">
-                        <Star className="w-2.5 h-2.5 fill-amber-300" /> Featured
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProjects.map((project, idx) => {
+              const accent = CARD_ACCENTS[idx % CARD_ACCENTS.length];
+              return (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: idx * 0.06 }}
+                  className={`group relative bg-zinc-950/25 backdrop-blur-3xl backdrop-saturate-200 border-2 border-white/15 ${accent.borderHover} ${accent.shadowHover} rounded-2xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 p-5 sm:p-6 shadow-[0_15px_40px_rgba(0,0,0,0.5)]`}
+                >
+                  <div>
+                    {/* Image container */}
+                    <div className="relative aspect-[16/9] w-full overflow-hidden bg-zinc-950/70 rounded-xl mb-4 border border-white/15 shadow-inner">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 group-hover:brightness-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent opacity-80 group-hover:opacity-50 transition-opacity" />
+                      
+                      {/* Category Badge with custom theme color */}
+                      <div className={`absolute top-3 left-3 px-3 py-1 rounded-full bg-black/60 backdrop-blur-xl border ${accent.badgeBorder} text-[11px] font-semibold ${accent.badgeText}`}>
+                        {project.category}
                       </div>
-                    )}
-                  </div>
 
-                  {/* Body content */}
-                  <div className="p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-red-400 transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="mt-1.5 text-zinc-400 text-xs line-clamp-2 leading-relaxed">
-                      {project.description}
-                    </p>
-
-                    {/* Metrics preview */}
-                    <div className="grid grid-cols-3 gap-1.5 my-3.5 p-2 rounded-lg bg-zinc-950/60 border border-zinc-800/80">
-                      {project.metrics.map((m) => (
-                        <div key={m.label} className="text-center">
-                          <div className="text-xs font-bold text-white">{m.value}</div>
-                          <div className="text-[9px] text-zinc-500 truncate">{m.label}</div>
+                      {project.featured && (
+                        <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-amber-500/20 backdrop-blur-xl border border-amber-500/40 text-[9px] font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1">
+                          <Star className="w-2.5 h-2.5 fill-amber-300" /> Featured
                         </div>
-                      ))}
+                      )}
                     </div>
 
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-1 mt-3">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-0.5 rounded bg-zinc-800/80 text-[10px] font-medium text-zinc-300 border border-zinc-700/50"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                    {/* Body content */}
+                    <div>
+                      <h3 className={`text-lg font-bold text-white ${accent.textHover} transition-colors duration-300 drop-shadow-sm`}>
+                        {project.title}
+                      </h3>
+                      <p className="mt-2 text-zinc-300/90 text-xs leading-relaxed font-normal">
+                        {project.description}
+                      </p>
+
+                      {/* Metrics preview */}
+                      <div className="grid grid-cols-3 gap-1.5 my-4 p-2.5 rounded-xl bg-black/30 backdrop-blur-xl border border-white/15">
+                        {project.metrics.map((m) => (
+                          <div key={m.label} className="text-center">
+                            <div className={`text-xs font-extrabold text-white group-hover:${accent.metricText} transition-colors`}>{m.value}</div>
+                            <div className="text-[9px] text-zinc-400 truncate mt-0.5">{m.label}</div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Languages used tags */}
+                      <div className="flex flex-wrap gap-1.5 mt-3">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2.5 py-1 rounded-lg bg-zinc-900/40 backdrop-blur-xl text-[10px] font-semibold text-zinc-200 border border-white/15 transition-colors group-hover:border-white/30"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-
-                {/* Footer button for Case Study */}
-                <div className="px-4 sm:px-5 pb-4 pt-1 flex items-center justify-end">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveModalProject(project);
-                    }}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-500/10 hover:bg-red-600 border border-red-500/30 hover:border-red-500 text-red-400 hover:text-white text-xs font-semibold transition-all duration-300 shadow-sm group-hover:bg-red-600 group-hover:text-white group-hover:border-red-500"
-                  >
-                    <FileText className="w-3.5 h-3.5" />
-                    <span>See Case Study</span>
-                  </button>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         )}
       </div>
-
-      {/* Project Detail Modal */}
-      <AnimatePresence>
-        {activeModalProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/80 backdrop-blur-xl">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-zinc-900 border border-zinc-700/80 rounded-3xl shadow-2xl p-6 sm:p-8 text-white scrollbar-thin scrollbar-thumb-zinc-700"
-            >
-              {/* Close button */}
-              <button
-                onClick={() => setActiveModalProject(null)}
-                className="absolute top-6 right-6 p-2.5 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white transition-all z-10"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              {/* Modal Banner */}
-              <div className="relative aspect-video w-full rounded-2xl overflow-hidden mb-6 bg-zinc-950 border border-zinc-800">
-                <img
-                  src={activeModalProject.image}
-                  alt={activeModalProject.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 px-3 py-1 rounded-full bg-red-600/90 text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 backdrop-blur-md border border-white/20">
-                  <FileText className="w-3.5 h-3.5" /> Case Study • {activeModalProject.category}
-                </div>
-              </div>
-
-              {/* Title & Description */}
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
-                {activeModalProject.title}
-              </h2>
-              <p className="mt-3 text-zinc-300 text-base leading-relaxed">
-                {activeModalProject.longDescription}
-              </p>
-
-              {/* Metrics Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8 p-4 rounded-2xl bg-zinc-950/80 border border-zinc-800">
-                {activeModalProject.metrics.map((m) => (
-                  <div key={m.label} className="p-3 text-center rounded-xl bg-zinc-900/60 border border-zinc-800/60">
-                    <div className="text-xl font-extrabold text-red-400">{m.value}</div>
-                    <div className="text-xs text-zinc-400 mt-0.5">{m.label}</div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Technologies */}
-              <div className="mb-8">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-3">
-                  Technologies & Frameworks
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {activeModalProject.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="px-3 py-1 rounded-lg bg-zinc-800 text-xs font-semibold text-zinc-200 border border-zinc-700/80"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-zinc-800">
-                {activeModalProject.liveUrl && (
-                  <a
-                    href={activeModalProject.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 min-w-[160px] inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 font-bold text-sm text-white shadow-lg shadow-red-600/30 transition-all hover:scale-[1.02]"
-                  >
-                    <Globe className="w-4 h-4" /> Live Demo
-                  </a>
-                )}
-                {activeModalProject.githubUrl && (
-                  <a
-                    href={activeModalProject.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 min-w-[160px] inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 font-bold text-sm text-zinc-200 hover:text-white border border-zinc-700 transition-all hover:scale-[1.02]"
-                  >
-                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                    </svg> Source Repository
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };
+
+import { GradientBackground } from './components/GradientBackground';
 
 // Full Projects Page export
 export default function ProjectsPage() {
@@ -639,8 +1362,10 @@ export default function ProjectsPage() {
       {/* 1. Canvas Hero Header Component requested by user */}
       <Html />
 
-      {/* 2. Projects Catalog & Grid Showcase */}
-      <ProjectsCatalogSection />
+      {/* 2. Projects Catalog & Grid Showcase wrapped in GradientBackground */}
+      <GradientBackground overlay={true} overlayOpacity={0.65} animationDuration={10}>
+        <ProjectsCatalogSection />
+      </GradientBackground>
     </div>
   );
 }
