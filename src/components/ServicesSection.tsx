@@ -25,7 +25,7 @@ const SERVICES = [
     description: 'Perfect for landing pages, portfolio sites, and local businesses needing a fast, professional, and mobile-friendly web presence with 3 free pages included.',
     icon: HiOutlineGlobeAlt, gradient: 'from-sky-400/20 via-cyan-400/20 to-teal-400/20', accentColor: '#38bdf8',
     features: ['Mobile & Tablet Responsive Design', '99+ Google Lighthouse Speed Score', 'Contact Form & Social Media Links', '3 Free Pages Included'],
-    tech: ['React 19', 'Tailwind', 'HTML5', 'Vite', 'TypeScript'],
+    tech: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React 19', 'Tailwind', 'Vite'],
   },
   {
     id: 'fullstack', number: '02', title: 'Full Stack Development',
@@ -33,7 +33,7 @@ const SERVICES = [
     description: 'We craft high-performance, robust web applications built with modern frontend frameworks (React 19, Next.js) and enterprise backend architectures (Node.js, Express, PostgreSQL, GraphQL).',
     icon: HiOutlineCode, gradient: 'from-blue-500/20 via-indigo-500/20 to-purple-500/20', accentColor: '#3b82f6',
     features: ['Real-Time WebSockets & Live Telemetry', 'Microservices & REST / GraphQL APIs', 'Database Modeling & Query Optimization', 'Serverless Edge Functions & Caching'],
-    tech: ['React 19', 'Next.js', 'Node.js', 'PostgreSQL', 'TypeScript', 'Tailwind'],
+    tech: ['TypeScript', 'JavaScript', 'React 19', 'Next.js 15', 'Node.js', 'PostgreSQL', 'GraphQL', 'Prisma'],
   },
   {
     id: 'mobile', number: '03', title: 'Mobile Application Development',
@@ -41,7 +41,7 @@ const SERVICES = [
     description: 'Engineered for fluid 60 FPS performance across iOS and Android. Native device API integration, offline-first data sync, and intuitively responsive UI design systems.',
     icon: HiOutlineDeviceMobile, gradient: 'from-[#00ffc6]/20 via-cyan-500/20 to-blue-500/20', accentColor: '#00ffc6',
     features: ['Cross-Platform React Native & Flutter', 'Native Device Hardware & Sensor APIs', 'Push Notifications & Background Sync', 'Biometric Security & Encrypted Storage'],
-    tech: ['React Native', 'Swift', 'Kotlin', 'Expo', 'Redux Toolkit', 'Firebase'],
+    tech: ['TypeScript', 'Swift', 'Kotlin', 'Dart', 'React Native', 'Flutter', 'Expo', 'Firebase'],
   },
   {
     id: '3d-landing', number: '04', title: '3D Interactive Landing Page',
@@ -49,7 +49,7 @@ const SERVICES = [
     description: 'Captivate users and drastically elevate conversion rates with bespoke 3D interactive graphics, custom shaders, and physics-driven motion tracking built directly into your website.',
     icon: HiOutlineCube, gradient: 'from-purple-500/20 via-pink-500/20 to-rose-500/20', accentColor: '#ec4899',
     features: ['Custom WebGL Shaders & Raymarching', 'Interactive 3D Physics & Mouse Tracking', 'Blender Model Pipeline Optimization', 'High-FPS Smooth Rendering Engines'],
-    tech: ['Three.js', 'React Three Fiber', 'WebGL', 'GSAP', 'GLSL', 'Framer Motion'],
+    tech: ['JavaScript', 'GLSL Shaders', 'Three.js', 'React Three Fiber', 'WebGL', 'GSAP', 'Framer Motion'],
   },
   {
     id: 'saas', number: '05', title: 'SaaS Development',
@@ -57,7 +57,7 @@ const SERVICES = [
     description: 'Turn SaaS ideas into production-ready platforms complete with recurring subscription billing, user role management (RBAC), multi-tenant data isolation, and live analytics dashboards.',
     icon: HiOutlineCloudUpload, gradient: 'from-amber-500/20 via-orange-500/20 to-red-500/20', accentColor: '#f59e0b',
     features: ['Stripe & LemonSqueezy Subscription Billing', 'Role-Based Access Control (RBAC)', 'Multi-Tenant Database Architecture', 'Automated User Onboarding & Analytics'],
-    tech: ['Next.js', 'Stripe API', 'Prisma ORM', 'Redis', 'Docker', 'AWS'],
+    tech: ['TypeScript', 'Next.js 15', 'Node.js', 'PostgreSQL', 'Stripe API', 'Prisma', 'Redis', 'Docker'],
   },
   {
     id: 'ai-integration', number: '06', title: 'AI Integration & Autonomous Agents',
@@ -65,7 +65,7 @@ const SERVICES = [
     description: 'Empower your digital products with state-of-the-art AI capabilities including custom RAG vector search, automated agent workflows, LLM integrations, and predictive insights.',
     icon: HiOutlineSparkles, gradient: 'from-emerald-500/20 via-[#00ffc6]/20 to-teal-500/20', accentColor: '#10b981',
     features: ['OpenAI, Anthropic & Llama 3 API Pipeline', 'RAG & Vector Databases (Pinecone / Qdrant)', 'Autonomous AI Agent Orchestration', 'Custom Fine-Tuned Model Embedding'],
-    tech: ['LangChain', 'OpenAI', 'Pinecone', 'Python', 'FastAPI', 'LlamaIndex'],
+    tech: ['Python', 'TypeScript', 'LangChain', 'OpenAI API', 'Pinecone Vector DB', 'FastAPI', 'PyTorch'],
   },
   {
     id: 'ecommerce', number: '07', title: 'E-commerce & Shopify Solutions',
@@ -73,7 +73,7 @@ const SERVICES = [
     description: 'Custom Shopify themes, headless commerce storefronts with Next.js Hydrogen, custom Liquid development, and seamless payment gateway integrations built for ultra-fast load speed.',
     icon: HiOutlineShoppingBag, gradient: 'from-green-500/20 via-emerald-500/20 to-lime-500/20', accentColor: '#22c55e',
     features: ['Custom Shopify Liquid Theme Development', 'Headless Commerce via Shopify Storefront API', 'Checkout Optimization & Upsell Flows', 'Custom ERP & Inventory API Syncing'],
-    tech: ['Shopify Hydrogen', 'Liquid', 'GraphQL', 'Stripe', 'Tailwind', 'Sanity CMS'],
+    tech: ['Liquid', 'JavaScript', 'Shopify Hydrogen', 'GraphQL', 'Next.js', 'Stripe', 'Tailwind'],
   },
   {
     id: 'wordpress', number: '08', title: 'WordPress & Custom CMS',
@@ -81,7 +81,7 @@ const SERVICES = [
     description: 'Ultra-fast custom WordPress development, bespoke Gutenberg blocks, headless WordPress setups with Next.js frontend, and enterprise-grade security hardening.',
     icon: HiOutlineGlobeAlt, gradient: 'from-sky-500/20 via-blue-500/20 to-cyan-500/20', accentColor: '#0ea5e9',
     features: ['Headless WordPress + Next.js GraphQL API', 'Custom Gutenberg Block & Plugin Development', '99+ Google Lighthouse Speed Score', 'Malware Shielding & Security Hardening'],
-    tech: ['WordPress', 'PHP', 'WP GraphQL', 'Next.js', 'Gutenberg', 'MySQL'],
+    tech: ['PHP', 'JavaScript', 'WordPress API', 'WP GraphQL', 'Next.js', 'MySQL', 'CSS3'],
   },
   {
     id: 'ios', number: '09', title: 'iOS Development',
@@ -89,7 +89,7 @@ const SERVICES = [
     description: 'Native iOS applications designed specifically for iPhone, iPad, and Apple Watch using Swift and SwiftUI, leveraging on-device ML, WidgetKit, and App Store guidelines.',
     icon: HiOutlineDeviceTablet, gradient: 'from-pink-500/20 via-purple-500/20 to-indigo-500/20', accentColor: '#a855f7',
     features: ['Native Swift & SwiftUI Modern Architectures', 'On-Device AI with CoreML & Vision Framework', 'WidgetKit & Dynamic Island Live Activities', 'Seamless App Store Submission & Compliance'],
-    tech: ['Swift 6', 'SwiftUI', 'Combine', 'CoreML', 'XCode', 'TestFlight'],
+    tech: ['Swift 6', 'SwiftUI', 'Combine', 'Objective-C', 'CoreML', 'WidgetKit', 'Xcode'],
   },
   {
     id: 'upgradation', number: '10', title: 'Existing Project Upgradation',
@@ -97,7 +97,7 @@ const SERVICES = [
     description: 'Revamp legacy codebases, eliminate technical debt, upgrade framework versions (React 19, Node.js), optimize bundle speeds, and patch security vulnerabilities without downtime.',
     icon: HiOutlineRefresh, gradient: 'from-violet-500/20 via-fuchsia-500/20 to-pink-500/20', accentColor: '#8b5cf6',
     features: ['Comprehensive Codebase Audit & Refactoring', 'Zero-Downtime Database & Cloud Migration', 'Page Speed & Bundle Size Optimization', 'Security Vulnerability Patching & Testing'],
-    tech: ['TypeScript', 'Vite', 'Docker', 'Jest/Cypress', 'CI/CD Pipelines'],
+    tech: ['TypeScript', 'JavaScript', 'React 19', 'Node.js', 'Vite', 'Docker', 'Jest', 'CI/CD'],
   },
   {
     id: 'custom-software', number: '11', title: 'Custom Software',
@@ -105,7 +105,7 @@ const SERVICES = [
     description: 'Custom desktop, web, and enterprise software solutions engineered from scratch to fit your exact business workflows, proprietary algorithms, and internal data structures.',
     icon: HiOutlineChip, gradient: 'from-rose-500/20 via-pink-500/20 to-red-500/20', accentColor: '#f43f5e',
     features: ['Bespoke Enterprise Software Architecture', 'Proprietary Algorithm & Workflow Automation', 'Cross-Platform Desktop & Cloud System Sync', 'High Concurrency & Custom Data Storage'],
-    tech: ['Electron', 'React 19', 'Go', 'Rust', 'PostgreSQL', 'Docker'],
+    tech: ['Go (Golang)', 'Rust', 'TypeScript', 'C++', 'Electron', 'React 19', 'PostgreSQL', 'Docker'],
   },
 ];
 
@@ -113,17 +113,18 @@ export function ServicesSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1);
 
+  // Infinite loop navigation
   const prevService = useCallback(() => {
     setDirection(-1);
-    setCurrentIndex((prev) => (prev === 0 ? SERVICES.length - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev - 1 + SERVICES.length) % SERVICES.length);
   }, []);
 
   const nextService = useCallback(() => {
     setDirection(1);
-    setCurrentIndex((prev) => (prev === SERVICES.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev + 1) % SERVICES.length);
   }, []);
 
-  // Keyboard navigation when user presses left or right arrow keys
+  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') prevService();
@@ -133,8 +134,10 @@ export function ServicesSection() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [nextService, prevService]);
 
-  const current = SERVICES[currentIndex];
-  const Icon = current.icon;
+  // Render 3 visible cards at a time (infinite wrap-around)
+  const firstService = SERVICES[currentIndex % SERVICES.length];
+  const secondService = SERVICES[(currentIndex + 1) % SERVICES.length];
+  const thirdService = SERVICES[(currentIndex + 2) % SERVICES.length];
 
   // 90FPS Animation variants for GPU acceleration
   const variants = {
@@ -165,10 +168,98 @@ export function ServicesSection() {
     }),
   };
 
+  const renderCard = (service: typeof SERVICES[0], displayClass = 'flex') => {
+    const Icon = service.icon;
+    return (
+      <div
+        className={`relative overflow-hidden rounded-3xl border border-white/25 bg-zinc-950/60 sm:bg-zinc-950/50 backdrop-blur-2xl sm:backdrop-blur-3xl p-5 sm:p-6 shadow-[0_30px_70px_rgba(0,0,0,0.9)] bg-gradient-to-br ${service.gradient} group transform-gpu flex flex-col justify-between h-full ${displayClass}`}
+      >
+        {/* Card Ambient Glow */}
+        <div className="hidden sm:block absolute -right-16 -top-16 w-56 h-56 rounded-full blur-[80px] pointer-events-none opacity-20 bg-[#00ffc6]" />
+
+        <div className="relative z-10 space-y-4">
+          {/* Header Row */}
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-white shadow-lg shrink-0">
+                <Icon className="w-6 h-6" style={{ color: service.accentColor }} />
+              </div>
+              <div>
+                <span className="text-[10px] font-mono font-bold text-[#00ffc6] tracking-widest uppercase">
+                  Service {service.number}
+                </span>
+                <h3 className="text-lg sm:text-xl font-black text-white tracking-tight leading-tight">{service.title}</h3>
+              </div>
+            </div>
+          </div>
+
+          {/* Tagline & Description */}
+          <div className="space-y-1">
+            <div className="text-xs font-bold text-zinc-200">{service.tagline}</div>
+            <p className="text-zinc-300 text-xs leading-relaxed">{service.description}</p>
+          </div>
+
+          {/* Feature List */}
+          <div className="space-y-1.5 pt-1">
+            {service.features.map((feat) => (
+              <div
+                key={feat}
+                className="flex items-center gap-2 text-xs text-zinc-200 font-medium bg-white/5 border border-white/10 px-2.5 py-1.5 rounded-xl backdrop-blur-sm"
+              >
+                <HiOutlineCheckCircle className="w-3.5 h-3.5 text-[#00ffc6] shrink-0" />
+                <span className="truncate">{feat}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Required Languages & Technology Stack Bar */}
+        <div className="pt-3 mt-4 border-t border-white/10 flex flex-col gap-2.5 relative z-10">
+          <div className="text-[10px] font-bold uppercase tracking-wider text-[#00ffc6] flex items-center gap-1.5">
+            <span>Required Languages & Tech Stack:</span>
+          </div>
+          <div className="flex flex-wrap items-center gap-1.5">
+            {service.tech.map((t) => (
+              <span
+                key={t}
+                className="px-2 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-bold text-zinc-200 hover:bg-[#00ffc6]/20 hover:text-[#00ffc6] hover:border-[#00ffc6]/40 transition-colors"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+
+          <div className="pt-2 flex justify-end">
+            <a
+              href="#estimator"
+              onClick={(e) => {
+                e.preventDefault();
+                window.dispatchEvent(
+                  new CustomEvent('select-estimator-service', {
+                    detail: { serviceId: service.id },
+                  })
+                );
+                window.location.hash = '#estimator';
+                const el = document.getElementById('estimator');
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-black text-[11px] font-extrabold uppercase tracking-wider hover:bg-[#00ffc6] transition-colors shadow-lg group/btn shrink-0"
+            >
+              <span>Estimate Cost</span>
+              <HiOutlineArrowNarrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <section
       id="services"
-      className="relative w-full min-h-[750px] lg:min-h-[820px] bg-zinc-950 text-white flex flex-col justify-between py-12 px-4 sm:px-6 lg:px-12 overflow-hidden select-none"
+      className="relative w-full min-h-[750px] lg:min-h-[840px] bg-zinc-950 text-white flex flex-col justify-between py-12 px-3 sm:px-6 lg:px-10 overflow-hidden select-none"
     >
       {/* ── Floating Paths Background ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -201,23 +292,23 @@ export function ServicesSection() {
         </h2>
       </div>
 
-      {/* ── 90FPS Slider Container with Left & Right Arrows ── */}
-      <div className="relative max-w-4xl mx-auto w-full my-auto py-6 z-20 flex items-center justify-between gap-2 sm:gap-6">
+      {/* ── 3 CARDS INFINITE LOOP SLIDER ── */}
+      <div className="relative max-w-7xl mx-auto w-full my-auto py-6 z-20 flex items-center justify-between gap-1 sm:gap-4">
         
-        {/* LEFT ARROW BUTTON */}
+        {/* BORDERLESS LEFT ARROW BUTTON */}
         <button
           onClick={prevService}
           aria-label="Previous Service"
-          className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-zinc-900/90 border border-white/20 backdrop-blur-md flex items-center justify-center text-white shadow-2xl hover:border-[#00ffc6] hover:bg-[#00ffc6]/15 hover:text-[#00ffc6] active:scale-90 transition-all duration-200 shrink-0 z-30 group"
+          className="p-1 sm:p-2 text-zinc-400 hover:text-[#00ffc6] active:scale-90 transition-all duration-200 shrink-0 z-30 group focus:outline-none"
         >
-          <HiOutlineChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 group-hover:-translate-x-0.5 transition-transform" />
+          <HiOutlineChevronLeft className="w-8 h-8 sm:w-12 sm:h-12 group-hover:-translate-x-1 transition-transform" />
         </button>
 
-        {/* 90FPS FLUID SLIDING CARD */}
+        {/* 3 CARDS SIDE-BY-SIDE 90FPS FLUID SLIDING GRID */}
         <div className="flex-1 overflow-hidden py-2 px-1">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
-              key={current.id}
+              key={firstService.id}
               custom={direction}
               variants={variants}
               initial="enter"
@@ -230,97 +321,27 @@ export function ServicesSection() {
                 if (info.offset.x < -40) nextService();
                 if (info.offset.x > 40) prevService();
               }}
-              className={`relative overflow-hidden rounded-3xl border border-white/20 bg-zinc-900/95 sm:bg-zinc-900/90 backdrop-blur-none sm:backdrop-blur-2xl p-6 sm:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.85)] bg-gradient-to-br ${current.gradient} group transform-gpu cursor-grab active:cursor-grabbing`}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 items-stretch cursor-grab active:cursor-grabbing"
             >
-              {/* Card Ambient Glow */}
-              <div className="hidden sm:block absolute -right-16 -top-16 w-60 h-60 rounded-full blur-[80px] pointer-events-none opacity-20 bg-[#00ffc6]" />
-
-              <div className="relative z-10 space-y-6">
-                {/* Header Row */}
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-white shadow-lg shrink-0">
-                      <Icon className="w-7 h-7" style={{ color: current.accentColor }} />
-                    </div>
-                    <div>
-                      <span className="text-xs font-mono font-bold text-[#00ffc6] tracking-widest uppercase">
-                        Service {current.number} / {SERVICES.length.toString().padStart(2, '0')}
-                      </span>
-                      <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">{current.title}</h3>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Tagline & Description */}
-                <div className="space-y-1.5">
-                  <div className="text-xs sm:text-sm font-bold text-zinc-200">{current.tagline}</div>
-                  <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">{current.description}</p>
-                </div>
-
-                {/* Feature Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-                  {current.features.map((feat) => (
-                    <div
-                      key={feat}
-                      className="flex items-center gap-2 text-xs text-zinc-200 font-medium bg-white/5 border border-white/10 px-3.5 py-2 rounded-xl backdrop-blur-sm"
-                    >
-                      <HiOutlineCheckCircle className="w-4 h-4 text-[#00ffc6] shrink-0" />
-                      <span className="truncate">{feat}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Tech Stack & Action CTA */}
-                <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex flex-wrap items-center gap-1.5">
-                    {current.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="px-2.5 py-1 rounded-full bg-white/10 border border-white/15 text-[10px] sm:text-xs font-bold text-zinc-300"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  <a
-                    href="#estimator"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.dispatchEvent(
-                        new CustomEvent('select-estimator-service', {
-                          detail: { serviceId: current.id },
-                        })
-                      );
-                      window.location.hash = '#estimator';
-                      const el = document.getElementById('estimator');
-                      if (el) {
-                        el.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black text-xs font-extrabold uppercase tracking-wider hover:bg-[#00ffc6] transition-colors shadow-lg group/btn"
-                  >
-                    <span>Estimate Cost</span>
-                    <HiOutlineArrowNarrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </a>
-                </div>
-              </div>
+              {renderCard(firstService, 'flex')}
+              {renderCard(secondService, 'hidden md:flex')}
+              {renderCard(thirdService, 'hidden lg:flex')}
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* RIGHT ARROW BUTTON */}
+        {/* BORDERLESS RIGHT ARROW BUTTON */}
         <button
           onClick={nextService}
           aria-label="Next Service"
-          className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-zinc-900/90 border border-white/20 backdrop-blur-md flex items-center justify-center text-white shadow-2xl hover:border-[#00ffc6] hover:bg-[#00ffc6]/15 hover:text-[#00ffc6] active:scale-90 transition-all duration-200 shrink-0 z-30 group"
+          className="p-1 sm:p-2 text-zinc-400 hover:text-[#00ffc6] active:scale-90 transition-all duration-200 shrink-0 z-30 group focus:outline-none"
         >
-          <HiOutlineChevronRight className="w-6 h-6 sm:w-7 sm:h-7 group-hover:translate-x-0.5 transition-transform" />
+          <HiOutlineChevronRight className="w-8 h-8 sm:w-12 sm:h-12 group-hover:translate-x-1 transition-transform" />
         </button>
 
       </div>
 
-      {/* ── Pagination Dots & Counter Bar ── */}
+      {/* ── Clean Pagination Indicator Dots Only ── */}
       <div className="flex flex-col items-center gap-3 relative z-20 pb-2">
         <div className="flex items-center justify-center gap-1.5 flex-wrap max-w-full px-4">
           {SERVICES.map((s, idx) => (
@@ -338,9 +359,6 @@ export function ServicesSection() {
               }`}
             />
           ))}
-        </div>
-        <div className="text-[11px] font-mono font-bold text-zinc-400 tracking-wider">
-          <span className="text-[#00ffc6]">{currentIndex + 1}</span> / {SERVICES.length} Services
         </div>
       </div>
     </section>

@@ -16,7 +16,7 @@
 <p>
   <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" />
   <img src="https://img.shields.io/badge/SEO-100%25%20Optimized-success?style=flat-square" />
-  <img src="https://img.shields.io/badge/Mobile-100%25%20Responsive-blue?style=flat-square" />
+  <img src="https://img.shields.io/badge/Mobile-100%25%20Optimized%2060FPS-blue?style=flat-square" />
   <img src="https://img.shields.io/badge/Build-Passing-brightgreen?style=flat-square" />
 </p>
 
@@ -26,87 +26,76 @@
 
 ## 📖 Overview
 
-**DraftoDeploy** is a high-performance, visually stunning agency platform built for web applications, mobile apps, SaaS MVPs, and AI integrations. It features an interactive 3D WebGL robot hero, real-time physics tracking, liquid bubble backgrounds, horizontal snap-scroll service cards, a 3-step interactive Price Estimator, 35 system architecture case studies on a standalone blog page, 100% free Google Webhook mail integration, and full mobile/tablet responsive optimization with rich SEO schemas.
+**DraftoDeploy** is a high-performance, visually stunning agency platform built for web applications, mobile apps, SaaS MVPs, project refactoring, and AI integrations. Having successfully built and deployed **150+ custom projects**, DraftoDeploy features an interactive 3D WebGL robot hero, real-time physics tracking, liquid bubble backgrounds, a 90FPS 3-card infinite loop services carousel, a 3-step Dual-Currency Price Estimator (Global $ USD vs India ₹ INR), 35 system architecture case studies on a standalone blog page, 100% free Google Webhook mail integration, global client case study reviews, and full 60FPS mobile responsive performance optimization.
 
 > Built with React 19, Three.js, React Three Fiber, Framer Motion, Tailwind CSS v4, and Vite 8.
 
 ---
 
-## ✨ Features & Architecture
+## ✨ Key Features & Architecture
 
 ### 🤖 3D Interactive Robot Hero (`RobotHero`)
 - **Real-time WebGL rendering** via `@react-three/fiber` and `Three.js`
-- **Mouse-tracking physics** — robot body and head follow your cursor with smooth lerp-based rotation
+- **Mouse-tracking physics** — robot body and head follow cursor with smooth lerp-based rotation
 - **Procedurally generated PBR textures** (color + bump maps) generated asynchronously using Canvas API
 - **Custom GLSL Fresnel shader** for the glowing glass visor effect
 - **Animated blinking eyes** with configurable blink cycle, rendered using parametric `TubeGeometry`
 - **Heart-eye Easter egg** — click the robot to toggle glowing ❤️ eyes for 2 seconds
-- **Scroll indicator animation** that fades out as you scroll down using Framer Motion `useScroll` + `useTransform`
 
 ### 🧭 Smart Antenna Navbar (`AntennaNavbar`)
 - **Auto-hide on scroll down / reveal on scroll up** with smooth `cubic-bezier` transition
-- **Always visible at the top** of the page
 - **Desktop floating pill** — frosted glass backdrop blur navbar with hover highlights
 - **Mobile sidebar drawer** (`MobileSidebarDrawer`) for smooth navigation on small screens
-- **Smooth anchor navigation** for all site sections (`#top`, `#projects`, `#blog`, `#about`, `#services`, `#estimator`, `#testimonials`, `#contact`)
+- **Smooth anchor navigation** (`#top`, `#projects`, `#blog`, `#about`, `#services`, `#estimator`, `#testimonials`, `#contact`)
 
-### 🌊 About Section with Fluid Bubble Background (`AboutSection`)
-- **Interactive liquid bubble animation** — fluid blobs that react to cursor movement
-- **Frosted glass card** with `backdrop-blur-2xl` layered on top of the animation
-- **4 animated stat cards**: Deployment Speed `<50ms`, Uptime SLA `99.99%`, 3D Rendering `60 FPS`, Deployed Projects `10,000+`
-- **Tech stack badges**: React 19, Three.js, React Three Fiber, Tailwind CSS v4, TypeScript, Framer Motion, Vite, WebGL Engine
+### 🌊 About Section with 150+ Projects Track Record (`AboutSection`)
+- **Startup Acceleration Narrative**: Highlights 150+ successfully deployed projects for startups and custom project sets
+- **Right-side Services Provided Box**: Displays core development capabilities with tick icons
+- **Liquid Bubble Background** (`BubbleBackground`): Interactive blobs with mobile-optimized CSS blurs (`max-sm:blur(35px)`) for smooth 60FPS mobile scrolling
+- **Frosted Glass Container**: Layered `backdrop-blur-2xl` glass card with key metrics (<2 Weeks average MVP launch, 99.99% Uptime SLA)
 
-### 🧩 Services Section — Horizontal Snap Scroll (`ServicesSection`)
-- **10 service cards** in a horizontally scrollable snap-scroll track:
-  1. Full Stack Development
-  2. Mobile Application Development
-  3. 3D Interactive Landing Pages
-  4. SaaS Development
-  5. AI Integration & Autonomous Agents
-  6. E-commerce & Shopify Solutions
-  7. WordPress & Custom CMS
-  8. iOS Development
-  9. Existing Project Upgradation
-  10. Custom Enterprise Software
-- **Scroll hijack**: `IntersectionObserver` detects section visibility, then intercepts vertical wheel events to scroll cards horizontally
-- **Floating Paths SVG background** (`FloatingPathsBackground`) animated with Framer Motion
+### 🎡 90FPS 3-Card Infinite Services Carousel (`ServicesSection`)
+- **3 Visible Cards Grid**: Displays 3 cards side-by-side on desktop (`lg:grid-cols-3`), 2 on tablet (`md:grid-cols-2`), and 1 on mobile
+- **Endless Infinite Looping**: Smooth wrap-around navigation through all 11 services
+- **Borderless Glowing Arrows**: Clean, borderless Left (`←`) and Right (`→`) arrow icons + touch swipe gestures + keyboard arrow navigation (`←` / `→`)
+- **Required Languages & Tech Stacks**: Every card explicitly lists all required programming languages (`TypeScript`, `JavaScript`, `Python`, `Swift`, `Kotlin`, `Dart`, `PHP`, `Go`, `Rust`, `C++`, `HTML5/CSS3`) and framework stacks
+- **Intense Frosted Glass Blur**: Cards feature soft `backdrop-blur-3xl` over floating SVG paths (`FloatingPathsBackground`)
+- **1-Click Estimator Integration**: Clicking *"Estimate Cost"* selects that service in the Price Estimator and smooth scrolls to `#estimator`
 
-### 🧮 Interactive Price Estimator & Quote Generator (`PriceEstimatorSection`)
+### 🧮 Dual-Currency Price Estimator & Proposal Generator (`PriceEstimatorSection`)
+- **Global vs. India Country Selector**: Toggle between International rates (`$ USD`) and local Indian startup pricing (`₹ INR`)
+  - **Indian Rates**: Basic Website (`₹8,999`), 3D Landing (`₹24,999`), AI Integration (`₹39,999`), Full Stack (`₹59,999`), Mobile App (`₹49,999`), SaaS Platform (`₹54,999`), Native iOS (`₹79,999`), Extra Pages (`₹499/page`), Growth Scope (`₹7,999`), Enterprise Scope (`₹15,999`), Add-ons (`₹5,999 - ₹14,999`)
+  - **Starter / MVP Scope Tier**: Displayed cleanly as **`Free`**
 - **3-Step Configurator**:
-  1. **Select Core Services**: Multi-service selection unlocks automatic 10% – 15% bundle discounts
-  2. **Choose Project Scope & Page Count**: Interactive range slider with free page credits ($25/extra page)
-  3. **Add-ons & Velocity**: Infrastructure, CI/CD, SEO, AI integration, and Express 2x velocity options
-- **Real-Time Terminal Receipt**: Live estimate breakdown with instant total cost calculation ($USD)
+  1. **Select Core Services**: Multi-service selection unlocks 10% – 15% bundle discounts
+  2. **Project Scope & Page Count**: Interactive range slider with free page credits per service
+  3. **Add-ons & Delivery Velocity**: Infrastructure, CI/CD, SEO, AI integration, and Express delivery options
+- **Live Terminal Receipt**: Real-time receipt breakdown with live cost calculation in chosen currency
 - **Direct Proposal Attachment**: Clicking *"Request Proposal"* attaches an uneditable proposal card directly into the Contact Section
 
-### 📬 Contact Section with Free Mail Backend (`ContactSection`)
+### 💬 Global Client Reviews & Case Studies (`TestimonialsSection`)
+- **15 International & Indian Client Reviews**: Feature reviewers from 🇮🇳 India (Bengaluru, Mumbai, Delhi, Hyderabad, Pune), 🇺🇸 USA, 🇦🇪 UAE (Dubai, Abu Dhabi), 🇬🇧 UK, 🇨🇦 Canada, 🇦🇺 Australia, 🇩🇪 Germany, and 🇸🇬 Singapore
+- **Real Project Showcase Names**: Reviews feature real projects (*DevDock*, *SiteGuard*, *FormForge*, *DocuSigner*, *Apex Analytics*, *KubeCloud*, *TaskSync*, *LearnLoom*, *EcoTrack*, *Zenith Health*, *PagePulse*, *LocalBite*, *InvoiceFlow*, *WhisperChat*, *MailBlast*)
+- **Problem ➔ Solution Case Study Structure**: Documents what the technical bottleneck was, what DraftoDeploy delivered, and praises DraftoDeploy's 150+ project experience
+
+### 📬 Contact Section with Free Email Backend (`ContactSection`)
 - **100% Free Google Webhook Mail Integration**: Form submissions trigger instant email lead notifications directly to your Gmail inbox with $0 monthly cost
 - **Attached Proposal Card**: Displays locked, read-only estimate details with **Edit** (scrolls to Estimator) and **Delete** (clears quote) buttons
-- **Form Reset on Re-submit**: Clicking *"Send Another Message"* clears input state for fresh entries
-- **Ultra-Wide 1-Line Footer Navbar**: Single horizontal row displaying all navbar links (`Home`, `Projects`, `Blog`, `About`, `Services`, `Estimator`, `Review`, `Contact`) and copyright metadata
+- **Ultra-Wide 1-Line Footer Navbar**: Single horizontal row displaying all navbar links and copyright metadata
 
 ### 📚 Standalone Blog Page & System Architecture Case Studies (`BlogPage` & `BlogSection`)
 - **Dedicated View**: Renders on `#blog` or `/blog` with an animated `AuroraBackground`
 - **35 System Architecture Case Studies**: Deep-dive technical breakdowns including Problem Statement, Overcoming Strategy, Monorepo File Structure, Backend Working, and Core Features
 - **Futuristic Reader Modal**: Fullscreen mobile-responsive reader with 1-click code block copying, progress bar, JSON-LD `BlogPosting` schema, and related study recommendations
 
-### 💬 Testimonials Section — Infinite Scroll Columns (`TestimonialsSection`)
-- **12 client testimonials** auto-scrolling in **3 independent columns** using Framer Motion infinite loop animation
-- Responsive: 1 column on mobile, 2 on tablet, 3 on desktop
-- DiceBear avatars and star ratings (⭐ × 5)
-
 ---
 
-## 🔍 SEO & Mobile Responsiveness
+## ⚡ Mobile Performance Optimization (60FPS Target)
 
-- **Primary Meta Tags**: Keyword-rich titles, meta descriptions, author, and canonical link
-- **Social Open Graph & Twitter Cards**: Full social sharing metadata
-- **Structured Data (JSON-LD)**:
-  - `Organization` Schema (Agency branding & founder info)
-  - `ProfessionalService` Schema (Freelancing & startup service catalog)
-  - `BlogPosting` Schema (Automated post indexing)
-- **Search Engine Files**: Generated `sitemap.xml` and `robots.txt`
-- **100% Mobile/Tablet Optimization**: Safe area insets, touch target sizing (44px min), non-overflowing grids, and touch scroll handling
+- **SVG Filter Fallback**: Switches from heavy SVG `<feColorMatrix>` matrix filters to clean CSS blur on mobile screens (`max-sm:blur(35px)`), preventing mobile GPU stutter
+- **Static Vector Path Rendering**: Reduces SVG path count to 12 static paths on mobile view (`isMobile`) in `FloatingPathsBackground`
+- **Reduced Canvas Particle Count**: Automatically scales down `ParticlesBackground` canvas count to 25 particles on mobile view
+- **Hardware Acceleration**: Enforces `transform-gpu`, `touch-pan-x`, and `-webkit-overflow-scrolling: touch` for buttery smooth 60FPS mobile touch gestures
 
 ---
 
@@ -124,18 +113,18 @@ DraftoDeploy/
 ├── src/
 │   ├── assets/                          # Project images & assets
 │   ├── components/                      # UI Section Components
-│   │   ├── AboutSection.tsx             # About section & liquid bubble card
+│   │   ├── AboutSection.tsx             # About section with 150+ projects track record
 │   │   ├── AntennaNavbar.tsx            # Floating pill header navbar
 │   │   ├── BlogSection.tsx              # 35 case studies grid & reader modal
-│   │   ├── BubbleBackground.tsx         # Liquid SVG goo blob animation
-│   │   ├── ContactSection.tsx           # Contact form & Google Mail Webhook
+│   │   ├── BubbleBackground.tsx         # Liquid SVG goo blob animation with mobile fallbacks
+│   │   ├── ContactSection.tsx           # Contact form & Google Mail Webhook backend
 │   │   ├── FireworksBackground.tsx      # Canvas fireworks animation
-│   │   ├── FloatingPathsBackground.tsx  # Animated SVG paths background
+│   │   ├── FloatingPathsBackground.tsx  # Animated & mobile-optimized SVG paths background
 │   │   ├── MobileSidebarDrawer.tsx      # Slide-over mobile drawer nav
 │   │   ├── ParticlesBackground.tsx      # Interactive canvas particle background
-│   │   ├── PriceEstimatorSection.tsx    # 3-step price quote generator
-│   │   ├── ServicesSection.tsx          # 10-card snap scroll services track
-│   │   ├── TestimonialsSection.tsx      # 3-column infinite review scroll
+│   │   ├── PriceEstimatorSection.tsx    # 3-step dual currency price quote generator
+│   │   ├── ServicesSection.tsx          # 90FPS 3-card infinite loop services carousel
+│   │   ├── TestimonialsSection.tsx      # 15 global client case study reviews
 │   │   └── aurora-background.tsx        # Aurora gradient background
 │   │
 │   ├── App.tsx                          # Core React app container
@@ -186,7 +175,7 @@ Opens the local development server at **http://localhost:5173** with Hot Module 
 npm run build
 ```
 
-Compiles TypeScript and bundles production assets into the `dist/` directory.
+Compiles TypeScript and bundles production assets into the `dist/` directory with 0 errors.
 
 ---
 
@@ -200,4 +189,4 @@ Distributed under the **MIT License**. See `LICENSE` for details.
 
 **Ayush Kumar** — [@Ayush08k](https://github.com/Ayush08k)
 
-> *From Draft to Deploy — Crafted with React, Three.js, and modern web design standards.*
+> *From Draft to Deploy — Crafted with React 19, Three.js, and modern web engineering standards.*
