@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Particles from './ParticlesBackground';
 import {
@@ -30,6 +30,7 @@ interface ServiceOption {
   title: string;
   tagline: string;
   basePrice: number;
+  basePriceINR: number;
   freePages: number;
   icon: any;
   accentColor: string;
@@ -42,6 +43,7 @@ const SERVICES: ServiceOption[] = [
     title: 'Full Stack Development',
     tagline: 'React 19, Next.js, Node.js & PostgreSQL',
     basePrice: 600,
+    basePriceINR: 59999,
     freePages: 6,
     icon: HiOutlineCode,
     accentColor: '#3b82f6',
@@ -52,6 +54,7 @@ const SERVICES: ServiceOption[] = [
     title: 'Mobile Application',
     tagline: 'Cross-Platform React Native & Flutter',
     basePrice: 750,
+    basePriceINR: 49999,
     freePages: 8,
     icon: HiOutlineDeviceMobile,
     accentColor: '#00ffc6',
@@ -62,6 +65,7 @@ const SERVICES: ServiceOption[] = [
     title: '3D Interactive Landing',
     tagline: 'Three.js, WebGL & Shader Physics',
     basePrice: 300,
+    basePriceINR: 24999,
     freePages: 1,
     icon: HiOutlineCube,
     accentColor: '#ec4899',
@@ -72,6 +76,7 @@ const SERVICES: ServiceOption[] = [
     title: 'SaaS Platform Development',
     tagline: 'Multi-Tenant Architecture & Subscriptions',
     basePrice: 700,
+    basePriceINR: 54999,
     freePages: 5,
     icon: HiOutlineCloudUpload,
     accentColor: '#f59e0b',
@@ -82,6 +87,7 @@ const SERVICES: ServiceOption[] = [
     title: 'AI & Autonomous Agents',
     tagline: 'LLMs, RAG Pipelines & Vector DBs',
     basePrice: 400,
+    basePriceINR: 39999,
     freePages: 2,
     icon: HiOutlineSparkles,
     accentColor: '#10b981',
@@ -92,6 +98,7 @@ const SERVICES: ServiceOption[] = [
     title: 'E-commerce & Headless Shopify',
     tagline: 'Next.js Hydrogen & Shopify Storefront',
     basePrice: 400,
+    basePriceINR: 39999,
     freePages: 5,
     icon: HiOutlineShoppingBag,
     accentColor: '#22c55e',
@@ -102,6 +109,7 @@ const SERVICES: ServiceOption[] = [
     title: 'WordPress & Headless CMS',
     tagline: 'Bespoke Gutenberg & WP GraphQL',
     basePrice: 200,
+    basePriceINR: 11999,
     freePages: 5,
     icon: HiOutlineGlobeAlt,
     accentColor: '#0ea5e9',
@@ -112,6 +120,7 @@ const SERVICES: ServiceOption[] = [
     title: 'Native iOS Development',
     tagline: 'SwiftUI, CoreML & Apple Ecosystem',
     basePrice: 1000,
+    basePriceINR: 79999,
     freePages: 8,
     icon: HiOutlineDeviceTablet,
     accentColor: '#a855f7',
@@ -122,6 +131,7 @@ const SERVICES: ServiceOption[] = [
     title: 'Project Upgradation & Revamp',
     tagline: 'Refactoring, React 19 & Security Audits',
     basePrice: 300,
+    basePriceINR: 19999,
     freePages: 5,
     icon: HiOutlineRefresh,
     accentColor: '#8b5cf6',
@@ -132,6 +142,7 @@ const SERVICES: ServiceOption[] = [
     title: 'Custom Software',
     tagline: 'Bespoke Enterprise & Dedicated Software Systems',
     basePrice: 700,
+    basePriceINR: 54999,
     freePages: 8,
     icon: HiOutlineChip,
     accentColor: '#f43f5e',
@@ -144,6 +155,7 @@ interface ScopeTier {
   id: string;
   name: string;
   price: number;
+  priceINR: number;
   description: string;
   timeframe: string;
 }
@@ -153,6 +165,7 @@ const SCOPE_TIERS: ScopeTier[] = [
     id: 'mvp',
     name: 'Starter / MVP',
     price: 0,
+    priceINR: 0,
     description: 'Essential core features ready to launch fast to market.',
     timeframe: '1 - 2 Weeks',
   },
@@ -160,6 +173,7 @@ const SCOPE_TIERS: ScopeTier[] = [
     id: 'growth',
     name: 'Growth Platform',
     price: 100,
+    priceINR: 7999,
     description: 'Polished features, scaled architecture, and complete workflows.',
     timeframe: '2 - 3 Weeks',
   },
@@ -167,6 +181,7 @@ const SCOPE_TIERS: ScopeTier[] = [
     id: 'enterprise',
     name: 'Enterprise Grade',
     price: 300,
+    priceINR: 15999,
     description: 'High concurrency, advanced security, SOC2/HIPAA compliance & SLAs.',
     timeframe: '4 - 6 Weeks',
   },
@@ -177,6 +192,7 @@ interface AddonOption {
   id: string;
   title: string;
   price: number;
+  priceINR: number;
   category: string;
   description: string;
 }
@@ -186,6 +202,7 @@ const ADDONS: AddonOption[] = [
     id: 'cicd',
     title: 'Cloud CI/CD & Automated Deployment',
     price: 100,
+    priceINR: 5999,
     category: 'DevOps',
     description: 'GitHub Actions, Docker containers, AWS/Vercel zero-downtime pipeline.',
   },
@@ -193,6 +210,7 @@ const ADDONS: AddonOption[] = [
     id: 'stripe',
     title: 'Stripe & Subscription Billing Integration',
     price: 100,
+    priceINR: 9999,
     category: 'Fintech',
     description: 'Multi-tier plans, customer portal, invoices & webhooks.',
   },
@@ -200,6 +218,7 @@ const ADDONS: AddonOption[] = [
     id: 'owner-dashboard',
     title: 'Owner Dashboard',
     price: 100,
+    priceINR: 5999,
     category: 'Dashboard',
     description: 'Admin analytics, user controls, data overview & management dashboard.',
   },
@@ -207,6 +226,7 @@ const ADDONS: AddonOption[] = [
     id: 'ai-addon',
     title: 'AI Integration',
     price: 200,
+    priceINR: 14999,
     category: 'AI Tech',
     description: 'LLM API integration, smart chat assistant & automated agent workflows.',
   },
@@ -214,6 +234,7 @@ const ADDONS: AddonOption[] = [
     id: 'seo',
     title: 'Google 99+ Lighthouse & Technical SEO',
     price: 150,
+    priceINR: 7999,
     category: 'Performance',
     description: 'Schema markup, image optimization, dynamic sitemaps, speed audit.',
   },
@@ -221,6 +242,7 @@ const ADDONS: AddonOption[] = [
     id: 'i18n',
     title: 'Multi-Language Localization (i18n)',
     price: 150,
+    priceINR: 8999,
     category: 'Features',
     description: 'Dynamic locale switching, RTL support, string translation management.',
   },
@@ -228,6 +250,7 @@ const ADDONS: AddonOption[] = [
     id: 'maintenance',
     title: '+30 Days Warranty and maintenance',
     price: 150,
+    priceINR: 9999,
     category: 'Services',
     description: 'Extended priority support, server monitoring & bug fixes.',
   },
@@ -241,6 +264,8 @@ export interface EstimateData {
   deliverySpeed: string;
   pageCount: number;
   totalEstimate: number;
+  currency?: 'USD' | 'INR';
+  formattedTotal?: string;
 }
 
 export interface PriceEstimatorSectionProps {
@@ -255,6 +280,44 @@ export function PriceEstimatorSection({ onRequestProposal }: PriceEstimatorSecti
   const [activeStep, setActiveStep] = useState<number>(1);
   const [pageCount, setPageCount] = useState<number>(5);
   const [copied, setCopied] = useState(false);
+  const [isIndianClient, setIsIndianClient] = useState(false);
+
+  useEffect(() => {
+    const handleSelectService = (e: Event) => {
+      const customEvent = e as CustomEvent<{ serviceId: string }>;
+      if (customEvent.detail?.serviceId) {
+        setSelectedServices([customEvent.detail.serviceId]);
+      }
+    };
+
+    window.addEventListener('select-estimator-service', handleSelectService);
+    return () => {
+      window.removeEventListener('select-estimator-service', handleSelectService);
+    };
+  }, []);
+
+  const USD_TO_INR = 85;
+
+  const formatCurrency = (amountUSD: number, amountINR?: number | boolean, showSign = false) => {
+    let inrVal: number | undefined;
+    let sign = false;
+
+    if (typeof amountINR === 'boolean') {
+      sign = amountINR;
+      inrVal = undefined;
+    } else {
+      inrVal = amountINR;
+      sign = showSign;
+    }
+
+    if (isIndianClient) {
+      const val = inrVal !== undefined ? inrVal : Math.round(amountUSD * USD_TO_INR);
+      const formatted = `₹${val.toLocaleString('en-IN')}`;
+      return sign && val > 0 ? `+${formatted}` : formatted;
+    }
+    const formatted = `$${amountUSD.toLocaleString('en-US')}`;
+    return sign && amountUSD > 0 ? `+${formatted}` : formatted;
+  };
 
   // Free pages calculation dynamically per selected service
   const freePages = useMemo(() => {
@@ -264,7 +327,7 @@ export function PriceEstimatorSection({ onRequestProposal }: PriceEstimatorSecti
     }, 0);
   }, [selectedServices]);
   const extraPages = Math.max(0, pageCount - freePages);
-  const extraPagesCost = extraPages * 25;
+  const extraPagesCost = isIndianClient ? extraPages * 499 : extraPages * 25;
 
   // Toggle Service selection
   const toggleService = (id: string) => {
@@ -291,7 +354,8 @@ export function PriceEstimatorSection({ onRequestProposal }: PriceEstimatorSecti
     // Sum selected services base prices
     const rawServicesSum = selectedServices.reduce((sum, serviceId) => {
       const s = SERVICES.find((item) => item.id === serviceId);
-      return sum + (s ? s.basePrice : 0);
+      if (!s) return sum;
+      return sum + (isIndianClient ? s.basePriceINR : s.basePrice);
     }, 0);
 
     // Bundle discount if multi-services selected (10% off for 2, 15% off for 3+)
@@ -304,11 +368,14 @@ export function PriceEstimatorSection({ onRequestProposal }: PriceEstimatorSecti
     // Sum selected add-ons
     const addonsSum = selectedAddons.reduce((sum, addonId) => {
       const a = ADDONS.find((item) => item.id === addonId);
-      return sum + (a ? a.price : 0);
+      if (!a) return sum;
+      return sum + (isIndianClient ? a.priceINR : a.price);
     }, 0);
 
-    // Subtotal: services + add-ons + scope tier flat fee + extra pages cost ($25/page beyond free limit)
-    let total = discountedServicesSum + addonsSum + scopeTierObj.price + extraPagesCost;
+    const scopePrice = isIndianClient ? scopeTierObj.priceINR : scopeTierObj.price;
+
+    // Subtotal: services + add-ons + scope tier flat fee + extra pages cost
+    let total = discountedServicesSum + addonsSum + scopePrice + extraPagesCost;
 
     // Express delivery surcharge (25%)
     if (deliverySpeed === 'express') {
@@ -322,7 +389,7 @@ export function PriceEstimatorSection({ onRequestProposal }: PriceEstimatorSecti
       scopeTierObj,
       totalDiscount: Math.round(rawServicesSum * multiServiceDiscount),
     };
-  }, [selectedServices, selectedScope, selectedAddons, deliverySpeed, extraPagesCost]);
+  }, [selectedServices, selectedScope, selectedAddons, deliverySpeed, extraPagesCost, isIndianClient]);
 
   const copySummary = () => {
     const selectedServiceNames = selectedServices
@@ -332,7 +399,7 @@ export function PriceEstimatorSection({ onRequestProposal }: PriceEstimatorSecti
       .map((id) => ADDONS.find((a) => a.id === id)?.title)
       .join(', ');
 
-    const summaryText = `DraftoDeploy Project Estimate:\n• Services: ${selectedServiceNames}\n• Scope: ${scopeTierObj.name}\n• Add-ons: ${selectedAddonNames || 'None'}\n• Velocity: ${deliverySpeed.toUpperCase()}\n• Estimated Total: $${totalEstimate.toLocaleString()} USD`;
+    const summaryText = `DraftoDeploy Project Estimate:\n• Client Region: ${isIndianClient ? 'India (INR)' : 'International (USD)'}\n• Services: ${selectedServiceNames}\n• Scope: ${scopeTierObj.name}\n• Add-ons: ${selectedAddonNames || 'None'}\n• Velocity: ${deliverySpeed.toUpperCase()}\n• Estimated Total: ${formatCurrency(totalEstimate, false)} ${isIndianClient ? 'INR' : 'USD'}`;
 
     navigator.clipboard.writeText(summaryText);
     setCopied(true);
@@ -356,6 +423,8 @@ export function PriceEstimatorSection({ onRequestProposal }: PriceEstimatorSecti
       deliverySpeed: deliverySpeed === 'express' ? 'Express 2x (Fast Track)' : 'Standard Velocity',
       pageCount,
       totalEstimate,
+      currency: isIndianClient ? 'INR' : 'USD',
+      formattedTotal: `${formatCurrency(totalEstimate, false)} ${isIndianClient ? 'INR' : 'USD'}`,
     };
 
     if (onRequestProposal) {
@@ -416,6 +485,19 @@ export function PriceEstimatorSection({ onRequestProposal }: PriceEstimatorSecti
           >
             Configure your technical requirements below to generate a transparent real-time quote for your digital product.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold shadow-lg backdrop-blur-md"
+          >
+            <span className="text-base">🇮🇳</span>
+            <span>
+              <strong>For Indian citizens:</strong> Select <strong>India</strong> from the right-side Live Terminal box to convert estimator prices to Indian Currency (₹ INR).
+            </span>
+          </motion.div>
         </div>
 
         {/* Futuristic 3-Step Navigation Bar */}
@@ -532,7 +614,7 @@ export function PriceEstimatorSection({ onRequestProposal }: PriceEstimatorSecti
                             </p>
                             <div className="pt-2 flex items-center justify-between text-xs">
                               <span className="font-extrabold text-[#00ffc6]">
-                                From ${service.basePrice.toLocaleString()}
+                                From {formatCurrency(service.basePrice, service.basePriceINR, false)}
                               </span>
                               <span className="text-[10px] text-zinc-400 font-bold bg-white/5 border border-white/10 px-2 py-0.5 rounded-full">
                                 {service.freePages} free {service.freePages === 1 ? 'page' : 'pages'}
@@ -607,7 +689,7 @@ export function PriceEstimatorSection({ onRequestProposal }: PriceEstimatorSecti
                           <div className="mt-6 pt-4 border-t border-white/10 space-y-2">
                             <div className="text-[11px] font-bold text-[#00ffc6] flex items-center justify-between">
                               <span>Additional Cost:</span>
-                              <span className="font-extrabold">{tier.price === 0 ? 'Free (+$0)' : `+$${tier.price}`}</span>
+                              <span className="font-extrabold">{tier.price === 0 ? 'Free' : `+${formatCurrency(tier.price, tier.priceINR, false)}`}</span>
                             </div>
                             <div className="text-[11px] text-zinc-400 flex items-center justify-between">
                               <span>Estimated Sprint:</span>
@@ -627,7 +709,7 @@ export function PriceEstimatorSection({ onRequestProposal }: PriceEstimatorSecti
                           <span>Page Count & Screen Customization</span>
                         </h4>
                         <p className="text-xs text-zinc-400 mt-0.5">
-                          Every project includes <strong className="text-[#00ffc6]">{freePages} Free Pages</strong>. Additional pages are billed at $25 / page.
+                          Every project includes <strong className="text-[#00ffc6]">{freePages} Free Pages</strong>. Additional pages are billed at {formatCurrency(25, 499, false)} / page.
                         </p>
                       </div>
 
@@ -637,7 +719,7 @@ export function PriceEstimatorSection({ onRequestProposal }: PriceEstimatorSecti
                         </div>
                         {extraPages > 0 ? (
                           <div className="bg-white/10 border border-white/20 px-3 py-1.5 rounded-xl text-xs font-bold text-white">
-                            +{extraPages} Extra (+${extraPagesCost})
+                            +{extraPages} Extra (+{formatCurrency(extraPagesCost, extraPages * 499, false)})
                           </div>
                         ) : (
                           <div className="bg-emerald-500/20 border border-emerald-500/30 px-3 py-1.5 rounded-xl text-xs font-bold text-emerald-400">
@@ -745,7 +827,7 @@ export function PriceEstimatorSection({ onRequestProposal }: PriceEstimatorSecti
                                 {addon.title}
                               </span>
                               <span className="text-xs font-black text-[#00ffc6] flex-shrink-0">
-                                +${addon.price}
+                                +{formatCurrency(addon.price, addon.priceINR, false)}
                               </span>
                             </div>
                             <p className="text-xs text-zinc-300 leading-snug">{addon.description}</p>
@@ -825,36 +907,82 @@ export function PriceEstimatorSection({ onRequestProposal }: PriceEstimatorSecti
                   </span>
                 </div>
 
+                {/* Indian Citizen / Currency Selector Slider */}
+                <div className="p-3 sm:p-4 rounded-2xl bg-zinc-950/80 border border-white/15 space-y-2.5 shadow-inner">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs font-bold text-white flex items-center gap-1.5 leading-tight">
+                      <span className="text-base">🇮🇳</span>
+                      Are you an Indian Citizen / Client from India?
+                    </span>
+                  </div>
+
+                  {/* Interactive Sliding Toggle Switch */}
+                  <div className="relative flex items-center p-1 rounded-xl bg-black/60 border border-white/15 select-none cursor-pointer">
+                    <button
+                      type="button"
+                      onClick={() => setIsIndianClient(false)}
+                      className={`flex-1 py-1.5 text-center text-xs font-extrabold transition-colors z-10 ${
+                        !isIndianClient ? 'text-black' : 'text-zinc-400 hover:text-white'
+                      }`}
+                    >
+                      Global ($ USD)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setIsIndianClient(true)}
+                      className={`flex-1 py-1.5 text-center text-xs font-extrabold transition-colors z-10 ${
+                        isIndianClient ? 'text-black' : 'text-zinc-400 hover:text-white'
+                      }`}
+                    >
+                      India (₹ INR)
+                    </button>
+
+                    {/* Sliding Indicator */}
+                    <div
+                      className="absolute top-1 bottom-1 w-[calc(50%-4px)] bg-[#00ffc6] rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(0,255,198,0.5)]"
+                      style={{ left: isIndianClient ? 'calc(50% + 2px)' : '4px' }}
+                    />
+                  </div>
+
+                  {isIndianClient && (
+                    <div className="text-[10px] text-[#00ffc6] font-bold flex items-center justify-between pt-0.5 px-1">
+                      <span>✓ Prices converted to Indian Currency (₹ INR)</span>
+                    </div>
+                  )}
+                </div>
+
                 {/* Line Item Breakdown */}
                 <div className="space-y-3 text-xs">
                   <div className="flex justify-between items-center text-zinc-300">
                     <span>Selected Services ({selectedServices.length}):</span>
-                    <span className="font-bold text-white">${baseServicesCost.toLocaleString()}</span>
+                    <span className="font-bold text-white">{formatCurrency(baseServicesCost, false)}</span>
                   </div>
 
                   {totalDiscount > 0 && (
                     <div className="flex justify-between items-center text-[#00ffc6]">
                       <span>Multi-Service Discount:</span>
-                      <span className="font-bold">-${totalDiscount.toLocaleString()}</span>
+                      <span className="font-bold">-{formatCurrency(totalDiscount, false)}</span>
                     </div>
                   )}
 
                   <div className="flex justify-between items-center text-zinc-300">
                     <span>Extra Add-ons ({selectedAddons.length}):</span>
-                    <span className="font-bold text-white">+${addonsCost.toLocaleString()}</span>
+                    <span className="font-bold text-white">+{formatCurrency(addonsCost, false)}</span>
                   </div>
 
                   <div className="flex justify-between items-center text-zinc-300">
                     <span>Scope Tier ({scopeTierObj.name}):</span>
                     <span className="font-bold text-white">
-                      {scopeTierObj.price === 0 ? 'Free (+$0)' : `+$${scopeTierObj.price}`}
+                      {scopeTierObj.price === 0 ? 'Free' : `+${formatCurrency(scopeTierObj.price, scopeTierObj.priceINR, false)}`}
                     </span>
                   </div>
 
                   <div className="flex justify-between items-center text-zinc-300">
                     <span>Page Count ({pageCount} Pages):</span>
                     <span className="font-bold text-white">
-                      {extraPages > 0 ? `+$${extraPagesCost} (${extraPages} extra @ $25/pg)` : 'Free Included'}
+                      {extraPages > 0
+                        ? `+${formatCurrency(extraPagesCost, false)} (${extraPages} extra)`
+                        : 'Free Included'}
                     </span>
                   </div>
 
@@ -879,9 +1007,11 @@ export function PriceEstimatorSection({ onRequestProposal }: PriceEstimatorSecti
 
                   <div className="flex items-baseline gap-2">
                     <span className="text-4xl sm:text-5xl font-black text-white tracking-tight">
-                      ${totalEstimate.toLocaleString()}
+                      {formatCurrency(totalEstimate, false)}
                     </span>
-                    <span className="text-xs text-zinc-400 font-bold">USD</span>
+                    <span className="text-xs text-zinc-400 font-bold">
+                      {isIndianClient ? 'INR' : 'USD'}
+                    </span>
                   </div>
 
                   <p className="text-[11px] text-zinc-300 flex items-center gap-1.5 pt-1">

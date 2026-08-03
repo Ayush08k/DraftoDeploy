@@ -4,35 +4,35 @@ import {
   HiOutlineSparkles,
   HiOutlineLightningBolt,
   HiOutlineShieldCheck,
-  HiOutlineCube,
   HiOutlineGlobeAlt,
   HiOutlineCheckCircle,
-  HiOutlineCloudUpload
+  HiOutlineCloudUpload,
+  HiOutlineCode,
+  HiOutlineCheck
 } from "react-icons/hi";
 
 export function AboutSection() {
   const stats = [
-    { label: "Deployment Speed", value: "< 50ms", detail: "Global Edge Network", icon: HiOutlineLightningBolt },
-    { label: "Uptime SLA", value: "99.99%", detail: "Enterprise Reliability", icon: HiOutlineShieldCheck },
-    { label: "3D Rendering", value: "60 FPS", detail: "WebGL & Three.js", icon: HiOutlineCube },
-    { label: "Deployed Projects", value: "10,000+", detail: "Worldwide Creators", icon: HiOutlineCloudUpload },
+    { label: "Deployed Projects", value: "150+", detail: "Successfully Delivered", icon: HiOutlineCloudUpload },
+    { label: "Uptime & Quality SLA", value: "99.99%", detail: "Enterprise Reliability", icon: HiOutlineShieldCheck },
+    { label: "Average MVP Launch", value: "< 2 Weeks", detail: "Rapid Turnaround", icon: HiOutlineLightningBolt },
+    { label: "Core Expertise", value: "Full-Stack", detail: "Web, Mobile & AI Apps", icon: HiOutlineCode },
   ];
 
-  const techStack = [
-    "React 19",
-    "Three.js",
-    "React Three Fiber",
-    "Tailwind CSS v4",
-    "TypeScript",
-    "Framer Motion",
-    "Vite",
-    "WebGL Engine",
+  const providedServices = [
+    "Custom Full-Stack Web Apps & SaaS MVPs",
+    "Mobile App Development (iOS & Android)",
+    "3D WebGL & Interactive Three.js Experiences",
+    "AI Microservices & LLM Integration",
+    "High-Scale Cloud Deployment & DevOps Pipeline",
+    "Custom E-Commerce & Enterprise Platforms",
   ];
 
   return (
     <section id="about" className="relative w-full overflow-hidden bg-zinc-950 text-white">
       {/* Smooth transition gradient blend at the top of About section */}
       <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-zinc-950 via-zinc-950/40 to-transparent pointer-events-none z-20" />
+      
       {/* 
         BubbleBackground is the background of the ENTIRE About section.
         The liquid bubbles move behind the blurred card container!
@@ -71,7 +71,7 @@ export function AboutSection() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight"
             >
-              Turning Creative Concepts into <span className="bg-gradient-to-r from-[#00ffc6] via-cyan-400 to-purple-400 bg-clip-text text-transparent">Live Production Apps</span>
+              Empowering Startups with <span className="bg-gradient-to-r from-[#00ffc6] via-cyan-400 to-purple-400 bg-clip-text text-transparent">150+ Successfully Deployed Projects</span>
             </motion.h2>
 
             <motion.p
@@ -81,7 +81,7 @@ export function AboutSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-zinc-300 text-base sm:text-lg leading-relaxed font-medium"
             >
-              DraftoDeploy is an interactive UI factory and rapid deployment suite built for modern web applications.
+              We design, build, and deploy tailored custom project sets for early-stage startups and growing businesses worldwide.
             </motion.p>
           </div>
 
@@ -99,25 +99,31 @@ export function AboutSection() {
 
             {/* Card Inner Grid Narrative */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              
+              {/* Left Column: Startup Story & Track Record */}
               <div className="lg:col-span-7 space-y-6">
                 <div className="inline-flex items-center gap-2 text-xs font-bold text-[#00ffc6] uppercase tracking-wider">
                   <HiOutlineGlobeAlt className="w-4 h-4" />
-                  Next-Gen Web Architecture
+                  Startup Acceleration & Engineering
                 </div>
 
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
-                  Engineered for Designers, Developers & Visionaries
+                  Turning Visionary Ideas into Live Production Software
                 </h3>
 
                 <p className="text-zinc-300 text-base sm:text-lg leading-relaxed">
-                  DraftoDeploy eliminates the friction between design iterations and live deployment. By integrating real-time WebGL rendering, responsive component modularity, and edge execution, we empower teams to launch state-of-the-art web products in record time.
+                  DraftoDeploy specializes in custom engineering for startups and modern businesses. Having successfully built and deployed <strong className="text-white font-semibold">150+ custom projects</strong>, we eliminate the friction between initial design concepts and production rollout.
+                </p>
+
+                <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+                  From high-converting web apps and custom SaaS MVPs to interactive 3D landing pages and autonomous AI microservices, we build reliable, scalable project sets engineered for fast market growth.
                 </p>
 
                 <ul className="space-y-3 pt-2">
                   {[
-                    "Real-time Three.js lighting & custom shader support",
-                    "Full dark mode & responsive container scaling",
-                    "Zero-config setup with modern build tools",
+                    "150+ custom projects deployed across web, mobile & AI",
+                    "Tailored project sets specifically crafted for startup MVPs",
+                    "End-to-end delivery: architecture, UI/UX, backend & cloud launch",
                   ].map((item) => (
                     <li key={item} className="flex items-center gap-3 text-sm text-zinc-200">
                       <HiOutlineCheckCircle className="w-5 h-5 text-[#00ffc6] shrink-0" />
@@ -127,7 +133,7 @@ export function AboutSection() {
                 </ul>
               </div>
 
-              {/* Right Side Highlight Card */}
+              {/* Right Side Services Highlight Box */}
               <div className="lg:col-span-5 flex flex-col justify-center">
                 <div className="p-6 sm:p-8 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-xl shadow-2xl space-y-6 hover:border-[#00ffc6]/50 transition-colors group">
                   <div className="flex items-center justify-between">
@@ -136,32 +142,38 @@ export function AboutSection() {
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00ffc6] opacity-75" />
                         <span className="relative inline-flex rounded-full h-3 w-3 bg-[#00ffc6]" />
                       </span>
-                      <span className="text-xs font-bold text-[#00ffc6] uppercase tracking-wider">Live Factory Core</span>
+                      <span className="text-xs font-bold text-[#00ffc6] uppercase tracking-wider">Services We Provide</span>
                     </div>
-                    <span className="text-xs text-zinc-400 font-mono">v2.4 Active</span>
+                    <span className="text-xs text-zinc-400 font-mono">150+ Delivered</span>
                   </div>
 
                   <div>
                     <h4 className="text-xl font-bold text-white group-hover:text-[#00ffc6] transition-colors">
-                      DraftoDeploy Core Engine
+                      Core Development Services
                     </h4>
-                    <p className="text-xs sm:text-sm text-zinc-300 mt-2 leading-relaxed">
-                      Move your cursor across the section to interact with the fluid liquid bubble animation flowing behind this blurred card!
+                    <p className="text-xs sm:text-sm text-zinc-300 mt-1 leading-relaxed">
+                      Complete custom software development capabilities tailored for your product needs:
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-white/10 flex flex-wrap gap-2">
-                    {techStack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2.5 py-1 rounded-md bg-white/10 text-xs text-zinc-200 font-mono border border-white/10"
+                  <div className="space-y-2.5 pt-2 border-t border-white/10">
+                    {providedServices.map((service) => (
+                      <div
+                        key={service}
+                        className="flex items-center gap-3 p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
                       >
-                        {tech}
-                      </span>
+                        <div className="w-6 h-6 rounded-lg bg-[#00ffc6]/20 border border-[#00ffc6]/40 flex items-center justify-center shrink-0">
+                          <HiOutlineCheck className="w-4 h-4 text-[#00ffc6]" />
+                        </div>
+                        <span className="text-xs sm:text-sm font-medium text-zinc-200">
+                          {service}
+                        </span>
+                      </div>
                     ))}
                   </div>
                 </div>
               </div>
+
             </div>
 
             {/* Stats Bar inside the main Blurred Card */}

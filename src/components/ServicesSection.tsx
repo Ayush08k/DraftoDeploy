@@ -260,8 +260,24 @@ export function ServicesSection() {
                           <span key={t} className="px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-bold text-zinc-300">{t}</span>
                         ))}
                       </div>
-                      <a href="#contact" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black text-xs font-extrabold uppercase tracking-wider hover:bg-[#00ffc6] transition-colors shadow-md group/btn">
-                        <span>Explore</span>
+                      <a
+                        href="#estimator"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.dispatchEvent(
+                            new CustomEvent('select-estimator-service', {
+                              detail: { serviceId: service.id },
+                            })
+                          );
+                          window.location.hash = '#estimator';
+                          const el = document.getElementById('estimator');
+                          if (el) {
+                            el.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black text-xs font-extrabold uppercase tracking-wider hover:bg-[#00ffc6] transition-colors shadow-md group/btn"
+                      >
+                        <span>Estimate Cost</span>
                         <HiOutlineArrowNarrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                       </a>
                     </div>

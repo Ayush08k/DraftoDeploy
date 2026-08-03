@@ -290,7 +290,7 @@ export function ContactSection({
                       <div>
                         <span className="text-[10px] text-zinc-400 block uppercase font-bold">Estimated Total</span>
                         <span className="text-base font-black text-[#00ffc6]">
-                          ${attachedEstimate.totalEstimate.toLocaleString()} USD
+                          {attachedEstimate.formattedTotal || `$${attachedEstimate.totalEstimate.toLocaleString()} USD`}
                         </span>
                       </div>
                     </div>
