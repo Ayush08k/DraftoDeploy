@@ -3,8 +3,9 @@ import BlogSection from "./components/BlogSection";
 import AuroraBackground from "./components/aurora-background";
 
 export default function BlogPage() {
-  // Update document title and meta description for the Blog page
+  // Update document title, meta description and scroll to top for the Blog page
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     document.title =
       "Tech Blog — Web Dev, React, AI & Startup Engineering Guides | DraftoDeploy";
     const metaDesc = document.querySelector<HTMLMetaElement>(

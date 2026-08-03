@@ -46,7 +46,12 @@ export default function AntennaNavbar({
     if (item.href.startsWith('#')) {
       e.preventDefault();
       window.location.hash = item.href;
-      if (item.label.toLowerCase() === 'home' || item.href === '#top') {
+      if (
+        item.label.toLowerCase() === 'home' ||
+        item.href === '#top' ||
+        item.href === '#blog' ||
+        item.href === '#projects'
+      ) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         const el = document.querySelector(item.href);

@@ -25,7 +25,7 @@ export function MobileSidebarDrawer({
     setIsOpen(false);
     window.location.hash = href;
 
-    if (href === '#top' || href === '#') {
+    if (href === '#top' || href === '#' || href === '#blog' || href === '#projects') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (href.startsWith('#')) {
       const targetEl = document.querySelector(href);

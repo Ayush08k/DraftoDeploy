@@ -44,6 +44,20 @@ function App() {
   const isProjectsPage = currentHash === "#projects" || currentPath === "/projects";
   const isBlogPage = currentHash === "#blog" || currentPath === "/blog";
 
+  useEffect(() => {
+    if (isProjectsPage || isBlogPage || currentHash === "#top" || !currentHash) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (currentHash.startsWith("#")) {
+      const timer = setTimeout(() => {
+        const el = document.querySelector(currentHash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [currentHash, currentPath, isProjectsPage, isBlogPage]);
+
   // Determine current SEO page
   const seoPage = isProjectsPage ? "projects" : isBlogPage ? "blog" : "home";
 

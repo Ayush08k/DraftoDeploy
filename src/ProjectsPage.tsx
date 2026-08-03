@@ -1357,6 +1357,10 @@ import { GradientBackground } from './components/GradientBackground';
 
 // Full Projects Page export
 export default function ProjectsPage() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <div className="w-full min-h-screen bg-zinc-950 text-white selection:bg-red-500 selection:text-white">
       {/* 1. Canvas Hero Header Component requested by user */}

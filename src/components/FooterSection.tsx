@@ -45,7 +45,7 @@ export function FooterSection() {
     if (href.startsWith("#")) {
       e.preventDefault();
       window.location.hash = href;
-      if (href === "#top") {
+      if (href === "#top" || href === "#blog" || href === "#projects") {
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
         const el = document.querySelector(href);
