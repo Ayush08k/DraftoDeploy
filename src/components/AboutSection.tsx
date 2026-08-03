@@ -45,7 +45,7 @@ export function AboutSection() {
       */}
       <BubbleBackground
         interactive={true}
-        className="w-full py-24 px-4 sm:px-6 lg:px-8 min-h-[800px]"
+        className="w-full py-24 px-4 sm:px-6 lg:px-8 xl:px-12 min-h-[800px]"
         colors={{
           first: "18,113,255",
           second: "221,74,255",
@@ -55,7 +55,7 @@ export function AboutSection() {
           sixth: "140,100,255",
         }}
       >
-        <div className="max-w-5xl mx-auto relative z-10 space-y-12">
+        <div className="max-w-7xl xl:max-w-[1320px] mx-auto relative z-10 space-y-12">
 
           {/* Section Header */}
           <div className="text-center space-y-4 max-w-3xl mx-auto">
@@ -130,9 +130,47 @@ export function AboutSection() {
                   From high-converting web apps and custom SaaS MVPs to interactive 3D landing pages and autonomous AI microservices, we build reliable, scalable project sets engineered for fast market growth.
                 </p>
 
+                <p className="text-zinc-300 text-sm sm:text-base leading-relaxed font-medium bg-white/5 border border-white/10 p-3.5 rounded-xl">
+                  🏡 <strong className="text-[#00ffc6]">100% Remote & Work-From-Home Team:</strong> Our entire staff operates remotely from home across global timezones, ensuring 24/7 availability, agile communication, and cost-efficient overhead savings passed directly to our clients.
+                </p>
+
+                {/* Vibe Coding & Job Type SEO Feature Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1" role="region" aria-label="Capabilities and Engagement Models">
+                  <div
+                    className="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1 hover:border-[#00ffc6]/40 transition-colors"
+                    itemScope
+                    itemType="https://schema.org/Offer"
+                    title="Vibe Coding & AI Velocity — Rapid AI-assisted web development service"
+                  >
+                    <div className="text-xs font-bold text-[#00ffc6] flex items-center gap-1.5" itemProp="name">
+                      <span>⚡ Vibe Coding &amp; AI Velocity</span>
+                    </div>
+                    <p className="text-[11px] text-zinc-300 leading-normal" itemProp="description">
+                      Next-gen AI-assisted vibe coding for ultra-fast MVP prototyping and rapid iteration.
+                    </p>
+                  </div>
+
+                  <div
+                    className="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1 hover:border-[#00ffc6]/40 transition-colors"
+                    itemScope
+                    itemType="https://schema.org/Offer"
+                    title="Flexible Job Types — Freelance, Contract, Remote Staff Augmentation & Full-Time"
+                  >
+                    <div className="text-xs font-bold text-[#00ffc6] flex items-center gap-1.5" itemProp="name">
+                      <span>💼 Flexible Job Types &amp; Hiring</span>
+                    </div>
+                    <p className="text-[11px] text-zinc-300 leading-normal" itemProp="description">
+                      Hourly Freelance, Fixed Project Contract, Dedicated Remote Staff &amp; Full-Time Hire.
+                    </p>
+                  </div>
+                </div>
+
                 <ul className="space-y-3 pt-2">
                   {[
                     "150+ custom projects deployed across web, mobile & AI",
+                    "Fully remote & work-from-home distributed staff available 24/7",
+                    "Modern Vibe Coding methodology for 5x faster MVP delivery",
+                    "Flexible Job Types: Freelance, Contract & Remote Staff Augmentation",
                     "Tailored project sets specifically crafted for startup MVPs",
                     "End-to-end delivery: architecture, UI/UX, backend & cloud launch",
                   ].map((item) => (

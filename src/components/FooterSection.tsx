@@ -1,28 +1,13 @@
 import {
   HiOutlineMail,
   HiOutlineGlobeAlt,
-  HiOutlineCode,
-  HiOutlineDeviceMobile,
-  HiOutlineCube,
-  HiOutlineCloudUpload,
-  HiOutlineSparkles,
-  HiOutlineShoppingBag,
   HiOutlineCheckCircle,
   HiOutlineLightningBolt,
   HiOutlineShieldCheck,
+  HiOutlineHome,
 } from "react-icons/hi";
-
-// ─── Service Quick Links ─────────────────────────────────────────────────────
-const SERVICE_LINKS = [
-  { label: "Basic Website Development", href: "#services", icon: HiOutlineGlobeAlt },
-  { label: "Full Stack Web Development", href: "#services", icon: HiOutlineCode },
-  { label: "Mobile App Development", href: "#services", icon: HiOutlineDeviceMobile },
-  { label: "3D Interactive Landing Pages", href: "#services", icon: HiOutlineCube },
-  { label: "SaaS MVP Development", href: "#services", icon: HiOutlineCloudUpload },
-  { label: "AI Integration & Agents", href: "#services", icon: HiOutlineSparkles },
-  { label: "E-commerce & Shopify", href: "#services", icon: HiOutlineShoppingBag },
-  { label: "iOS App Development", href: "#services", icon: HiOutlineDeviceMobile },
-];
+import { FaLinkedinIn } from "react-icons/fa";
+import { SiFiverr, SiFreelancer, SiUpwork, SiIndeed } from "react-icons/si";
 
 // ─── Navigation Links ─────────────────────────────────────────────────────────
 const NAV_LINKS = [
@@ -46,9 +31,10 @@ const TRUST_BADGES = [
 
 // ─── Technology Tags ────────────────────────────────────────────────────────
 const TECH_TAGS = [
-  "React 19", "Next.js 15", "Node.js", "TypeScript", "Three.js",
-  "WebGL", "React Native", "Flutter", "Swift", "Python",
-  "LangChain", "OpenAI API", "PostgreSQL", "Docker", "Vercel",
+  "Vibe Coding", "AI Velocity", "React 19", "Next.js 15", "Node.js",
+  "TypeScript", "Three.js", "WebGL", "React Native", "Flutter",
+  "Swift", "Python", "LangChain", "OpenAI API", "PostgreSQL",
+  "Docker", "Vercel", "Freelance & Contract Job Types",
 ];
 
 export function FooterSection() {
@@ -156,13 +142,13 @@ export function FooterSection() {
               itemProp="address"
             >
               <a
-                href="mailto:contact@draftodeploy.com"
+                href="mailto:draftodeploy@gmail.com"
                 className="flex items-center gap-2 text-sm text-[#00ffc6] hover:text-white transition-colors"
                 itemProp="email"
                 aria-label="Email DraftoDeploy"
               >
                 <HiOutlineMail className="w-4 h-4 flex-shrink-0" />
-                contact@draftodeploy.com
+                draftodeploy@gmail.com
               </a>
               <div className="flex items-center gap-2 text-sm text-zinc-400">
                 <HiOutlineGlobeAlt className="w-4 h-4 flex-shrink-0 text-zinc-500" />
@@ -198,33 +184,97 @@ export function FooterSection() {
             </ul>
           </nav>
 
-          {/* Column 3: Services — Keyword-rich for SEO */}
-          <nav
-            className="space-y-4"
-            aria-label="Our services"
-            itemScope
-            itemType="https://schema.org/ItemList"
-          >
+          {/* Column 3: Platforms & Social Links */}
+          <div className="space-y-4">
             <h3 className="text-xs font-black tracking-[0.15em] uppercase text-zinc-500">
-              Our Services
+              Platforms & Social
             </h3>
-            <ul className="space-y-2.5" role="list">
-              {SERVICE_LINKS.map(({ label, href, icon: Icon }) => (
-                <li key={label} itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                  <a
-                    href={href}
-                    onClick={(e) => handleNavClick(e, href)}
-                    className="group flex items-center gap-2 text-sm text-zinc-400 hover:text-[#00ffc6] transition-colors"
-                    itemProp="url"
-                    aria-label={`Learn about ${label}`}
-                  >
-                    <Icon className="w-3.5 h-3.5 flex-shrink-0 text-zinc-600 group-hover:text-[#00ffc6] transition-colors" />
-                    <span itemProp="name">{label}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+            <div className="space-y-3">
+              <div className="flex flex-col gap-2">
+
+                {/* LinkedIn */}
+                <a
+                  href="https://www.linkedin.com/company/draftodeploy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="DraftoDeploy on LinkedIn — Freelance Web Development Agency Page"
+                  title="DraftoDeploy LinkedIn Page — Freelance Web Developer & Startup Agency"
+                  itemProp="sameAs"
+                  className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-[#0A66C2]/10 border border-[#0A66C2]/30 hover:bg-[#0A66C2]/20 hover:border-[#0A66C2]/60 transition-all"
+                >
+                  <FaLinkedinIn className="w-4 h-4 text-[#0A66C2]" />
+                  <span className="text-xs font-semibold text-zinc-300 group-hover:text-white transition-colors">LinkedIn</span>
+                </a>
+
+                {/* Fiverr */}
+                <a
+                  href="https://www.fiverr.com/ayush08k"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="DraftoDeploy on Fiverr — Hire Top Rated Budget Friendly Freelance Developer"
+                  title="DraftoDeploy Fiverr Profile — Hire React & Next.js Freelancer"
+                  itemProp="sameAs"
+                  className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-[#1DBF73]/10 border border-[#1DBF73]/30 hover:bg-[#1DBF73]/20 hover:border-[#1DBF73]/60 transition-all"
+                >
+                  <SiFiverr className="w-4 h-4 text-[#1DBF73]" />
+                  <span className="text-xs font-semibold text-zinc-300 group-hover:text-white transition-colors">Fiverr Profile</span>
+                </a>
+
+                {/* Freelancer */}
+                <a
+                  href="https://www.freelancer.in/u/ayush08k?sb=t"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="DraftoDeploy on Freelancer — Top Rated Full Stack Web Developer"
+                  title="DraftoDeploy Freelancer.in Profile — Budget Startup MVPs & AI Engineering"
+                  itemProp="sameAs"
+                  className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-[#29B2FE]/10 border border-[#29B2FE]/30 hover:bg-[#29B2FE]/20 hover:border-[#29B2FE]/60 transition-all"
+                >
+                  <SiFreelancer className="w-4 h-4 text-[#29B2FE]" />
+                  <span className="text-xs font-semibold text-zinc-300 group-hover:text-white transition-colors">Freelancer.com</span>
+                </a>
+
+                {/* Upwork */}
+                <a
+                  href="https://www.upwork.com/freelancers/~018562aba5c499b197?mp_source=share"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="DraftoDeploy on Upwork — Top Rated Remote Web Developer & Vibe Coder"
+                  title="DraftoDeploy Upwork Profile — Hire Freelance Full Stack Developer"
+                  itemProp="sameAs"
+                  className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-[#6FDA44]/10 border border-[#6FDA44]/30 hover:bg-[#6FDA44]/20 hover:border-[#6FDA44]/60 transition-all"
+                >
+                  <SiUpwork className="w-4 h-4 text-[#6FDA44]" />
+                  <span className="text-xs font-semibold text-zinc-300 group-hover:text-white transition-colors">Upwork Profile</span>
+                </a>
+
+                {/* Indeed */}
+                <a
+                  href="https://profile.indeed.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="DraftoDeploy on Indeed — Remote Work From Home Web Development Agency"
+                  title="DraftoDeploy Indeed Profile — Remote Contract & Job Hiring Company"
+                  itemProp="sameAs"
+                  className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-[#2164f3]/10 border border-[#2164f3]/30 hover:bg-[#2164f3]/20 hover:border-[#2164f3]/60 transition-all"
+                >
+                  <SiIndeed className="w-4 h-4 text-[#2164f3]" />
+                  <span className="text-xs font-semibold text-zinc-300 group-hover:text-white transition-colors">Indeed Company</span>
+                </a>
+              </div>
+
+              {/* Remote-first badge */}
+              <div
+                className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10"
+                title="100% Remote — Our team works fully remote from home, serving clients worldwide"
+              >
+                <HiOutlineHome className="w-4 h-4 text-[#00ffc6] flex-shrink-0" />
+                <span className="text-[11px] font-semibold text-zinc-300">
+                  100% Remote · Work From Home
+                </span>
+              </div>
+            </div>
+          </div>
 
           {/* Column 4: CTA / Hire Us */}
           <div className="space-y-6">
@@ -291,6 +341,10 @@ export function FooterSection() {
           {/* Keywords / Trust Tags */}
           <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] text-zinc-600">
             <span>Freelance Web Developer</span>
+            <span className="text-zinc-800">·</span>
+            <span>Vibe Coding Agency</span>
+            <span className="text-zinc-800">·</span>
+            <span>Remote Job & Contract Hiring</span>
             <span className="text-zinc-800">·</span>
             <span>Budget Friendly Agency</span>
             <span className="text-zinc-800">·</span>

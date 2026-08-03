@@ -180,7 +180,7 @@ export function ContactSection({
             itemProp="contactPoint"
           >
             <span itemProp="name">DraftoDeploy</span>
-            <a itemProp="email" href="mailto:contact@draftodeploy.com">contact@draftodeploy.com</a>
+            <a itemProp="email" href="mailto:draftodeploy@gmail.com">draftodeploy@gmail.com</a>
             <span itemProp="addressCountry">IN</span>
             <span itemProp="areaServed">Worldwide</span>
             <span itemProp="availableLanguage">English</span>
