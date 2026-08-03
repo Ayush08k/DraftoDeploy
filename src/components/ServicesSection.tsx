@@ -20,7 +20,15 @@ import FloatingPathsBackground from './FloatingPathsBackground';
 
 const SERVICES = [
   {
-    id: 'fullstack', number: '01', title: 'Full Stack Development',
+    id: 'basic-website', number: '01', title: 'Basic Website',
+    tagline: 'Fast, Clean & Responsive Web Presence for Businesses',
+    description: 'Perfect for landing pages, portfolio sites, and local businesses needing a fast, professional, and mobile-friendly web presence with 3 free pages included.',
+    icon: HiOutlineGlobeAlt, gradient: 'from-sky-400/20 via-cyan-400/20 to-teal-400/20', accentColor: '#38bdf8',
+    features: ['Mobile & Tablet Responsive Design', '99+ Google Lighthouse Speed Score', 'Contact Form & Social Media Links', '3 Free Pages Included'],
+    tech: ['React 19', 'Tailwind', 'HTML5', 'Vite', 'TypeScript'],
+  },
+  {
+    id: 'fullstack', number: '02', title: 'Full Stack Development',
     tagline: 'Scalable Web Architectures & End-to-End Applications',
     description: 'We craft high-performance, robust web applications built with modern frontend frameworks (React 19, Next.js) and enterprise backend architectures (Node.js, Express, PostgreSQL, GraphQL).',
     icon: HiOutlineCode, gradient: 'from-blue-500/20 via-indigo-500/20 to-purple-500/20', accentColor: '#3b82f6',

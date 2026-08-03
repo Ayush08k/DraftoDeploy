@@ -39,6 +39,17 @@ interface ServiceOption {
 
 const SERVICES: ServiceOption[] = [
   {
+    id: 'basic-website',
+    title: 'Basic Website',
+    tagline: 'Fast, Clean & Responsive Web Presence',
+    basePrice: 150,
+    basePriceINR: 8999,
+    freePages: 3,
+    icon: HiOutlineGlobeAlt,
+    accentColor: '#38bdf8',
+    popularAddons: ['seo', 'cicd'],
+  },
+  {
     id: 'fullstack',
     title: 'Full Stack Development',
     tagline: 'React 19, Next.js, Node.js & PostgreSQL',
