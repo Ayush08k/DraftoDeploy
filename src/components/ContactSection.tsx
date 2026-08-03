@@ -128,6 +128,9 @@ export function ContactSection({
     <section
       id="contact"
       className="relative w-full min-h-screen bg-zinc-950 text-white py-20 px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center overflow-hidden select-none"
+      aria-labelledby="contact-heading"
+      itemScope
+      itemType="https://schema.org/ContactPage"
     >
       {/* Fireworks Canvas Background Animation */}
       <FireworksBackground className="absolute inset-0 pointer-events-none opacity-60" population={60} color="white" />
@@ -150,6 +153,7 @@ export function ContactSection({
           </motion.div>
 
           <motion.h2
+            id="contact-heading"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -168,6 +172,19 @@ export function ContactSection({
           >
             Fill in your details below. Our team responds within 2 hours.
           </motion.p>
+          {/* Hidden address for schema/SEO — Google reads this for local business trust */}
+          <address
+            className="sr-only"
+            itemScope
+            itemType="https://schema.org/Organization"
+            itemProp="contactPoint"
+          >
+            <span itemProp="name">DraftoDeploy</span>
+            <a itemProp="email" href="mailto:contact@draftodeploy.com">contact@draftodeploy.com</a>
+            <span itemProp="addressCountry">IN</span>
+            <span itemProp="areaServed">Worldwide</span>
+            <span itemProp="availableLanguage">English</span>
+          </address>
         </div>
 
         {/* Decent Sized Compact Form Card */}
@@ -453,59 +470,6 @@ export function ContactSection({
             <span>30 Days Free Warranty</span>
           </div>
         </div>
-
-        {/* Footer Navigation & Copyright in 1 Single Line */}
-        <footer className="pt-6 border-t border-white/10 flex flex-row items-center justify-between gap-6 sm:gap-8 text-xs text-zinc-400 whitespace-nowrap overflow-x-auto no-scrollbar w-full">
-          {/* Navbar Links List in 1 Line */}
-          <div className="flex items-center gap-4 sm:gap-6 font-semibold text-zinc-300 shrink-0">
-            {[
-              { label: 'Home', href: '#top' },
-              { label: 'Projects', href: '#projects' },
-              { label: 'Blog', href: '#blog' },
-              { label: 'About', href: '#about' },
-              { label: 'Services', href: '#services' },
-              { label: 'Estimator', href: '#estimator' },
-              { label: 'Review', href: '#reviews' },
-              { label: 'Contact', href: '#contact' },
-            ].map((nav) => (
-              <a
-                key={nav.label}
-                href={nav.href}
-                onClick={(e) => {
-                  if (nav.href.startsWith('#')) {
-                    e.preventDefault();
-                    window.location.hash = nav.href;
-                    if (nav.href === '#top' || nav.label === 'Home') {
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else {
-                      document.querySelector(nav.href)?.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }
-                }}
-                className="hover:text-[#00ffc6] transition-colors"
-              >
-                {nav.label}
-              </a>
-            ))}
-          </div>
-
-          <div className="text-[11px] text-zinc-500 shrink-0">
-            © 2026 <strong className="text-white">DraftoDeploy Agency</strong>. All rights reserved.
-          </div>
-
-          <div className="flex items-center gap-4 font-medium text-[11px] shrink-0">
-            <a
-              href="#top"
-              onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="hover:text-[#00ffc6] transition-colors flex items-center gap-1"
-            >
-              Back to Top ↑
-            </a>
-          </div>
-        </footer>
       </div>
     </section>
   );

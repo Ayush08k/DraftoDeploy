@@ -1,28 +1,154 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- Homepage -->
+  <!-- ══════════════════════════════════════════════════════════════
+       HOMEPAGE — Highest priority, updated weekly
+  ══════════════════════════════════════════════════════════════ -->
   <url>
-    <loc>https://draftodeploy.vercel.app/</loc>
+    <loc>https://www.draftodeploy.com/</loc>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.draftodeploy.com/logo.png</image:loc>
+      <image:title>DraftoDeploy — Freelance Web Development Agency Logo</image:title>
+      <image:caption>DraftoDeploy is a budget-friendly freelance web development agency specializing in React, Next.js, mobile apps and AI integrations for startups.</image:caption>
+    </image:image>
   </url>
 
-  <!-- Projects Page -->
+  <!-- ══════════════════════════════════════════════════════════════
+       HOMEPAGE SECTION ANCHORS — Crawlable anchor links
+  ══════════════════════════════════════════════════════════════ -->
   <url>
-    <loc>https://draftodeploy.vercel.app/projects</loc>
+    <loc>https://www.draftodeploy.com/#about</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.draftodeploy.com/#services</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.draftodeploy.com/#reviews</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.draftodeploy.com/#estimator</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.draftodeploy.com/#contact</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       PROJECTS PAGE — Portfolio of 150+ delivered projects
+  ══════════════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.draftodeploy.com/projects</loc>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Blog Page -->
+  <!-- ══════════════════════════════════════════════════════════════
+       BLOG PAGE — 35 SEO-optimized technical articles
+  ══════════════════════════════════════════════════════════════ -->
   <url>
-    <loc>https://draftodeploy.vercel.app/blog</loc>
+    <loc>https://www.draftodeploy.com/blog</loc>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       BLOG ARTICLES — Individual blog post slugs
+  ══════════════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://www.draftodeploy.com/blog/ai-business-analytics-predictive-intelligence</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.draftodeploy.com/blog/react-saas-dashboard-architecture</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.draftodeploy.com/blog/threejs-3d-landing-page-guide</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.draftodeploy.com/blog/nextjs-ecommerce-headless-shopify</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.draftodeploy.com/blog/react-native-mobile-app-gps-tracking</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.draftodeploy.com/blog/langchain-rag-vector-search-startup</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.draftodeploy.com/blog/nodejs-microservices-saas-architecture</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.draftodeploy.com/blog/swiftui-ios-app-development-guide</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.draftodeploy.com/blog/wordpress-headless-nextjs-cms-setup</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.draftodeploy.com/blog/stripe-subscription-billing-saas-integration</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
 </urlset>

@@ -755,15 +755,20 @@ export function RobotHero({
       id="top"
       ref={containerRef}
       className="relative w-full h-dvh min-h-[600px] overflow-hidden"
+      aria-label="DraftoDeploy — Freelance Web Development Agency Hero"
+      itemScope
+      itemType="https://schema.org/WebPageElement"
       style={{
         background: `linear-gradient(to bottom, ${entorno.fondoArriba} 0%, ${entorno.fondoArriba} 55%, ${entorno.fondoMedio} 65%, ${entorno.fondoAbajo} 100%)`,
       }}
     >
+      {/* ── DECORATIVE BACKGROUND WATERMARK TEXT (aria-hidden — purely visual) ── */}
       <div
         className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden"
         style={{ zIndex: 0 }}
+        aria-hidden="true"
       >
-        <h1
+        <span
           className="font-sans font-black select-none whitespace-nowrap"
           style={{
             color: backgroundTextColor,
@@ -776,10 +781,46 @@ export function RobotHero({
           }}
         >
           {backgroundText}
-        </h1>
+        </span>
       </div>
 
-      <div className="absolute inset-0 z-10">
+      {/* ── SEO PRIMARY H1 + SUBHEADING — Visible, keyword-rich, Google-first ── */}
+      {/*
+        Positioned at the very top of the hero, above the 3D canvas.
+        Uses a subtle zinc pill container to stay visible against the light hero bg.
+        This is the REAL H1 that Google will index and rank for our primary keywords.
+      */}
+      <div
+        className="absolute top-20 sm:top-24 inset-x-0 z-30 flex flex-col items-center text-center px-4 pointer-events-none opacity-35"
+        aria-label="Hero headline — DraftoDeploy Freelance Web Development Agency"
+      >
+        {/* Primary H1 — Main keyword-rich heading */}
+        <h1
+          className="text-zinc-800 font-black tracking-tight leading-tight"
+          style={{ fontSize: "clamp(1.15rem, 2.8vw, 2.25rem)" }}
+          itemProp="headline"
+        >
+          <span className="block">DraftoDeploy</span>
+          <span
+            className="block text-zinc-600 font-bold"
+            style={{ fontSize: "clamp(0.75rem, 1.6vw, 1.1rem)" }}
+          >
+            Freelance Web Developer &amp; Budget-Friendly Startup Agency
+          </span>
+        </h1>
+
+        {/* Subheading — Secondary keyword context for Google */}
+        <p
+          className="mt-1.5 text-zinc-500 font-medium max-w-lg"
+          style={{ fontSize: "clamp(0.6rem, 1.1vw, 0.8rem)" }}
+          itemProp="description"
+        >
+          150+ Projects Delivered · React, Next.js, Mobile Apps, SaaS MVPs, AI &amp; 3D WebGL
+        </p>
+      </div>
+
+      {/* ── 3D ROBOT CANVAS ─────────────────────────────────────────────── */}
+      <div className="absolute inset-0 z-10" aria-hidden="true">
         <Canvas shadows camera={{ position: [0, 0.2, 6], fov: 40 }}>
           <ambientLight intensity={entorno.luzAmbiente} color="#ffffff" />
 
@@ -843,10 +884,11 @@ export function RobotHero({
         </Canvas>
       </div>
 
-      {/* Plain frameless scroll indicator with plain text and two stacked down arrows below */}
+      {/* Scroll indicator */}
       <motion.div
         style={{ opacity: scrollIndicatorOpacity, y: scrollIndicatorY }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex flex-col items-center gap-1 select-none text-center"
+        aria-hidden="true"
       >
         <span className="text-[11px] font-bold text-zinc-900 tracking-widest uppercase">
           Scroll for details
@@ -862,7 +904,7 @@ export function RobotHero({
       </motion.div>
 
       {/* Smooth transition gradient blend into the dark About section */}
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-b from-transparent via-zinc-950/40 to-zinc-950 pointer-events-none z-20" />
+      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-b from-transparent via-zinc-950/40 to-zinc-950 pointer-events-none z-20" aria-hidden="true" />
     </section>
   );
 }

@@ -171,8 +171,11 @@ export function ServicesSection() {
   const renderCard = (service: typeof SERVICES[0], displayClass = 'flex') => {
     const Icon = service.icon;
     return (
-      <div
+      <article
         className={`relative overflow-hidden rounded-3xl border border-white/25 bg-zinc-950/60 sm:bg-zinc-950/50 backdrop-blur-2xl sm:backdrop-blur-3xl p-5 sm:p-6 shadow-[0_30px_70px_rgba(0,0,0,0.9)] bg-gradient-to-br ${service.gradient} group transform-gpu flex flex-col justify-between h-full ${displayClass}`}
+        itemScope
+        itemType="https://schema.org/Service"
+        aria-label={`${service.title} — ${service.tagline}`}
       >
         {/* Card Ambient Glow */}
         <div className="hidden sm:block absolute -right-16 -top-16 w-56 h-56 rounded-full blur-[80px] pointer-events-none opacity-20 bg-[#00ffc6]" />
@@ -182,21 +185,18 @@ export function ServicesSection() {
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <div className="w-11 h-11 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center text-white shadow-lg shrink-0">
-                <Icon className="w-6 h-6" style={{ color: service.accentColor }} />
+                <Icon className="w-6 h-6" style={{ color: service.accentColor }} aria-hidden="true" />
               </div>
               <div>
-                <span className="text-[10px] font-mono font-bold text-[#00ffc6] tracking-widest uppercase">
-                  Service {service.number}
-                </span>
-                <h3 className="text-lg sm:text-xl font-black text-white tracking-tight leading-tight">{service.title}</h3>
+                <h3 className="text-lg sm:text-xl font-black text-white tracking-tight leading-tight" itemProp="name">{service.title}</h3>
               </div>
             </div>
           </div>
 
           {/* Tagline & Description */}
           <div className="space-y-1">
-            <div className="text-xs font-bold text-zinc-200">{service.tagline}</div>
-            <p className="text-zinc-300 text-xs leading-relaxed">{service.description}</p>
+            <div className="text-xs font-bold text-zinc-200" itemProp="alternateName">{service.tagline}</div>
+            <p className="text-zinc-300 text-xs leading-relaxed" itemProp="description">{service.description}</p>
           </div>
 
           {/* Feature List */}
@@ -252,7 +252,7 @@ export function ServicesSection() {
             </a>
           </div>
         </div>
-      </div>
+      </article>
     );
   };
 
@@ -260,6 +260,9 @@ export function ServicesSection() {
     <section
       id="services"
       className="relative w-full min-h-[750px] lg:min-h-[840px] bg-zinc-950 text-white flex flex-col justify-between py-12 px-3 sm:px-6 lg:px-10 overflow-hidden select-none"
+      aria-labelledby="services-heading"
+      itemScope
+      itemType="https://schema.org/ItemList"
     >
       {/* ── Floating Paths Background ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -284,7 +287,7 @@ export function ServicesSection() {
           Services & Capabilities
         </motion.div>
 
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight">
+        <h2 id="services-heading" className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight">
           End-to-End Engineering for{' '}
           <span className="bg-gradient-to-r from-[#00ffc6] via-cyan-400 to-purple-400 bg-clip-text text-transparent">
             Digital Products

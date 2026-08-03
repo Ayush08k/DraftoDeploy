@@ -8,6 +8,8 @@ import PriceEstimatorSection, { type EstimateData } from "./components/PriceEsti
 import ContactSection from "./components/ContactSection";
 import ProjectsPage from "./ProjectsPage";
 import BlogPage from "./BlogPage";
+import SeoHead from "./components/SeoHead";
+import FooterSection from "./components/FooterSection";
 
 const DEFAULT_NAV_ITEMS = [
   { label: "Home", href: "#top" },
@@ -42,6 +44,9 @@ function App() {
   const isProjectsPage = currentHash === "#projects" || currentPath === "/projects";
   const isBlogPage = currentHash === "#blog" || currentPath === "/blog";
 
+  // Determine current SEO page
+  const seoPage = isProjectsPage ? "projects" : isBlogPage ? "blog" : "home";
+
   const handleEditEstimate = () => {
     const estimatorEl = document.getElementById("estimator");
     if (estimatorEl) {
@@ -54,42 +59,60 @@ function App() {
   };
 
   return (
-    <main className="w-full min-h-screen bg-zinc-950 text-white overflow-x-hidden relative">
-      {/* Global Fixed Navbar */}
-      <AntennaNavbar leftItems={DEFAULT_NAV_ITEMS} />
+    <>
+      {/* Dynamic per-page SEO meta updater */}
+      <SeoHead page={seoPage} />
 
-      {isProjectsPage ? (
-        <ProjectsPage />
-      ) : isBlogPage ? (
-        <BlogPage />
-      ) : (
-        <>
-          {/* 1. Hero Section */}
-          <RobotHero />
+      <div
+        className="w-full min-h-screen bg-zinc-950 text-white overflow-x-hidden relative"
+        itemScope
+        itemType="https://schema.org/WebPage"
+      >
+        {/* Global Fixed Navbar */}
+        <AntennaNavbar leftItems={DEFAULT_NAV_ITEMS} />
 
-          {/* 2. About Section with Blurred Card & Bubble Background */}
-          <AboutSection />
+        {isProjectsPage ? (
+          <main id="main-content" aria-label="Projects Portfolio Page">
+            <ProjectsPage />
+            <FooterSection />
+          </main>
+        ) : isBlogPage ? (
+          <main id="main-content" aria-label="Tech Blog Page">
+            <BlogPage />
+            <FooterSection />
+          </main>
+        ) : (
+          <main id="main-content" aria-label="DraftoDeploy Freelance Web Development Agency">
+            {/* 1. Hero Section — H1 lives here */}
+            <RobotHero />
 
-          {/* 3. Services Section with Sticky Stacking Cards */}
-          <ServicesSection />
+            {/* 2. About Section with Blurred Card & Bubble Background */}
+            <AboutSection />
 
-          {/* 4. Testimonials Section – Infinite Scroll Columns */}
-          <TestimonialsSection />
+            {/* 3. Services Section with Sticky Stacking Cards */}
+            <ServicesSection />
 
-          {/* 5. Price Estimator Section – Interactive Services & Addons Calculator */}
-          <PriceEstimatorSection
-            onRequestProposal={(estimate) => setAttachedEstimate(estimate)}
-          />
+            {/* 4. Testimonials Section – Infinite Scroll Columns */}
+            <TestimonialsSection />
 
-          {/* 6. Contact Section – Inquiry Form & Attached Estimate Handler */}
-          <ContactSection
-            attachedEstimate={attachedEstimate}
-            onEditEstimate={handleEditEstimate}
-            onDeleteEstimate={handleDeleteEstimate}
-          />
-        </>
-      )}
-    </main>
+            {/* 5. Price Estimator Section – Interactive Services & Addons Calculator */}
+            <PriceEstimatorSection
+              onRequestProposal={(estimate) => setAttachedEstimate(estimate)}
+            />
+
+            {/* 6. Contact Section – Inquiry Form & Attached Estimate Handler */}
+            <ContactSection
+              attachedEstimate={attachedEstimate}
+              onEditEstimate={handleEditEstimate}
+              onDeleteEstimate={handleDeleteEstimate}
+            />
+
+            {/* 7. SEO Footer — Trust signals, nav, services, contact schema */}
+            <FooterSection />
+          </main>
+        )}
+      </div>
+    </>
   );
 }
 

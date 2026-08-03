@@ -29,7 +29,13 @@ export function AboutSection() {
   ];
 
   return (
-    <section id="about" className="relative w-full overflow-hidden bg-zinc-950 text-white">
+    <section
+      id="about"
+      className="relative w-full overflow-hidden bg-zinc-950 text-white"
+      aria-labelledby="about-heading"
+      itemScope
+      itemType="https://schema.org/AboutPage"
+    >
       {/* Smooth transition gradient blend at the top of About section */}
       <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-zinc-950 via-zinc-950/40 to-transparent pointer-events-none z-20" />
       
@@ -65,11 +71,13 @@ export function AboutSection() {
             </motion.div>
 
             <motion.h2
+              id="about-heading"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight"
+              itemProp="name"
             >
               Empowering Startups with <span className="bg-gradient-to-r from-[#00ffc6] via-cyan-400 to-purple-400 bg-clip-text text-transparent">150+ Successfully Deployed Projects</span>
             </motion.h2>
@@ -110,7 +118,7 @@ export function AboutSection() {
                   Startup Acceleration & Engineering
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight" itemProp="headline">
                   Turning Visionary Ideas into Live Production Software
                 </h3>
 
@@ -180,7 +188,10 @@ export function AboutSection() {
             </div>
 
             {/* Stats Bar inside the main Blurred Card */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-8 border-t border-white/15">
+            <dl
+              className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-8 border-t border-white/15"
+              aria-label="DraftoDeploy agency statistics and achievements"
+            >
               {stats.map((stat, idx) => {
                 const Icon = stat.icon;
                 return (
@@ -193,15 +204,15 @@ export function AboutSection() {
                     className="p-5 rounded-2xl bg-zinc-900/90 sm:bg-white/10 border border-white/15 backdrop-blur-sm sm:backdrop-blur-xl hover:bg-white/15 hover:border-white/30 transition-all group"
                   >
                     <div className="w-10 h-10 rounded-xl bg-[#00ffc6]/15 text-[#00ffc6] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                      <Icon className="w-5 h-5" />
+                      <Icon className="w-5 h-5" aria-hidden="true" />
                     </div>
-                    <div className="text-2xl sm:text-3xl font-black text-white">{stat.value}</div>
-                    <div className="text-xs font-bold text-zinc-200 mt-0.5">{stat.label}</div>
+                    <dt className="text-2xl sm:text-3xl font-black text-white">{stat.value}</dt>
+                    <dd className="text-xs font-bold text-zinc-200 mt-0.5">{stat.label}</dd>
                     <div className="text-[11px] text-zinc-400">{stat.detail}</div>
                   </motion.div>
                 );
               })}
-            </div>
+            </dl>
 
           </motion.div>
 

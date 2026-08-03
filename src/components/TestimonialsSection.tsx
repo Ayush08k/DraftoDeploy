@@ -266,6 +266,8 @@ const TestimonialsColumn = ({
               <div
                 key={`${loopIdx}-${i}`}
                 className="relative p-5 sm:p-6 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl backdrop-saturate-150 shadow-2xl shadow-black/50 max-w-xs sm:max-w-sm w-full group hover:border-[#00ffc6]/50 hover:bg-white/15 transition-all duration-300 flex flex-col justify-between"
+                itemScope
+                itemType="https://schema.org/Review"
               >
                 {/* Glow on hover */}
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#00ffc6]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
@@ -273,9 +275,11 @@ const TestimonialsColumn = ({
                 <div>
                   {/* Top Bar: Stars + Tag */}
                   <div className="flex items-center justify-between gap-2 mb-3">
-                    <div className="flex items-center gap-0.5">
+                    <div className="flex items-center gap-0.5" aria-label={`${stars} out of 5 stars`} itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                      <meta itemProp="ratingValue" content={String(stars)} />
+                      <meta itemProp="bestRating" content="5" />
                       {Array.from({ length: stars }).map((_, s) => (
-                        <HiStar key={s} className="w-4 h-4 text-[#00ffc6]" />
+                        <HiStar key={s} className="w-4 h-4 text-[#00ffc6]" aria-hidden="true" />
                       ))}
                     </div>
                     {tag && (
@@ -286,7 +290,7 @@ const TestimonialsColumn = ({
                   </div>
 
                   {/* Review Case Study Text */}
-                  <p className="text-xs sm:text-sm text-zinc-200 leading-relaxed mb-4 relative z-10 font-normal">
+                  <p className="text-xs sm:text-sm text-zinc-200 leading-relaxed mb-4 relative z-10 font-normal" itemProp="reviewBody">
                     "{text}"
                   </p>
                 </div>
@@ -295,20 +299,21 @@ const TestimonialsColumn = ({
                 <div className="flex items-center gap-3 pt-3 border-t border-white/15 relative z-10">
                   <img
                     src={image}
-                    alt={name}
+                    alt={`${name} — ${role} review of DraftoDeploy`}
                     width={40}
                     height={40}
                     className="w-10 h-10 rounded-full ring-2 ring-[#00ffc6]/40 bg-zinc-800/80 shadow-md flex-shrink-0"
+                    loading="lazy"
                   />
-                  <div className="min-w-0 flex-1">
+                  <div className="min-w-0 flex-1" itemProp="author" itemScope itemType="https://schema.org/Person">
                     <div className="text-sm font-bold text-white tracking-tight leading-tight flex items-center gap-1.5 truncate">
-                      <span>{name}</span>
-                      <span className="text-sm flex-shrink-0">{flag}</span>
+                      <span itemProp="name">{name}</span>
+                      <span className="text-sm flex-shrink-0" aria-hidden="true">{flag}</span>
                     </div>
-                    <div className="text-[11px] text-[#00ffc6] font-semibold leading-tight truncate">
+                    <div className="text-[11px] text-[#00ffc6] font-semibold leading-tight truncate" itemProp="jobTitle">
                       {role}
                     </div>
-                    <div className="text-[10px] text-zinc-400 leading-tight truncate mt-0.5">
+                    <div className="text-[10px] text-zinc-400 leading-tight truncate mt-0.5" itemProp="address">
                       {location}
                     </div>
                   </div>
@@ -326,7 +331,7 @@ const TestimonialsColumn = ({
 export function TestimonialsSection() {
   return (
     <AuroraBackground className="py-20 px-4">
-      <section id="reviews" className="relative w-full min-h-screen text-white overflow-hidden">
+      <section id="reviews" className="relative w-full min-h-screen text-white overflow-hidden" aria-labelledby="reviews-heading">
         {/* Support legacy #testimonials anchor link */}
         <div id="testimonials" className="absolute -top-20" />
 
@@ -344,6 +349,7 @@ export function TestimonialsSection() {
           </motion.div>
 
           <motion.h2
+            id="reviews-heading"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

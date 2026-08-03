@@ -1,11 +1,52 @@
-# robots.txt for DraftoDeploy
+# robots.txt for DraftoDeploy — https://www.draftodeploy.com
+# Last updated: August 2026
+
+# ─── Allow all good crawlers ───────────────────────────────────────
 User-agent: *
 Allow: /
+Allow: /projects
+Allow: /blog
 
-# Sitemap location
-Sitemap: https://draftodeploy.vercel.app/sitemap.xml
-
-# Disallow admin/internal paths
+# Disallow internal/admin paths
 Disallow: /api/
 Disallow: /_next/
 Disallow: /admin/
+Disallow: /private/
+
+# ─── Google-specific rules ─────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+Allow: /projects
+Allow: /blog
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.svg$
+Allow: /*.webp$
+
+# ─── Bing rules ────────────────────────────────────────────────────
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+# ─── AI crawlers (allow for discoverability) ───────────────────────
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# ─── Sitemap ───────────────────────────────────────────────────────
+Sitemap: https://www.draftodeploy.com/sitemap.xml
