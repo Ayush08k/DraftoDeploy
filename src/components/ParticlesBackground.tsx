@@ -201,7 +201,8 @@ export const Particles: React.FC<ParticlesProps> = ({
 
   const drawParticles = () => {
     clearContext();
-    const particleCount = quantity;
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
+    const particleCount = isMobile ? Math.min(25, quantity) : quantity;
     for (let i = 0; i < particleCount; i++) {
       const circle = circleParams();
       drawCircle(circle);

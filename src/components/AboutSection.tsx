@@ -89,12 +89,15 @@ export function AboutSection() {
             THE BLURRED FROSTED GLASS CARD
             This card sits on top of the section background and blurs the BubbleBackground liquid animation flowing behind it!
           */}
+          {/* 
+            THE FROSTED GLASS CARD (Optimized for 60fps mobile scrolling)
+          */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative rounded-3xl backdrop-blur-2xl bg-zinc-950/65 border border-white/20 p-8 sm:p-12 lg:p-14 shadow-[0_25px_60px_rgba(0,0,0,0.8)] space-y-12"
+            className="relative rounded-3xl bg-zinc-950/90 sm:bg-zinc-950/65 backdrop-blur-md sm:backdrop-blur-2xl border border-white/20 p-6 sm:p-12 lg:p-14 shadow-[0_25px_60px_rgba(0,0,0,0.8)] space-y-12 transform-gpu"
           >
 
             {/* Card Inner Grid Narrative */}
@@ -135,7 +138,7 @@ export function AboutSection() {
 
               {/* Right Side Services Highlight Box */}
               <div className="lg:col-span-5 flex flex-col justify-center">
-                <div className="p-6 sm:p-8 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-xl shadow-2xl space-y-6 hover:border-[#00ffc6]/50 transition-colors group">
+                <div className="p-6 sm:p-8 rounded-2xl bg-zinc-900/90 sm:bg-white/10 border border-white/20 backdrop-blur-sm sm:backdrop-blur-xl shadow-2xl space-y-6 hover:border-[#00ffc6]/50 transition-colors group">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <span className="relative flex h-3 w-3">
@@ -160,7 +163,7 @@ export function AboutSection() {
                     {providedServices.map((service) => (
                       <div
                         key={service}
-                        className="flex items-center gap-3 p-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+                        className="flex items-center gap-3 p-2.5 rounded-xl bg-zinc-800/60 sm:bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
                       >
                         <div className="w-6 h-6 rounded-lg bg-[#00ffc6]/20 border border-[#00ffc6]/40 flex items-center justify-center shrink-0">
                           <HiOutlineCheck className="w-4 h-4 text-[#00ffc6]" />
@@ -187,7 +190,7 @@ export function AboutSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
-                    className="p-5 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-xl hover:bg-white/15 hover:border-white/30 transition-all group"
+                    className="p-5 rounded-2xl bg-zinc-900/90 sm:bg-white/10 border border-white/15 backdrop-blur-sm sm:backdrop-blur-xl hover:bg-white/15 hover:border-white/30 transition-all group"
                   >
                     <div className="w-10 h-10 rounded-xl bg-[#00ffc6]/15 text-[#00ffc6] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                       <Icon className="w-5 h-5" />

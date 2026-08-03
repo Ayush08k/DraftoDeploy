@@ -128,7 +128,7 @@ function BubbleBackground({
 
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="pointer-events-none absolute -top-full -left-full size-0 opacity-0"
+        className="pointer-events-none absolute -top-full -left-full size-0 opacity-0 hidden sm:block"
       >
         <defs>
           <filter id="goo">
@@ -148,9 +148,21 @@ function BubbleBackground({
         </defs>
       </svg>
 
+      <style>{`
+        @media (min-width: 640px) {
+          .bubble-goo-layer {
+            filter: url(#goo) blur(20px);
+          }
+        }
+        @media (max-width: 639px) {
+          .bubble-goo-layer {
+            filter: blur(35px);
+          }
+        }
+      `}</style>
+
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ filter: 'url(#goo) blur(20px)' }}
+        className="absolute inset-0 pointer-events-none bubble-goo-layer"
       >
         <motion.div
           className="absolute rounded-full size-[80%] top-[10%] left-[10%] mix-blend-hard-light bg-[radial-gradient(circle_at_center,rgba(var(--first-color),0.8)_0%,rgba(var(--first-color),0)_50%)]"
