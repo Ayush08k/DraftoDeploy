@@ -22,19 +22,25 @@ const DEFAULT_NAV_ITEMS = [
 
 function App() {
   const [currentHash, setCurrentHash] = useState(() => window.location.hash || "#top");
+  const [currentPath, setCurrentPath] = useState(() => window.location.pathname);
   const [attachedEstimate, setAttachedEstimate] = useState<EstimateData | null>(null);
 
   useEffect(() => {
-    const handleHashChange = () => {
+    const handleLocationChange = () => {
       setCurrentHash(window.location.hash || "#top");
+      setCurrentPath(window.location.pathname);
     };
 
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
+    window.addEventListener("hashchange", handleLocationChange);
+    window.addEventListener("popstate", handleLocationChange);
+    return () => {
+      window.removeEventListener("hashchange", handleLocationChange);
+      window.removeEventListener("popstate", handleLocationChange);
+    };
   }, []);
 
-  const isProjectsPage = currentHash === "#projects" || window.location.pathname === "/projects";
-  const isBlogPage = currentHash === "#blog" || window.location.pathname === "/blog";
+  const isProjectsPage = currentHash === "#projects" || currentPath === "/projects";
+  const isBlogPage = currentHash === "#blog" || currentPath === "/blog";
 
   const handleEditEstimate = () => {
     const estimatorEl = document.getElementById("estimator");
