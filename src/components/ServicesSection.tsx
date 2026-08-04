@@ -345,8 +345,8 @@ export function ServicesSection() {
       </div>
 
       {/* ── Clean Pagination Indicator Dots Only ── */}
-      <div className="flex flex-col items-center gap-3 relative z-20 pb-2">
-        <div className="flex items-center justify-center gap-1 sm:gap-1.5 flex-wrap max-w-full px-2 sm:px-4">
+      <div className="hidden sm:flex flex-col items-center gap-3 relative z-20 pb-2">
+        <div className="flex items-center justify-center gap-1.5 flex-wrap max-w-full px-4">
           {SERVICES.map((s, idx) => (
             <button
               key={s.id}
@@ -355,10 +355,10 @@ export function ServicesSection() {
                 setCurrentIndex(idx);
               }}
               aria-label={`Go to ${s.title}`}
-              className={`h-1.5 sm:h-2.5 rounded-full transition-all duration-300 ${
+              className={`h-2.5 rounded-full transition-all duration-300 ${
                 idx === currentIndex
-                  ? 'w-5 sm:w-8 bg-[#00ffc6] shadow-[0_0_12px_rgba(0,255,198,0.6)]'
-                  : 'w-1.5 sm:w-2.5 bg-white/20 hover:bg-white/40'
+                  ? 'w-8 bg-[#00ffc6] shadow-[0_0_12px_rgba(0,255,198,0.6)]'
+                  : 'w-2.5 bg-white/20 hover:bg-white/40'
               }`}
             />
           ))}
