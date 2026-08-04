@@ -139,31 +139,31 @@ export function ServicesSection() {
   const secondService = SERVICES[(currentIndex + 1) % SERVICES.length];
   const thirdService = SERVICES[(currentIndex + 2) % SERVICES.length];
 
-  // 90FPS Animation variants for GPU acceleration
+  // 90FPS Ultra-Fast Animation variants for instant responsive sliding
   const variants = {
     enter: (dir: number) => ({
-      x: dir > 0 ? 120 : -120,
+      x: dir > 0 ? 50 : -50,
       opacity: 0,
-      scale: 0.96,
+      scale: 0.98,
     }),
     center: {
       x: 0,
       opacity: 1,
       scale: 1,
       transition: {
-        x: { type: 'spring' as const, stiffness: 380, damping: 30 },
-        opacity: { duration: 0.2 },
-        scale: { duration: 0.2 },
+        x: { type: 'spring' as const, stiffness: 500, damping: 35, mass: 0.5 },
+        opacity: { duration: 0.12 },
+        scale: { duration: 0.12 },
       },
     },
     exit: (dir: number) => ({
-      x: dir < 0 ? 120 : -120,
+      x: dir < 0 ? 50 : -50,
       opacity: 0,
-      scale: 0.96,
+      scale: 0.98,
       transition: {
-        x: { type: 'spring' as const, stiffness: 380, damping: 30 },
-        opacity: { duration: 0.15 },
-        scale: { duration: 0.15 },
+        x: { type: 'spring' as const, stiffness: 500, damping: 35, mass: 0.5 },
+        opacity: { duration: 0.08 },
+        scale: { duration: 0.08 },
       },
     }),
   };
@@ -308,8 +308,8 @@ export function ServicesSection() {
         </button>
 
         {/* 3 CARDS SIDE-BY-SIDE 90FPS FLUID SLIDING GRID */}
-        <div className="flex-1 overflow-hidden py-2 px-1">
-          <AnimatePresence mode="wait" custom={direction}>
+        <div className="flex-1 overflow-hidden py-2 px-1 relative">
+          <AnimatePresence mode="popLayout" custom={direction}>
             <motion.div
               key={firstService.id}
               custom={direction}
@@ -319,10 +319,10 @@ export function ServicesSection() {
               exit="exit"
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.2}
+              dragElastic={0.15}
               onDragEnd={(_, info) => {
-                if (info.offset.x < -40) nextService();
-                if (info.offset.x > 40) prevService();
+                if (info.offset.x < -25) nextService();
+                if (info.offset.x > 25) prevService();
               }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 items-stretch cursor-grab active:cursor-grabbing"
             >
