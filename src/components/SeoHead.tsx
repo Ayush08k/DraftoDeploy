@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+﻿import { useEffect } from "react";
 
 /**
- * SeoHead — Dynamic per-page SEO meta updater
+ * SeoHead â€” Dynamic per-page SEO meta updater
  *
  * Updates document.title, meta description, canonical URL,
  * Open Graph, and Twitter Card tags dynamically when the user
@@ -23,40 +23,40 @@ interface SeoHeadProps {
 const SEO_CONFIG = {
   home: {
     title:
-      "DraftoDeploy — #1 Freelance Developer & Budget-Friendly Web Development Agency for Startups",
+      "DraftoDeploy â€” #1 Freelance Developer & Budget-Friendly Web Development Agency for Startups",
     description:
       "DraftoDeploy is a top-rated freelance web development agency. We build high-quality, budget-friendly web apps, mobile apps, SaaS MVPs, 3D landing pages & AI integrations for startups worldwide. 150+ projects delivered.",
-    canonical: "https://www.draftodeploy.com/",
+    canonical: "https://draftodeploy.vercel.app/",
     ogTitle:
-      "DraftoDeploy — Best Freelance Developer & Low-Cost Web Agency for Startups",
+      "DraftoDeploy â€” Best Freelance Developer & Low-Cost Web Agency for Startups",
     ogDescription:
       "Hire top freelance developers for budget-friendly web apps, mobile apps, SaaS MVPs, and 3D websites. Premium quality at affordable rates. 150+ startup projects delivered worldwide.",
-    ogImage: "https://www.draftodeploy.com/logo.png",
+    ogImage: "https://draftodeploy.vercel.app/logo.png",
     ogType: "website",
   },
   projects: {
     title:
-      "Projects Portfolio — 150+ Delivered Web Apps, Mobile Apps & AI Platforms | DraftoDeploy",
+      "Projects Portfolio â€” 150+ Delivered Web Apps, Mobile Apps & AI Platforms | DraftoDeploy",
     description:
       "Explore DraftoDeploy's portfolio of 150+ successfully delivered projects including React SaaS platforms, 3D WebGL landing pages, AI-powered dashboards, mobile apps, and e-commerce stores built for startups worldwide.",
-    canonical: "https://www.draftodeploy.com/projects",
-    ogTitle: "DraftoDeploy Projects Portfolio — 150+ Successful Deliveries",
+    canonical: "https://draftodeploy.vercel.app/projects",
+    ogTitle: "DraftoDeploy Projects Portfolio â€” 150+ Successful Deliveries",
     ogDescription:
       "Browse our portfolio of 150+ delivered projects: SaaS MVPs, 3D interactive websites, AI integrations, mobile apps and e-commerce stores built for global startups.",
-    ogImage: "https://www.draftodeploy.com/logo.png",
+    ogImage: "https://draftodeploy.vercel.app/logo.png",
     ogType: "website",
   },
   blog: {
     title:
-      "Tech Blog — Web Development, React, AI & Startup Engineering Guides | DraftoDeploy",
+      "Tech Blog â€” Web Development, React, AI & Startup Engineering Guides | DraftoDeploy",
     description:
       "DraftoDeploy's tech blog features 35+ in-depth articles on React architecture, Next.js, Three.js 3D development, AI integrations, SaaS engineering, mobile app development, and startup tech strategy.",
-    canonical: "https://www.draftodeploy.com/blog",
+    canonical: "https://draftodeploy.vercel.app/blog",
     ogTitle:
-      "DraftoDeploy Tech Blog — React, AI, SaaS & Web Dev Engineering Guides",
+      "DraftoDeploy Tech Blog â€” React, AI, SaaS & Web Dev Engineering Guides",
     ogDescription:
       "35+ in-depth technical articles covering React 19, Next.js 15, Three.js WebGL, LangChain AI, SaaS architecture, mobile development and startup engineering best practices.",
-    ogImage: "https://www.draftodeploy.com/logo.png",
+    ogImage: "https://draftodeploy.vercel.app/logo.png",
     ogType: "blog",
   },
 };
@@ -101,26 +101,26 @@ function setArticleSchema(props: SeoHeadProps) {
     description:
       props.articleDescription ||
       "An in-depth technical article from DraftoDeploy covering web development best practices.",
-    url: `https://www.draftodeploy.com/blog/${props.articleSlug}`,
-    image: "https://www.draftodeploy.com/logo.png",
+    url: `https://draftodeploy.vercel.app/blog/${props.articleSlug}`,
+    image: "https://draftodeploy.vercel.app/logo.png",
     datePublished: props.articlePublishDate || "2026-08-01",
     dateModified: new Date().toISOString().split("T")[0],
     author: {
       "@type": "Person",
       name: props.articleAuthor || "Ayush Kumar",
-      url: "https://www.draftodeploy.com",
+      url: "https://draftodeploy.vercel.app",
     },
     publisher: {
       "@type": "Organization",
       name: "DraftoDeploy",
       logo: {
         "@type": "ImageObject",
-        url: "https://www.draftodeploy.com/logo.png",
+        url: "https://draftodeploy.vercel.app/logo.png",
       },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://www.draftodeploy.com/blog/${props.articleSlug}`,
+      "@id": `https://draftodeploy.vercel.app/blog/${props.articleSlug}`,
     },
   };
 
@@ -136,21 +136,21 @@ function setBreadcrumbSchema(page: SeoHeadProps["page"], articleTitle?: string) 
   if (existingScript) existingScript.remove();
 
   const items: { name: string; item: string }[] = [
-    { name: "Home", item: "https://www.draftodeploy.com/" },
+    { name: "Home", item: "https://draftodeploy.vercel.app/" },
   ];
 
   if (page === "projects") {
     items.push({
       name: "Projects Portfolio",
-      item: "https://www.draftodeploy.com/projects",
+      item: "https://draftodeploy.vercel.app/projects",
     });
   } else if (page === "blog") {
-    items.push({ name: "Blog", item: "https://www.draftodeploy.com/blog" });
+    items.push({ name: "Blog", item: "https://draftodeploy.vercel.app/blog" });
   } else if (page === "blog-article" && articleTitle) {
-    items.push({ name: "Blog", item: "https://www.draftodeploy.com/blog" });
+    items.push({ name: "Blog", item: "https://draftodeploy.vercel.app/blog" });
     items.push({
       name: articleTitle,
-      item: `https://www.draftodeploy.com/blog`,
+      item: `https://draftodeploy.vercel.app/blog`,
     });
   }
 
@@ -188,12 +188,12 @@ export function SeoHead(props: SeoHeadProps) {
         description:
           articleDescription ||
           `An in-depth technical article: ${articleTitle}. Read expert insights from DraftoDeploy's engineering team.`,
-        canonical: `https://www.draftodeploy.com/blog/${slug}`,
+        canonical: `https://draftodeploy.vercel.app/blog/${slug}`,
         ogTitle: `${articleTitle} | DraftoDeploy`,
         ogDescription:
           articleDescription ||
           `Technical deep dive: ${articleTitle}. Expert web development insights from DraftoDeploy.`,
-        ogImage: "https://www.draftodeploy.com/logo.png",
+        ogImage: "https://draftodeploy.vercel.app/logo.png",
         ogType: "article",
       };
     } else {

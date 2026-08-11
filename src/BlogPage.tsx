@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+﻿import { useEffect } from "react";
 import BlogSection from "./components/BlogSection";
 import AuroraBackground from "./components/aurora-background";
 
@@ -7,7 +7,7 @@ export default function BlogPage() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     document.title =
-      "Tech Blog — Web Dev, React, AI & Startup Engineering Guides | DraftoDeploy";
+      "Tech Blog â€” Web Dev, React, AI & Startup Engineering Guides | DraftoDeploy";
     const metaDesc = document.querySelector<HTMLMetaElement>(
       'meta[name="description"]'
     );
@@ -18,7 +18,7 @@ export default function BlogPage() {
     return () => {
       // Restore homepage title on unmount
       document.title =
-        "DraftoDeploy — #1 Freelance Developer & Budget-Friendly Web Development Agency for Startups";
+        "DraftoDeploy â€” #1 Freelance Developer & Budget-Friendly Web Development Agency for Startups";
     };
   }, []);
 
@@ -28,7 +28,7 @@ export default function BlogPage() {
       itemScope
       itemType="https://schema.org/Blog"
     >
-      {/* Blog page breadcrumb — hidden visually but crawlable */}
+      {/* Blog page breadcrumb â€” hidden visually but crawlable */}
       <nav
         aria-label="Breadcrumb"
         className="sr-only"
@@ -39,7 +39,7 @@ export default function BlogPage() {
             itemScope
             itemType="https://schema.org/ListItem"
           >
-            <a itemProp="item" href="https://www.draftodeploy.com/">
+            <a itemProp="item" href="https://draftodeploy.vercel.app/">
               <span itemProp="name">Home</span>
             </a>
             <meta itemProp="position" content="1" />
@@ -51,7 +51,7 @@ export default function BlogPage() {
           >
             <a
               itemProp="item"
-              href="https://www.draftodeploy.com/blog"
+              href="https://draftodeploy.vercel.app/blog"
             >
               <span itemProp="name">Blog</span>
             </a>
