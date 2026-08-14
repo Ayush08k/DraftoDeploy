@@ -61,11 +61,11 @@ const SERVICES = [
   },
   {
     id: 'ai-integration', number: '06', title: 'AI Integration & Autonomous Agents',
-    tagline: 'Smart LLM Workflows & Vector Search Systems',
-    description: 'Empower your digital products with state-of-the-art AI capabilities including custom RAG vector search, automated agent workflows, LLM integrations, and predictive insights.',
+    tagline: 'Google Astra, Gemini 2.0, Meta Llama 3.3 & Agentic Workflows',
+    description: 'Empower your digital products with state-of-the-art AI capabilities including real-time multimodal voice/vision streaming (Gemini 2.0 / Project Astra), autonomous vibe coding agents, custom RAG vector search, and Meta Llama 3.3 / xAI Grok integrations.',
     icon: HiOutlineSparkles, gradient: 'from-emerald-500/20 via-[#00ffc6]/20 to-teal-500/20', accentColor: '#10b981',
-    features: ['OpenAI, Anthropic & Llama 3 API Pipeline', 'RAG & Vector Databases (Pinecone / Qdrant)', 'Autonomous AI Agent Orchestration', 'Custom Fine-Tuned Model Embedding'],
-    tech: ['Python', 'TypeScript', 'LangChain', 'OpenAI API', 'Pinecone Vector DB', 'FastAPI', 'PyTorch'],
+    features: ['Google Gemini 2.0 & Project Astra Live WebSockets', 'Meta Llama 3.3 & xAI Grok Code Orchestration', 'RAG & Vector Databases (Pinecone / Qdrant)', 'Autonomous Agent Tool Execution & Self-Healing'],
+    tech: ['Python', 'TypeScript', 'LangChain', 'Google Gemini 2.0', 'Meta Llama 3.3', 'FastAPI', 'PyTorch', 'Pinecone Vector DB'],
   },
   {
     id: 'ecommerce', number: '07', title: 'E-commerce & Shopify Solutions',

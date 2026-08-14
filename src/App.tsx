@@ -8,6 +8,7 @@ import PriceEstimatorSection, { type EstimateData } from "./components/PriceEsti
 import ContactSection from "./components/ContactSection";
 import ProjectsPage from "./ProjectsPage";
 import BlogPage from "./BlogPage";
+import BlogDetailPage from "./BlogDetailPage";
 import SeoHead from "./components/SeoHead";
 import FooterSection from "./components/FooterSection";
 
@@ -42,10 +43,21 @@ function App() {
   }, []);
 
   const isProjectsPage = currentHash === "#projects" || currentPath === "/projects";
-  const isBlogPage = currentHash === "#blog" || currentPath === "/blog";
+  const isBlogListPage = (currentHash === "#blog" || currentPath === "/blog") && !currentHash.startsWith("#blog-") && currentPath !== "/blog/";
+  
+  // Extract blog post slug if on dedicated blog post page
+  let blogPostSlug: string | null = null;
+  if (currentPath.startsWith("/blog/") && currentPath.length > 6) {
+    blogPostSlug = currentPath.replace(/^\/blog\//, "").replace(/\/$/, "");
+  } else if (currentHash.startsWith("#blog-") && currentHash.length > 6) {
+    blogPostSlug = currentHash.replace(/^#blog-/, "");
+  }
+
+  const isBlogDetailPage = !!blogPostSlug;
+  const isBlogPage = isBlogListPage && !isBlogDetailPage;
 
   useEffect(() => {
-    if (isProjectsPage || isBlogPage || currentHash === "#top" || !currentHash) {
+    if (isProjectsPage || isBlogPage || isBlogDetailPage || currentHash === "#top" || !currentHash) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else if (currentHash.startsWith("#")) {
       const timer = setTimeout(() => {
@@ -56,10 +68,10 @@ function App() {
       }, 50);
       return () => clearTimeout(timer);
     }
-  }, [currentHash, currentPath, isProjectsPage, isBlogPage]);
+  }, [currentHash, currentPath, isProjectsPage, isBlogPage, isBlogDetailPage]);
 
   // Determine current SEO page
-  const seoPage = isProjectsPage ? "projects" : isBlogPage ? "blog" : "home";
+  const seoPage = isProjectsPage ? "projects" : isBlogDetailPage ? "blog-article" : isBlogPage ? "blog" : "home";
 
   const handleEditEstimate = () => {
     const estimatorEl = document.getElementById("estimator");
@@ -88,6 +100,28 @@ function App() {
         {isProjectsPage ? (
           <main id="main-content" aria-label="Projects Portfolio Page">
             <ProjectsPage />
+            <FooterSection />
+          </main>
+        ) : isBlogDetailPage && blogPostSlug ? (
+          <main id="main-content" aria-label="Tech Case Study Deep Dive">
+            <BlogDetailPage
+              slug={blogPostSlug}
+              onNavigateHome={() => {
+                window.location.hash = "#top";
+                window.history.pushState(null, '', '/');
+                window.dispatchEvent(new Event('popstate'));
+              }}
+              onNavigateBlogList={() => {
+                window.location.hash = "#blog";
+                window.history.pushState(null, '', '/blog');
+                window.dispatchEvent(new Event('popstate'));
+              }}
+              onSelectPost={(newSlug) => {
+                window.location.hash = `#blog-${newSlug}`;
+                window.history.pushState(null, '', `/blog/${newSlug}`);
+                window.dispatchEvent(new Event('popstate'));
+              }}
+            />
             <FooterSection />
           </main>
         ) : isBlogPage ? (
