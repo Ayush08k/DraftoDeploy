@@ -1,31 +1,18 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import { 
   BookOpen, 
   Clock, 
   Calendar, 
-  User, 
-  Tag, 
   ArrowRight, 
   X, 
-  Share2, 
-  CheckCircle2, 
   Search,
-  Check,
   ShieldCheck,
-  Cpu,
-  Code2,
-  Server,
-  FolderTree,
-  Terminal,
-  Zap,
   Flame,
-  ChevronRight,
   LayoutGrid,
   List,
-  Copy,
   Sparkles,
   TrendingUp
 } from 'lucide-react';
@@ -70,117 +57,116 @@ export interface BlogPost {
 
 export const ALL_35_BLOGS: BlogPost[] = [
   {
-    id: 'google-astra-gemini-2-agentic-multimodal',
-    slug: 'google-astra-gemini-2-agentic-multimodal-development',
-    title: 'Google Project Astra & Gemini 2.0: Architecting Real-Time Multimodal Autonomous Coding Agents',
-    seoTitle: 'Google Project Astra & Gemini 2.0 Agentic Architecture, Live WebSocket Multimodal Pipeline & Codebase',
-    metaDescription: 'Complete technical breakdown of Google Project Astra & Gemini 2.0 Live Multimodal API: building sub-200ms latency agentic coding pipelines, WebSocket audio-visual streaming, FastAPI backend, and autonomous code execution.',
+    id: 'google-astra-gemini-2-developer-ai-agent',
+    slug: 'google-astra-gemini-2-developer-ai-agent-architecture',
+    title: 'Google Project Astra & Gemini 2.0: The Next-Gen Autonomous AI Coding Agent for Developers',
+    seoTitle: 'Google Project Astra & Gemini 2.0 Autonomous Developer AI Agent: Architecture, Real-Time WebSockets & AST Pipeline',
+    metaDescription: 'In-depth engineering breakdown of Google Project Astra & Gemini 2.0 Developer AI Agent: real-time multimodal voice/vision streaming, sub-200ms pair-programming, WebSocket live APIs, and autonomous CLI tool execution.',
     keywords: [
+      'Google Developer AI Agent',
       'Google Project Astra',
       'Gemini 2.0 Flash',
-      'Google AI Live Multimodal API',
-      'Agentic Coding Architecture',
-      'Autonomous AI Developer',
-      'Real-Time WebSocket Audio Stream',
-      'FastAPI Python Backend',
+      'Autonomous Coding Agent',
+      'AI Pair Programmer',
+      'Multimodal Live WebSocket API',
+      'FastAPI Python Agent Backend',
       'Vertex AI Function Calling',
-      'Vibe Coding Engine'
+      'Real-Time Vision Code Debugging',
+      'Vibe Coding Engineering'
     ],
     category: 'AI & Machine Learning',
     author: 'Ayush Kumar',
-    authorRole: 'Founder & AI Architect',
+    authorRole: 'Founder & Lead AI Architect',
     publishDate: 'August 14, 2026',
     readTime: '10 min read',
     image: getBlogImage('google astra gemini.png'),
-    excerpt: 'Deep-dive into Google’s newly unveiled Project Astra & Gemini 2.0 Flash agentic ecosystem. Learn how real-time bi-directional WebSockets, zero-latency visual context buffers, and function-calling trees enable autonomous pair programming.',
+    excerpt: 'An exhaustive technical breakdown of Google’s new autonomous Developer AI Agent powered by Project Astra & Gemini 2.0 Flash. Discover how sub-200ms bi-directional WebSockets, continuous screen comprehension, and sandboxed tool-calling create true AI pair-programming.',
     featured: true,
     tableOfContents: [
-      '1. Enterprise Problem & Real-Time Context Bottlenecks',
-      '2. Gemini 2.0 & Astra Agentic Architecture Strategy',
-      '3. High-Throughput Monorepo File & Service Structure',
-      '4. Backend Live WebSocket Streaming & Tool Execution Pipeline',
-      '5. Core Capabilities, Benchmarks & Production Takeaways'
+      '1. Latency Bottlenecks in Traditional Developer AI Assistants',
+      '2. Google Astra & Gemini 2.0 Developer Agent Architectural Strategy',
+      '3. High-Performance Monorepo Folder & Agent Microservice Hierarchy',
+      '4. Backend Live WebSocket Streaming & Sandboxed Tool Execution in Python',
+      '5. Autonomous Agent Benchmarks, Developer Productivity Gains & Takeaways'
     ],
     content: [
       {
-        sectionTitle: 'Enterprise Problem & Real-Time Context Bottlenecks',
+        sectionTitle: 'Latency Bottlenecks in Traditional Developer AI Assistants',
         type: 'problem',
-        text: 'Traditional Large Language Model development loops rely on discrete HTTP request-response cycles. When developers share visual screen states, terminal logs, and voice prompts, legacy architectures suffer from 1.5s - 3s latency overheads. This turn-taking latency makes synchronous voice-and-vision autonomous pair programming unusable in real-world agile engineering teams.'
+        text: 'Existing developer code assistants (Copilot, standard chat LLMs) operate on discrete, turn-based REST requests. When an engineer encounters a complex runtime traceback, syntax collision, or UI visual defect, manually copying code, terminal logs, and screenshots creates 2 to 5 seconds of context-switching overhead. The core architectural failure is the absence of persistent visual memory and instantaneous voice interaction.'
       },
       {
-        sectionTitle: 'Gemini 2.0 & Astra Agentic Architecture Strategy',
+        sectionTitle: 'Google Astra & Gemini 2.0 Developer Agent Architectural Strategy',
         type: 'strategy',
-        text: 'Google Project Astra and Gemini 2.0 Flash introduce bi-directional Multimodal Live WebSockets. Our solution establishes a persistent PCM audio and MPEG-4 frame ingestion pipe via WebRTC/WebSocket to Google’s low-latency TPU v5e clusters. The agent processes uninterrupted voice and code diff streams concurrently, triggering asynchronous tool execution pipelines without blocking dialogue generation.'
+        text: 'Google Project Astra and Gemini 2.0 Flash revolutionize developer workflows through persistent bi-directional Multimodal Live WebSockets. By streaming 24kHz PCM audio, high-framerate screen viewport buffers, and continuous Monaco editor AST deltas into Gemini TPU clusters, the agent acts as an autonomous co-pilot with human-grade sub-200ms conversational and tool execution latency.'
       },
       {
-        sectionTitle: 'High-Throughput Monorepo File & Service Structure',
+        sectionTitle: 'High-Performance Monorepo Folder & Agent Microservice Hierarchy',
         type: 'filestructure',
-        text: 'The architecture decouples the Electron / Next.js IDE client, the FastAPI bi-directional streaming gateway, and the Dockerized sandboxed code runner into high-performance isolated packages:',
+        text: 'The autonomous developer agent system is structured as a decoupled monorepo containing IDE client hooks, a high-throughput streaming bridge, and sandboxed Docker containers for command execution:',
         codeSnippet: {
           language: 'text',
-          code: `google-astra-gemini2-agent/
+          code: `google-developer-agent/
 ├── apps/
-│   ├── web-ide/                     # Next.js 15 & Monaco Editor Workspace
-│   │   ├── src/components/audio/    # WebAudio PCM 24kHz stream capture
-│   │   ├── src/components/screen/   # Canvas 60fps screen frame buffer
-│   │   └── src/hooks/useAstraLive.ts # Bi-directional WebSocket stream hook
-│   └── agent-gateway/               # FastAPI + asyncio TPU Gateway
-│       ├── app/api/v1/live_stream.py # Gemini 2.0 Live WebSocket router
-│       ├── app/tools/code_runner.py  # Sandboxed Docker runtime executor
-│       ├── app/services/astra.py     # Vertex AI Live Client session pool
+│   ├── ide-extension/               # VS Code & Monaco Editor Agent Plugin
+│   │   ├── src/audio/recorder.ts    # WebAudio PCM 24kHz stream capture
+│   │   ├── src/screen/capture.ts    # 60fps canvas diff encoder
+│   │   └── src/hooks/useAgentLive.ts # Bi-directional WebSocket connection hook
+│   └── agent-core-service/          # FastAPI + asyncio Streaming Gateway
+│       ├── app/api/v1/live_agent.py # Gemini 2.0 Live WebSocket controller
+│       ├── app/tools/terminal.py     # Docker sandbox CLI tool executor
+│       ├── app/tools/ast_modifier.py # Python/TypeScript Tree-Sitter AST patcher
 │       └── main.py                  # High-performance Uvicorn ASGI entry
 ├── packages/
-│   ├── ast-parser/                  # TypeScript & Python AST diff engine
-│   └── protocol/                    # Protobuf schemas for audio/video frames
+│   ├── agent-protocol/              # Protobuf schemas for audio, screen & code diffs
+│   └── telemetry/                   # OpenTelemetry latency & token tracking
 └── docker-compose.prod.yml          # Container topology with Redis Pub/Sub`
         }
       },
       {
-        sectionTitle: 'Backend Live WebSocket Streaming & Tool Execution Pipeline',
+        sectionTitle: 'Backend Live WebSocket Streaming & Sandboxed Tool Execution in Python',
         type: 'backend',
-        text: 'The Python backend bridges browser media capture streams directly to the Gemini 2.0 Live endpoint. Tool calls (e.g. running pytest, modifying Git branch, applying diffs) execute in an isolated ephemeral execution sandbox.',
+        text: 'The Python agent gateway orchestrates continuous WebSocket streams to Gemini 2.0 Live endpoint and safely executes autonomous actions (terminal commands, test suites, git commits) inside isolated Docker containers:',
         codeSnippet: {
           language: 'python',
-          code: `# FastAPI + Gemini 2.0 Live Multimodal WebSocket Streaming Pipeline
+          code: `# Google Gemini 2.0 Autonomous Developer AI Agent Gateway
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from google import genai
 from google.genai import types
 import asyncio
 import os
 
-app = FastAPI(title="Google Project Astra Agentic Live Gateway")
-
+app = FastAPI(title="Google Developer AI Agent Live Gateway")
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"), http_options={"api_version": "v1alpha"})
 
-@app.websocket("/ws/astra-live")
-async def astra_live_endpoint(websocket: WebSocket):
+@app.websocket("/ws/developer-agent")
+async def developer_agent_endpoint(websocket: WebSocket):
     await websocket.accept()
     
-    # Configure Gemini 2.0 Flash Live multimodal session
-    config = types.LiveConnectConfig(
+    agent_config = types.LiveConnectConfig(
         response_modalities=[types.LiveModality.AUDIO, types.LiveModality.TEXT],
         speech_config=types.SpeechConfig(
             voice_config=types.VoiceConfig(prebuilt_voice_config=types.PrebuiltVoiceConfig(voice_name="Aoede"))
         ),
         system_instruction=types.Content(
             parts=[types.Part.from_text(
-                "You are an expert autonomous software engineer powered by Google Astra. "
-                "Inspect screen frames and developer voice to debug, write code, and execute tools in real time."
+                "You are an autonomous senior staff AI engineer powered by Google Astra. "
+                "Continuously monitor screen code diffs, terminal outputs, and developer voice. "
+                "Autonomously fix bugs, run test suites, and refactor code in real time."
             )]
         )
     )
 
-    async with client.aio.live.connect(model="gemini-2.0-flash-exp", config=config) as session:
-        async def receive_from_client():
+    async with client.aio.live.connect(model="gemini-2.0-flash-exp", config=agent_config) as session:
+        async def receive_developer_stream():
             try:
                 while True:
-                    data = await websocket.receive_bytes()
-                    # Stream raw audio/video frames directly to Gemini Live TPU channel
-                    await session.send(input=data, end_of_turn=False)
+                    media_chunk = await websocket.receive_bytes()
+                    await session.send(input=media_chunk, end_of_turn=False)
             except WebSocketDisconnect:
                 pass
 
-        async def send_to_client():
+        async def emit_agent_actions():
             try:
                 async for response in session.receive():
                     if response.server_content and response.server_content.model_turn:
@@ -188,207 +174,86 @@ async def astra_live_endpoint(websocket: WebSocket):
                             if part.inline_data:
                                 await websocket.send_bytes(part.inline_data.data)
                             elif part.text:
-                                await websocket.send_json({"type": "text_delta", "content": part.text})
+                                await websocket.send_json({"type": "agent_action", "content": part.text})
             except Exception as e:
-                print(f"Streaming error: {e}")
+                print(f"Agent stream error: {e}")
 
-        await asyncio.gather(receive_from_client(), send_to_client())`
+        await asyncio.gather(receive_developer_stream(), emit_agent_actions())`
         }
       },
       {
-        sectionTitle: 'Core Capabilities, Benchmarks & Production Takeaways',
+        sectionTitle: 'Autonomous Agent Benchmarks, Developer Productivity Gains & Takeaways',
         type: 'features',
-        text: 'Benchmarking demonstrates a 78% reduction in latency compared to sequential REST LLM calls. Sub-200ms audio turnaround allows engineers to speak naturally while the Astra agent highlights syntax bugs, auto-generates test fixtures, and submits pull requests autonomously.'
+        text: 'Empirical benchmark suites show a 74% decrease in debugging time. The developer agent intercepts unhandled exceptions as they occur in local terminals, writes regression tests, and applies verified diffs with zero manual typing required.'
       }
     ],
     keyTakeaways: [
-      'Sub-200ms bi-directional voice and screen capture via Google Gemini 2.0 Live WebSocket API.',
-      'Asynchronous tool invocation for automated terminal command execution and AST code rewriting.',
-      'Eliminated context-switching latency for pair-programming teams with continuous stream ingestion.'
+      'Sub-200ms multimodal voice and screen streaming via Google Gemini 2.0 Live WebSocket API.',
+      'Autonomous sandbox terminal command execution and Tree-Sitter AST code patching.',
+      '74% faster debugging cycles with zero context switching for software engineering teams.'
     ]
   },
   {
-    id: 'meta-llama-figma-ai-design-to-code',
-    slug: 'meta-llama-figma-ai-design-to-code-pipeline',
-    title: 'Meta Llama 3.3 & Figma AI Studio: Revolutionizing Design-to-Code Automated Pipelines',
-    seoTitle: 'Meta Llama 3.3 & Figma AI Studio Architecture: Automated Design-to-Code React 19 Engine',
-    metaDescription: 'Comprehensive guide to building production design-to-code pipelines with Meta Llama 3.3 and Figma AI Dev Mode: extracting design tokens, AST code generation, Tailwind CSS compilation, and React 19 components.',
+    id: 'xai-grok-code-developer-ai-agent',
+    slug: 'xai-grok-code-developer-ai-agent-architecture',
+    title: 'xAI (Elon Musk) Grok Code: The High-Throughput Autonomous Developer AI Agent & Colossus Supercomputer IDE',
+    seoTitle: 'xAI Grok Code Autonomous Developer AI Agent Architecture: Elon Musk Colossus IDE & Rust Self-Healing Engine',
+    metaDescription: 'Deep technical analysis of xAI Grok Code Developer AI Agent: running on Elon Musk’s 100k GPU Colossus supercomputer, Rust zero-copy daemons, real-time self-healing compiler loops, and automated polyglot software engineering.',
     keywords: [
-      'Meta Llama 3.3 70B',
-      'Figma AI Dev Mode',
-      'Design to Code Pipeline',
-      'Automated React 19 Generator',
-      'Tailwind CSS Design Tokens',
-      'GenUI Component Engine',
-      'TypeScript AST Compiler',
-      'Autonomous UI Engineering'
-    ],
-    category: 'Full Stack & Architecture',
-    author: 'Ayush Kumar',
-    authorRole: 'Chief Technology Officer',
-    publishDate: 'August 13, 2026',
-    readTime: '9 min read',
-    image: getBlogImage('meta figma ai.png'),
-    excerpt: 'Explore how combining Meta’s open-weights Llama 3.3 70B with Figma AI Dev Mode Webhooks automates full design-to-production pipelines, generating type-safe React 19 components in seconds.',
-    featured: true,
-    tableOfContents: [
-      '1. Design-to-Engineering Handoff Friction',
-      '2. Meta Llama 3.3 + Figma REST Webhook Strategy',
-      '3. Automated Generator Architecture & Folder Hierarchy',
-      '4. Figma Node Extraction & Llama 3.3 AST Transformation Engine',
-      '5. Performance Metrics, Accessibility Compliance & Output Quality'
-    ],
-    content: [
-      {
-        sectionTitle: 'Design-to-Engineering Handoff Friction',
-        type: 'problem',
-        text: 'In enterprise product teams, 40% of sprint capacity is spent translating Figma vector frames, autolayout rules, spacing tokens, and color variables into frontend components. Pixel drifts, non-standard CSS classes, missing ARIA tags, and redundant responsive breakpoint code regularly degrade UI consistency and slow release cycles.'
-      },
-      {
-        sectionTitle: 'Meta Llama 3.3 + Figma REST Webhook Strategy',
-        type: 'strategy',
-        text: 'We created an automated GenUI synthesis pipeline: when designers publish changes to Figma design libraries, a webhook triggers our ingestion worker. The worker traverses Figma JSON scene graphs, extracts semantic layout nodes and design variables, and invokes a fine-tuned Meta Llama 3.3 70B model with strict TypeScript AST formatting schemas.'
-      },
-      {
-        sectionTitle: 'Automated Generator Architecture & Folder Hierarchy',
-        type: 'filestructure',
-        text: 'A clean monorepo architecture handles webhook verification, token normalization, model inference, and Git PR creation:',
-        codeSnippet: {
-          language: 'text',
-          code: `figma-llama-genui/
-├── apps/
-│   ├── webhook-receiver/            # Express / Node.js Figma Webhook Receiver
-│   │   ├── src/controllers/figma.ts # Ingests node changes & file comments
-│   │   └── src/services/figmaApi.ts # Fetches vector paths & variable tokens
-│   └── code-generator/              # Python Llama 3.3 Code Synthesizer
-│       ├── generator/ast_builder.py # Babel / TypeScript AST validator
-│       ├── generator/prompt_engine.py # Structured prompt templating with schemas
-│       ├── generator/tailwind.py    # Design token to Tailwind v4 class resolver
-│       └── server.py                # FastAPI microservice for code compilation
-├── packages/
-│   ├── design-tokens/               # Exported JSON design variables
-│   └── component-previewer/         # Storybook / Vite isolated sandbox
-└── tests/e2e/accessibility.spec.ts  # Axe-core automated WCAG verification`
-        }
-      },
-      {
-        sectionTitle: 'Figma Node Extraction & Llama 3.3 AST Transformation Engine',
-        type: 'backend',
-        text: 'The code synthesis microservice feeds normalized Figma JSON nodes into Meta Llama 3.3 with precise system guidelines for React 19 Server Components, Lucide icons, and Tailwind styling:',
-        codeSnippet: {
-          language: 'python',
-          code: `# Meta Llama 3.3 Automated Component Generator
-import httpx
-import json
-from pydantic import BaseModel, Field
-
-class ComponentSchema(BaseModel):
-    component_name: str = Field(description="PascalCase component name")
-    typescript_code: str = Field(description="Production React 19 TypeScript code")
-    tailwind_classes: list[str] = Field(description="List of Tailwind utility classes used")
-    accessibility_notes: str = Field(description="WCAG 2.1 AA compliance details")
-
-async def synthesize_react_component(figma_node_data: dict) -> ComponentSchema:
-    llama_endpoint = "https://api.together.xyz/v1/chat/completions" # Or Ollama/vLLM self-hosted
-    
-    system_prompt = """You are an elite Senior Frontend Architect specializing in React 19, TypeScript, and Tailwind CSS.
-Given raw Figma scene graph layout JSON, output a production-ready, accessible, modular component.
-Rules:
-1. Use semantic HTML (nav, section, article, button).
-2. Ensure full responsive design (mobile-first sm/md/lg/xl).
-3. Include TypeScript props interfaces and Lucide-React icons.
-4. Output valid JSON matching the schema."""
-
-    async with httpx.AsyncClient(timeout=60.0) as client:
-        response = await client.post(
-            llama_endpoint,
-            headers={"Authorization": "Bearer $LLAMA_API_KEY"},
-            json={
-                "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
-                "messages": [
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": f"Transform this Figma node into React 19: {json.dumps(figma_node_data)}"}
-                ],
-                "response_format": {"type": "json_object"},
-                "temperature": 0.1
-            }
-        )
-        data = response.json()
-        return ComponentSchema.model_validate_json(data["choices"][0]["message"]["content"])`
-        }
-      },
-      {
-        sectionTitle: 'Performance Metrics, Accessibility Compliance & Output Quality',
-        type: 'features',
-        text: 'Automated synthesis reduces component development turnaround from 6 hours to under 45 seconds. Built-in axe-core assertions guarantee 100% WCAG 2.1 AA accessibility score with zero manual DOM remediation.'
-      }
-    ],
-    keyTakeaways: [
-      'Real-time Figma design updates translated into React 19 code in under 45 seconds.',
-      'Leverages Meta Llama 3.3 70B structured JSON output for deterministic TypeScript compilation.',
-      'Automated WCAG 2.1 AA accessibility audits on generated component branches.'
-    ]
-  },
-  {
-    id: 'xai-grok-colossus-cloud-ide',
-    slug: 'xai-grok-code-colossus-cloud-ide-architecture',
-    title: 'xAI (Elon Musk) Grok Code & Colossus Supercomputer IDE: The Next-Gen Autonomous Engineering Cloud',
-    seoTitle: 'xAI Grok Code & Colossus Cloud IDE Architecture, Rust Microservices & Distributed AI Engine',
-    metaDescription: 'Technical architectural breakdown of xAI Grok Code and the Colossus 100k GPU cluster IDE: self-healing runtime compilation, high-throughput Rust microservices, real-time distributed debugging, and autonomous software engineering.',
-    keywords: [
-      'xAI Grok Code',
-      'Elon Musk AI IDE',
-      'Colossus 100k GPU Cluster',
-      'Distributed Autonomous IDE',
-      'Rust Microservices Backend',
-      'Self-Healing Compiler',
-      'AI Code Synthesis',
-      'High-Throughput Inference'
+      'xAI Grok Code Developer Agent',
+      'Elon Musk AI Developer Agent',
+      'xAI Colossus Supercomputer IDE',
+      'Autonomous Software Engineering Agent',
+      'Self-Healing Compiler Daemon',
+      'Rust Microservices Architecture',
+      'High-Throughput Distributed Inference',
+      'Real-Time Test Loop Healing',
+      'Grok 3 Reasoning Engine'
     ],
     category: 'DevOps & Cloud',
     author: 'Ayush Kumar',
-    authorRole: 'Principal Cloud Architect',
-    publishDate: 'August 12, 2026',
+    authorRole: 'Principal Cloud & AI Architect',
+    publishDate: 'August 14, 2026',
     readTime: '11 min read',
     image: getBlogImage('xai musk ide.png'),
-    excerpt: 'A technical analysis of xAI’s supercomputing engineering environment: how the Colossus GPU supercluster, Grok 3 reasoning engine, and high-performance Rust execution daemons power self-healing codebases.',
+    excerpt: 'An in-depth architectural breakdown of xAI’s new Developer AI Agent powered by Grok Code and the 100k liquid-cooled GPU Colossus cluster. Learn how Rust-native daemons and speculative reasoning engines achieve instant self-healing codebases.',
     featured: true,
     tableOfContents: [
-      '1. Cloud IDE Compute Bottlenecks & Distributed Scale',
-      '2. Colossus Supercomputing & Grok Reasoning Architecture',
-      '3. Rust Engine & Distributed Cloud IDE File Hierarchy',
+      '1. Cloud IDE Compute Bottlenecks in Enterprise Codebases',
+      '2. Colossus Supercomputing & Grok Reasoning Agent Strategy',
+      '3. Rust Engine & Distributed Cloud IDE Monorepo Architecture',
       '4. Self-Healing Compiler Daemon & Real-Time Test Loop in Rust',
-      '5. Enterprise Benchmarks, Speed Gains & Next Frontiers'
+      '5. Autonomous Agent Benchmarks, Speed Gains & Production Frontiers'
     ],
     content: [
       {
-        sectionTitle: 'Cloud IDE Compute Bottlenecks & Distributed Scale',
+        sectionTitle: 'Cloud IDE Compute Bottlenecks in Enterprise Codebases',
         type: 'problem',
-        text: 'Monolithic cloud IDEs and language server protocols (LSP) choke when analyzing multi-million-line enterprise codebases. Type checking, dependency graph resolution, and multi-file refactoring across thousands of microservices cause indexing thrashing, high memory footprint, and out-of-date static analysis.'
+        text: 'Enterprise repositories containing tens of millions of lines of code choke traditional Language Server Protocols (LSP). Type checking across thousands of microservices, resolving dependency cyclic graphs, and speculative refactoring create severe memory fragmentation and multi-minute build turnaround delays.'
       },
       {
-        sectionTitle: 'Colossus Supercomputing & Grok Reasoning Architecture',
+        sectionTitle: 'Colossus Supercomputing & Grok Reasoning Agent Strategy',
         type: 'strategy',
-        text: 'xAI’s architecture leverages the massive 100k+ liquid-cooled GPU compute mesh of Colossus. By hosting massive-context Grok 3 reasoning weights adjacent to in-memory distributed file systems, the IDE achieves sub-millisecond semantic code indexing, continuous speculative compilation, and automatic regression healing across polyglot microservices.'
+        text: 'xAI solves large-scale code synthesis by coupling Grok Code with the massive 100k liquid-cooled GPU cluster of Colossus. With massive in-memory context windows, the agent continuously indexes AST graphs across polyglot microservices, predicting compiler errors before save actions and executing automated regression repairs.'
       },
       {
-        sectionTitle: 'Rust Engine & Distributed Cloud IDE File Hierarchy',
+        sectionTitle: 'Rust Engine & Distributed Cloud IDE Monorepo Architecture',
         type: 'filestructure',
-        text: 'The architecture uses zero-copy Rust micro-daemons communicating over gRPC and RDMA fabrics with the Grok inference cluster:',
+        text: 'The architecture uses zero-copy Rust micro-daemons communicating over gRPC and ultra-low-latency RDMA networks with the Grok inference cluster:',
         codeSnippet: {
           language: 'text',
-          code: `xai-colossus-ide/
+          code: `xai-grok-developer-agent/
 ├── crates/
-│   ├── colossus-daemon/             # Rust High-Performance Local Code Daemon
+│   ├── grok-agent-daemon/           # Rust High-Performance Local Code Daemon
 │   │   ├── src/indexer/tree_sitter.rs # Incremental AST parser with zero-copy buffers
 │   │   ├── src/healer/runtime_fix.rs  # Self-healing test loop executor
 │   │   └── src/main.rs                # Async Tokio multi-threaded daemon
 │   ├── grok-grpc-client/            # Ultra-low-latency gRPC interface to xAI Colossus
 │   │   ├── proto/grok_code.proto     # Protocol buffer definitions for token streams
 │   │   └── src/client.rs             # Connection pooling with automatic failover
-│   └── web-client/                  # High-performance WebGL/WebGPU Editor Frontend
+│   └── webgpu-editor/               # High-performance WebGL/WebGPU Editor Frontend
 │       ├── src/editor/canvas_grid.ts # GPU-accelerated text & token rendering
-│       └── src/workers/colossus_sync.ts # WebSocket binary stream worker
+│       └── src/workers/sync_worker.ts # WebSocket binary stream worker
 └── config/
     └── colossus_cluster.toml        # Distributed node topology configuration`
         }
@@ -396,10 +261,10 @@ Rules:
       {
         sectionTitle: 'Self-Healing Compiler Daemon & Real-Time Test Loop in Rust',
         type: 'backend',
-        text: 'The core Rust daemon watches file changes via kernel notify APIs, builds incremental AST diffs, and submits failing test outputs directly to Grok for instant patch generation and validation in memory:',
+        text: 'The core Rust daemon watches file changes via OS kernel notify APIs, builds incremental AST diffs, and submits failing compiler error logs directly to Grok for instant patch generation and validation in memory:',
         codeSnippet: {
           language: 'rust',
-          code: `// Rust Self-Healing Runtime Daemon on Colossus Cloud Architecture
+          code: `// Rust Self-Healing Runtime Developer AI Agent on xAI Colossus
 use tokio::net::TcpStream;
 use tonic::{transport::Channel, Request};
 use serde::{Deserialize, Serialize};
@@ -409,20 +274,20 @@ pub mod grok_proto {
     tonic::include_proto!("xai.grok.v1");
 }
 
-use grok_proto::grok_code_service_client::GrokCodeServiceClient;
+use grok_proto::grok_agent_service_client::GrokAgentServiceClient;
 use grok_proto::{CodeRepairRequest, CodeRepairResponse};
 
-pub struct ColossusCodeHealer {
-    client: GrokCodeServiceClient<Channel>,
+pub struct ColossusDeveloperAgent {
+    client: GrokAgentServiceClient<Channel>,
 }
 
-impl ColossusCodeHealer {
+impl ColossusDeveloperAgent {
     pub async fn new(endpoint: &str) -> Result<Self, Box<dyn std::error::Error>> {
         let channel = Channel::from_shared(endpoint.to_string())?
             .connect()
             .await?;
         Ok(Self {
-            client: GrokCodeServiceClient::new(channel),
+            client: GrokAgentServiceClient::new(channel),
         })
     }
 
@@ -443,22 +308,265 @@ impl ColossusCodeHealer {
         let response: tonic::Response<CodeRepairResponse> = self.client.repair_and_verify(request).await?;
         let patched_code = response.into_inner().repaired_source;
         
-        println!("[Colossus Healer] Successfully validated patch with 0 warnings.");
+        println!("[xAI Grok Agent] Validated patch with 0 warnings & passed test suite.");
         Ok(patched_code)
     }
 }`
         }
       },
       {
-        sectionTitle: 'Enterprise Benchmarks, Speed Gains & Next Frontiers',
+        sectionTitle: 'Autonomous Agent Benchmarks, Speed Gains & Production Frontiers',
         type: 'features',
         text: 'Empirical testing reveals that Colossus-backed continuous compilation and instant speculative repair reduce developer debugging cycles by 65%. Enterprise engineers can refactor distributed microservices with zero downtime.'
       }
     ],
     keyTakeaways: [
-      'Self-healing compilation loops powered by xAI Grok 3 and Rust zero-copy daemons.',
+      'Self-healing compilation loops powered by xAI Grok Code and Rust zero-copy daemons.',
       'Distributed in-memory AST synchronization across massive enterprise repositories.',
       'Sub-millisecond semantic code search and automated multi-file regression repair.'
+    ]
+  },
+  {
+    id: 'meta-ai-llama-3-foundation-models',
+    slug: 'meta-ai-llama-3-open-source-enterprise-architecture',
+    title: 'Meta AI Llama 3.3: Architecting Enterprise-Grade Open Source LLM Infrastructures & RAG Pipelines',
+    seoTitle: 'Meta AI Llama 3.3 70B Enterprise Architecture: vLLM High-Throughput Inference, RAG Pipelines & Fine-Tuning',
+    metaDescription: 'Comprehensive technical breakdown of Meta AI Llama 3.3 70B: deploying open-weights models with vLLM tensor parallelism, sub-50ms latency RAG pipelines, QLoRA fine-tuning, and enterprise cost optimization.',
+    keywords: [
+      'Meta AI Llama 3.3',
+      'Meta AI Foundation Model',
+      'Llama 3.3 70B Architecture',
+      'vLLM Tensor Parallelism',
+      'Enterprise RAG Pipeline',
+      'QLoRA Fine-Tuning',
+      'Open Source LLM Deployment',
+      'Private AI Infrastructure',
+      'FastAPI LLM Microservices'
+    ],
+    category: 'Full Stack & Architecture',
+    author: 'Ayush Kumar',
+    authorRole: 'Chief Technology Officer',
+    publishDate: 'August 13, 2026',
+    readTime: '9 min read',
+    image: getBlogImage('meta ai.png'),
+    excerpt: 'An authoritative technical guide to deploying Meta AI’s flagship Llama 3.3 70B foundation model in private enterprise clouds. Explore vLLM continuous batching, quantized inference, and scalable RAG pipelines.',
+    featured: true,
+    tableOfContents: [
+      '1. Commercial API Costs & Data Privacy Constraints',
+      '2. Meta Llama 3.3 Enterprise Open-Weights Strategy',
+      '3. Distributed Inference Cluster Folder & Deployment Hierarchy',
+      '4. vLLM Continuous Batching & FastAPI Gateway Pipeline in Python',
+      '5. Benchmark Performance, Cost Reductions & Enterprise ROI'
+    ],
+    content: [
+      {
+        sectionTitle: 'Commercial API Costs & Data Privacy Constraints',
+        type: 'problem',
+        text: 'Enterprises handling confidential financial telemetry, healthcare records, and proprietary intellectual property face severe regulatory risks when routing tokens through third-party proprietary APIs. Furthermore, at scale (exceeding 100 million tokens daily), SaaS API pricing models become financially unsustainable.'
+      },
+      {
+        sectionTitle: 'Meta Llama 3.3 Enterprise Open-Weights Strategy',
+        type: 'strategy',
+        text: 'Meta AI’s open-weights Llama 3.3 70B provides GPT-4-class reasoning capabilities while permitting 100% on-premise and VPC hosting. We engineered a distributed inference engine utilizing vLLM with PagedAttention and FP8 quantization, achieving 4x throughput improvements and 60% memory reductions on NVIDIA H100/A100 clusters.'
+      },
+      {
+        sectionTitle: 'Distributed Inference Cluster Folder & Deployment Hierarchy',
+        type: 'filestructure',
+        text: 'The architecture decouples the GPU worker fleet, the semantic caching layer, and the FastAPI application gateway into robust Kubernetes-ready modules:',
+        codeSnippet: {
+          language: 'text',
+          code: `meta-llama-enterprise/
+├── helm-charts/                     # Kubernetes K8s Deployment Manifests
+│   ├── values-h100.yaml             # GPU node resource quotas & tensor slicing
+│   └── templates/vllm-deployment.yaml # vLLM distributed pod spec
+├── services/
+│   ├── llm-gateway/                 # FastAPI High-Concurrency REST API
+│   │   ├── app/routers/chat.py      # OpenAI-compatible /v1/chat/completions route
+│   │   ├── app/cache/redis_cache.py # Semantic vector cache with Qdrant
+│   │   └── main.py                  # ASGI cluster server
+│   └── rag-indexer/                 # Vector ingestion & embedding pipeline
+│       ├── app/embeddings/bge.py    # Multi-lingual embedding generator
+│       └── app/vector/pgvector.py   # PostgreSQL pgvector connector
+└── docker/
+    └── Dockerfile.vllm              # Custom CUDA 12.4 + vLLM base image`
+        }
+      },
+      {
+        sectionTitle: 'vLLM Continuous Batching & FastAPI Gateway Pipeline in Python',
+        type: 'backend',
+        text: 'The backend microservice wraps vLLM tensor-parallel workers behind an asynchronous FastAPI streaming gateway, supporting token-by-token server-sent events (SSE):',
+        codeSnippet: {
+          language: 'python',
+          code: `# High-Throughput Meta Llama 3.3 vLLM Streaming Gateway
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import StreamingResponse
+import httpx
+import json
+
+app = FastAPI(title="Meta AI Llama 3.3 Enterprise Gateway")
+VLLM_INTERNAL_URL = "http://vllm-service.inference.svc.cluster.local:8000/v1/chat/completions"
+
+@app.post("/v1/enterprise/chat")
+async def enterprise_chat(payload: dict):
+    payload["model"] = "meta-llama/Llama-3.3-70B-Instruct"
+    payload["stream"] = True
+
+    async def token_generator():
+        async with httpx.AsyncClient(timeout=120.0) as client:
+            async with client.stream("POST", VLLM_INTERNAL_URL, json=payload) as response:
+                if response.status_code != 200:
+                    raise HTTPException(status_code=500, detail="Inference cluster error")
+                async for line in response.aiter_lines():
+                    if line:
+                        yield f"{line}\\n\\n"
+
+    return StreamingResponse(token_generator(), media_type="text/event-stream")`
+        }
+      },
+      {
+        sectionTitle: 'Benchmark Performance, Cost Reductions & Enterprise ROI',
+        type: 'features',
+        text: 'Production workloads running Meta Llama 3.3 70B demonstrate an 82% cost reduction compared to commercial SaaS LLMs. PagedAttention ensures sub-35ms time-to-first-token (TTFT) across concurrent multi-user streams.'
+      }
+    ],
+    keyTakeaways: [
+      'Meta Llama 3.3 70B delivers GPT-4-class reasoning with 100% data sovereignty.',
+      'vLLM PagedAttention and FP8 quantization allow sub-35ms TTFT on private GPU clusters.',
+      '82% cost savings on high-volume production LLM token pipelines.'
+    ]
+  },
+  {
+    id: 'figma-ai-studio-design-to-code',
+    slug: 'figma-ai-studio-intelligent-design-to-code-architecture',
+    title: 'Figma AI Studio: Revolutionizing Design Systems with Generative UI & Automated React 19 Pipelines',
+    seoTitle: 'Figma AI Studio Architecture: Generative UI, Design Token Synchronization & Automated React 19 Components',
+    metaDescription: 'Complete technical case study on Figma AI Studio: transforming vector scene graphs and design tokens into production-ready, accessible React 19 & Tailwind CSS components using automated GenUI compilation pipelines.',
+    keywords: [
+      'Figma AI Studio',
+      'Figma AI Design Tool',
+      'Design to Code Pipeline',
+      'Generative UI Engine',
+      'React 19 Component Synthesis',
+      'Tailwind CSS Design Tokens',
+      'Figma Dev Mode API',
+      'TypeScript AST Automation',
+      'WCAG Accessible UI Generation'
+    ],
+    category: 'Full Stack & Architecture',
+    author: 'Ayush Kumar',
+    authorRole: 'Head of Frontend Engineering',
+    publishDate: 'August 12, 2026',
+    readTime: '9 min read',
+    image: getBlogImage('figma ai.png'),
+    excerpt: 'Explore how Figma AI Studio and Dev Mode APIs automate the translation of complex design systems into production-ready React 19 components with strict TypeScript types and Tailwind CSS utility styling.',
+    featured: true,
+    tableOfContents: [
+      '1. Design-to-Engineering Handoff Friction & Inconsistencies',
+      '2. Figma AI Studio & REST Scene Graph Extraction Strategy',
+      '3. Automated GenUI Compiler Monorepo Directory Structure',
+      '4. Webhook Receiver & TypeScript AST Synthesis Engine',
+      '5. Accessibility Benchmarks, Code Quality & Release Acceleration'
+    ],
+    content: [
+      {
+        sectionTitle: 'Design-to-Engineering Handoff Friction & Inconsistencies',
+        type: 'problem',
+        text: 'Translating Figma autolayout frames, color styles, spacing variables, and component variants into clean frontend code consumes up to 40% of modern sprint capacity. Manual handoffs frequently suffer from token drift, non-semantic DOM trees, inconsistent responsive breakpoints, and missing ARIA accessibility landmarks.'
+      },
+      {
+        sectionTitle: 'Figma AI Studio & REST Scene Graph Extraction Strategy',
+        type: 'strategy',
+        text: 'Figma AI Studio introduces native AI-assisted variable mapping and semantic node classification. We established an automated compiler pipeline: whenever a designer publishes changes to Figma components, webhooks transmit the vector scene graph JSON to our ingestion pipeline, which normalizes tokens and generates clean, modular React 19 code.'
+      },
+      {
+        sectionTitle: 'Automated GenUI Compiler Monorepo Directory Structure',
+        type: 'filestructure',
+        text: 'The architecture cleanly divides webhook ingestion, design token extraction, and AST code transformation into independent packages:',
+        codeSnippet: {
+          language: 'text',
+          code: `figma-ai-genui-compiler/
+├── apps/
+│   ├── figma-webhook-gateway/       # Express / Node.js Webhook Receiver
+│   │   ├── src/controllers/figma.ts # Ingests node changes & library publications
+│   │   └── src/services/figmaApi.ts # Fetches vector paths & variable tokens
+│   └── react-synthesizer/           # TypeScript & Python GenUI Compiler
+│       ├── compiler/ast_builder.ts  # Babel & TypeScript AST generator
+│       ├── compiler/tailwind.ts     # Maps Figma variables to Tailwind v4 theme
+│       └── server.ts                # Fastify microservice endpoint
+├── packages/
+│   ├── design-tokens/               # Auto-generated CSS / JSON design variables
+│   └── component-preview/           # Storybook / Vite isolated sandbox
+└── tests/e2e/accessibility.spec.ts  # Automated axe-core WCAG 2.1 AA test suite`
+        }
+      },
+      {
+        sectionTitle: 'Webhook Receiver & TypeScript AST Synthesis Engine',
+        type: 'backend',
+        text: 'The AST synthesizer parses normalized Figma layout nodes and outputs type-safe React 19 Server and Client components with Lucide icons and Tailwind styling:',
+        codeSnippet: {
+          language: 'typescript',
+          code: `// Figma AI Scene Graph to React 19 TypeScript AST Compiler
+import { parseFigmaNode, FigmaLayoutNode } from '@figma/ast-utils';
+import * as babel from '@babel/types';
+import generate from '@babel/generator';
+
+export interface GeneratedComponentResult {
+  componentName: string;
+  code: string;
+  cssVariables: Record<string, string>;
+}
+
+export async function compileFigmaNodeToReact(
+  rawNode: FigmaLayoutNode
+): Promise<GeneratedComponentResult> {
+  const normalized = parseFigmaNode(rawNode);
+  
+  // Build React 19 functional component AST
+  const componentAST = babel.exportNamedDeclaration(
+    babel.functionDeclaration(
+      babel.identifier(normalized.pascalName),
+      [babel.identifier('props: ' + normalized.pascalName + 'Props')],
+      babel.blockStatement([
+        babel.returnStatement(
+          babel.jsxElement(
+            babel.jsxOpeningElement(babel.jsxIdentifier('div'), [
+              babel.jsxAttribute(
+                babel.jsxIdentifier('className'),
+                babel.stringLiteral(normalized.tailwindClasses.join(' '))
+              ),
+              babel.jsxAttribute(
+                babel.jsxIdentifier('role'),
+                babel.stringLiteral(normalized.ariaRole || 'region')
+              )
+            ]),
+            babel.jsxClosingElement(babel.jsxIdentifier('div')),
+            normalized.childrenJSX,
+            false
+          )
+        )
+      ])
+    )
+  );
+
+  const { code } = generate(componentAST);
+  return {
+    componentName: normalized.pascalName,
+    code,
+    cssVariables: normalized.tokens
+  };
+}`
+        }
+      },
+      {
+        sectionTitle: 'Accessibility Benchmarks, Code Quality & Release Acceleration',
+        type: 'features',
+        text: 'Automated synthesis reduces component production turnaround from hours to under 30 seconds. Built-in axe-core assertions guarantee 100% WCAG 2.1 AA accessibility score with zero manual DOM remediation.'
+      }
+    ],
+    keyTakeaways: [
+      'Real-time Figma design updates translated into React 19 code in under 30 seconds.',
+      'Automated Tailwind CSS v4 design token synchronization without styling drift.',
+      'Guaranteed WCAG 2.1 AA accessibility compliance across all synthesized UI components.'
     ]
   },
   {
@@ -3616,10 +3724,6 @@ export function generateDocumentHash(pdfBuffer: Buffer): string {
 export function BlogSection() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [activeModalPost, setActiveModalPost] = useState<BlogPost | null>(null);
-  const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [copiedCodeText, setCopiedCodeText] = useState<string | null>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   const categories = useMemo(() => {
@@ -3641,79 +3745,6 @@ export function BlogSection() {
   const heroPost = useMemo(() => {
     return ALL_35_BLOGS.find((b) => b.featured) || ALL_35_BLOGS[0];
   }, []);
-
-  const relatedPosts = useMemo(() => {
-    if (!activeModalPost) return [];
-    return ALL_35_BLOGS.filter(
-      (p) => p.id !== activeModalPost.id && (p.category === activeModalPost.category || p.featured)
-    ).slice(0, 3);
-  }, [activeModalPost]);
-
-  const handleShare = (post: BlogPost) => {
-    const url = `${window.location.origin}/#blog-${post.slug}`;
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(url);
-      setCopiedId(post.id);
-      setTimeout(() => setCopiedId(null), 2500);
-    }
-  };
-
-  const handleCopyCode = (code: string) => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(code);
-      setCopiedCodeText(code);
-      setTimeout(() => setCopiedCodeText(null), 2500);
-    }
-  };
-
-  const handleModalScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const target = e.currentTarget;
-    const totalHeight = target.scrollHeight - target.clientHeight;
-    if (totalHeight > 0) {
-      const current = (target.scrollTop / totalHeight) * 100;
-      setScrollProgress(Math.min(100, Math.max(0, current)));
-    }
-  };
-
-  useEffect(() => {
-    if (activeModalPost) {
-      setScrollProgress(0);
-    }
-  }, [activeModalPost]);
-
-  const getSectionIcon = (type: string) => {
-    switch (type) {
-      case 'problem':
-        return <Flame className="w-4 h-4 text-rose-400 shrink-0" />;
-      case 'strategy':
-        return <Zap className="w-4 h-4 text-amber-400 shrink-0" />;
-      case 'filestructure':
-        return <FolderTree className="w-4 h-4 text-cyan-400 shrink-0" />;
-      case 'backend':
-        return <Server className="w-4 h-4 text-emerald-400 shrink-0" />;
-      case 'features':
-        return <Cpu className="w-4 h-4 text-purple-400 shrink-0" />;
-      default:
-        return <Code2 className="w-4 h-4 text-red-400 shrink-0" />;
-    }
-  };
-
-  const getSectionBadgeColor = (type: string) => {
-    switch (type) {
-      case 'problem':
-        return 'bg-rose-500/10 border-rose-500/30 text-rose-400';
-      case 'strategy':
-        return 'bg-amber-500/10 border-amber-500/30 text-amber-400';
-      case 'filestructure':
-        return 'bg-cyan-500/10 border-cyan-500/30 text-cyan-400';
-      case 'backend':
-        return 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400';
-      case 'features':
-        return 'bg-purple-500/10 border-purple-500/30 text-purple-400';
-      default:
-        return 'bg-red-500/10 border-red-500/30 text-red-400';
-    }
-  };
 
   return (
     <section id="blog" className="w-full min-h-screen py-16 sm:py-24 px-3 sm:px-8 md:px-12 lg:px-20 text-white relative">
@@ -3824,7 +3855,13 @@ export function BlogSection() {
 
                   <button
                     type="button"
-                    onClick={() => setActiveModalPost(heroPost)}
+                    onClick={() => {
+                      if (typeof window !== 'undefined') {
+                        window.location.hash = `#blog-${heroPost.slug}`;
+                        window.history.pushState(null, '', `/blog/${heroPost.slug}`);
+                        window.dispatchEvent(new Event('popstate'));
+                      }
+                    }}
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white text-xs font-bold shadow-lg shadow-red-600/30 transition-all hover:scale-105 cursor-pointer"
                   >
                     Read Technical Case Study <ArrowRight className="w-4 h-4" />
@@ -4076,240 +4113,6 @@ export function BlogSection() {
           </div>
         )}
       </div>
-
-      {/* Futuristic Reader Modal */}
-      <AnimatePresence>
-        {activeModalPost && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-6 md:p-10 bg-black/90 backdrop-blur-2xl">
-            {/* Structured JSON-LD metadata */}
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{
-                __html: JSON.stringify({
-                  '@context': 'https://schema.org',
-                  '@type': 'BlogPosting',
-                  headline: activeModalPost.seoTitle,
-                  description: activeModalPost.metaDescription,
-                  author: {
-                    '@type': 'Person',
-                    name: activeModalPost.author
-                  },
-                  datePublished: activeModalPost.publishDate,
-                  keywords: activeModalPost.keywords.join(', ')
-                })
-              }}
-            />
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              onScroll={handleModalScroll}
-              className="relative w-full max-w-4xl max-h-[100vh] sm:max-h-[92vh] overflow-y-auto bg-zinc-950/95 border border-zinc-700/80 rounded-none sm:rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.9)] p-4 sm:p-10 text-white"
-            >
-              {/* Sticky Top Progress Header Bar */}
-              <div className="sticky -top-4 sm:-top-10 -mx-4 sm:-mx-10 -mt-4 sm:-mt-10 mb-6 sm:mb-8 z-30 bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-800 px-4 sm:px-6 py-3 flex items-center justify-between">
-                <div className="flex items-center gap-3 truncate pr-4">
-                  <div className="px-2.5 py-0.5 rounded-full bg-red-600/20 border border-red-500/40 text-[10px] font-extrabold text-red-400 uppercase tracking-wider shrink-0">
-                    {activeModalPost.category}
-                  </div>
-                  <span className="text-xs font-bold text-zinc-300 truncate">
-                    {activeModalPost.title}
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-3 shrink-0">
-                  <button
-                    type="button"
-                    onClick={() => handleShare(activeModalPost)}
-                    className="p-2 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white transition-all text-xs flex items-center gap-1.5 cursor-pointer"
-                    title="Share Case Study Link"
-                  >
-                    {copiedId === activeModalPost.id ? (
-                      <Check className="w-4 h-4 text-emerald-400" />
-                    ) : (
-                      <Share2 className="w-4 h-4" />
-                    )}
-                  </button>
-                  <button
-                    onClick={() => setActiveModalPost(null)}
-                    className="p-2 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white transition-all cursor-pointer"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-
-                {/* Progress bar line */}
-                <div
-                  className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-red-600 via-rose-500 to-amber-400 transition-all duration-150"
-                  style={{ width: `${scrollProgress}%` }}
-                />
-              </div>
-
-              {/* Header Image Banner */}
-              <div className="relative aspect-video w-full rounded-2xl overflow-hidden mb-8 bg-zinc-900 border border-zinc-800 shadow-2xl">
-                <img
-                  src={activeModalPost.image}
-                  alt={activeModalPost.seoTitle}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />
-                <div className="absolute bottom-4 left-4 px-3.5 py-1 rounded-full bg-red-600 text-white text-xs font-extrabold uppercase tracking-wider backdrop-blur-md">
-                  {activeModalPost.category}
-                </div>
-              </div>
-
-              {/* Author & Meta */}
-              <div className="flex items-center gap-4 text-xs text-zinc-400 mb-4 flex-wrap">
-                <span className="flex items-center gap-1.5 text-zinc-200 font-semibold">
-                  <User className="w-4 h-4 text-red-400" /> {activeModalPost.author} ({activeModalPost.authorRole})
-                </span>
-                <span>•</span>
-                <span className="flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4 text-red-400" /> {activeModalPost.publishDate}
-                </span>
-                <span>•</span>
-                <span className="flex items-center gap-1.5">
-                  <Clock className="w-4 h-4 text-red-400" /> {activeModalPost.readTime}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h1 className="text-2xl sm:text-4xl font-black text-white leading-tight mb-6">
-                {activeModalPost.title}
-              </h1>
-
-              {/* Table of Contents Index */}
-              <div className="p-5 rounded-2xl bg-zinc-900/80 border border-zinc-800 mb-10">
-                <h3 className="text-xs font-extrabold uppercase tracking-wider text-red-400 mb-3 flex items-center gap-2">
-                  <Tag className="w-4 h-4" /> Technical Outline Index
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-zinc-300">
-                  {activeModalPost.tableOfContents.map((item) => (
-                    <div key={item} className="flex items-center gap-2 py-1 px-2.5 rounded-lg bg-zinc-950/60 border border-white/5 font-medium">
-                      <ChevronRight className="w-3.5 h-3.5 text-red-400 shrink-0" />
-                      <span className="truncate">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* 5-Part Section Breakdown */}
-              <div className="space-y-10 text-zinc-300 text-sm sm:text-base leading-relaxed">
-                {activeModalPost.content.map((sec) => (
-                  <div key={sec.sectionTitle} className="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800/80 shadow-lg">
-                    <div className="flex items-center gap-2.5 mb-4">
-                      <div className={`px-3 py-1 rounded-full border text-xs font-bold flex items-center gap-2 ${getSectionBadgeColor(sec.type)}`}>
-                        {getSectionIcon(sec.type)}
-                        <span>{sec.sectionTitle}</span>
-                      </div>
-                    </div>
-
-                    <p className="text-zinc-300 leading-relaxed whitespace-pre-line mb-4 text-xs sm:text-sm">
-                      {sec.text}
-                    </p>
-
-                    {/* Code snippet with copy button */}
-                    {sec.codeSnippet && (
-                      <div className="my-4 rounded-2xl bg-zinc-950 border border-zinc-800 p-3 sm:p-4 font-mono text-xs overflow-x-auto text-emerald-400 shadow-inner relative group/code">
-                        <div className="text-[10px] uppercase text-zinc-500 mb-2 border-b border-zinc-800 pb-1.5 flex justify-between items-center">
-                          <span className="flex items-center gap-1.5"><Terminal className="w-3.5 h-3.5 text-emerald-400" /> Architecture Blueprint & Code</span>
-                          <div className="flex items-center gap-2">
-                            <span className="text-zinc-400 font-bold">{sec.codeSnippet.language}</span>
-                            <button
-                              type="button"
-                              onClick={() => handleCopyCode(sec.codeSnippet!.code)}
-                              className="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[10px] flex items-center gap-1 transition-all cursor-pointer"
-                            >
-                              {copiedCodeText === sec.codeSnippet.code ? (
-                                <span className="text-emerald-400 flex items-center gap-1"><Check className="w-3 h-3" /> Copied</span>
-                              ) : (
-                                <span className="flex items-center gap-1"><Copy className="w-3 h-3" /> Copy</span>
-                              )}
-                            </button>
-                          </div>
-                        </div>
-                        <pre className="overflow-x-auto whitespace-pre"><code>{sec.codeSnippet.code}</code></pre>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Key Takeaways Box */}
-              <div className="my-10 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-zinc-900 via-zinc-950 to-zinc-900 border-2 border-red-500/40 shadow-2xl">
-                <h3 className="text-base font-bold text-white mb-4 flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400" /> Core Engineering Metrics & Takeaways
-                </h3>
-                <ul className="space-y-3">
-                  {activeModalPost.keyTakeaways.map((takeaway) => (
-                    <li key={takeaway} className="text-xs sm:text-sm text-zinc-200 flex items-start gap-3 font-medium">
-                      <span className="w-2 h-2 rounded-full bg-red-500 mt-1.5 shrink-0" />
-                      <span>{takeaway}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Related Case Studies Recommendations */}
-              {relatedPosts.length > 0 && (
-                <div className="my-10 pt-8 border-t border-zinc-800">
-                  <h3 className="text-sm font-extrabold uppercase tracking-wider text-red-400 mb-4 flex items-center gap-2">
-                    <Sparkles className="w-4 h-4" /> Related Engineering Case Studies
-                  </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {relatedPosts.map((rel) => (
-                      <button
-                        key={rel.id}
-                        type="button"
-                        onClick={() => setActiveModalPost(rel)}
-                        className="text-left p-3 rounded-xl bg-zinc-900/60 border border-zinc-800 hover:border-red-500/50 transition-all group/rel cursor-pointer"
-                      >
-                        <img
-                          src={rel.image}
-                          alt={rel.title}
-                          className="w-full aspect-video rounded-lg object-cover mb-2 border border-zinc-800"
-                        />
-                        <div className="text-[10px] text-red-400 font-bold mb-1">{rel.category}</div>
-                        <div className="text-xs font-bold text-white group-hover/rel:text-red-400 line-clamp-2 transition-colors">
-                          {rel.title}
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Modal Footer */}
-              <div className="pt-6 border-t border-zinc-800 flex flex-wrap items-center justify-between gap-4">
-                <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">
-                    SEO Keywords & Tech Tags
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {activeModalPost.keywords.map((k) => (
-                      <span
-                        key={k}
-                        className="px-3 py-1 rounded-lg bg-zinc-900 text-xs font-medium text-zinc-300 border border-zinc-800"
-                      >
-                        #{k}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => setActiveModalPost(null)}
-                  className="px-5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold transition-all cursor-pointer"
-                >
-                  Close Reader
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </section>
   );
 }
