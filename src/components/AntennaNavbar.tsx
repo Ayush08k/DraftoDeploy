@@ -45,19 +45,41 @@ export default function AntennaNavbar({
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: NavItem) => {
     if (item.href.startsWith('#')) {
       e.preventDefault();
-      window.location.hash = item.href;
-      if (
-        item.label.toLowerCase() === 'home' ||
-        item.href === '#top' ||
-        item.href === '#blog' ||
-        item.href === '#projects'
-      ) {
+      
+      if (item.label.toLowerCase() === 'home' || item.href === '#top') {
+        window.history.pushState(null, '', '/#top');
+        window.location.hash = '#top';
+        window.dispatchEvent(new Event('popstate'));
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        const el = document.querySelector(item.href);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
-        }
+        return;
+      }
+
+      if (item.href === '#blog') {
+        window.history.pushState(null, '', '/blog');
+        window.location.hash = '#blog';
+        window.dispatchEvent(new Event('popstate'));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      if (item.href === '#projects') {
+        window.history.pushState(null, '', '/projects');
+        window.location.hash = '#projects';
+        window.dispatchEvent(new Event('popstate'));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      // In-page section anchors (About, Services, Estimator, Contact, Review)
+      if (window.location.pathname !== '/') {
+        window.history.pushState(null, '', `/${item.href}`);
+        window.dispatchEvent(new Event('popstate'));
+      }
+      window.location.hash = item.href;
+
+      const el = document.querySelector(item.href);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
       }
     }
   };
@@ -82,7 +104,9 @@ export default function AntennaNavbar({
               href="#top"
               onClick={(e) => {
                 e.preventDefault();
+                window.history.pushState(null, '', '/#top');
                 window.location.hash = '#top';
+                window.dispatchEvent(new Event('popstate'));
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               className="flex items-center pr-3 pl-1 -my-2 hover:opacity-90 transition-opacity"

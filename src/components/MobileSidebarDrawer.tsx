@@ -23,11 +23,39 @@ export function MobileSidebarDrawer({
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsOpen(false);
+
+    if (href === '#top' || href === '#') {
+      window.history.pushState(null, '', '/#top');
+      window.location.hash = '#top';
+      window.dispatchEvent(new Event('popstate'));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    if (href === '#blog') {
+      window.history.pushState(null, '', '/blog');
+      window.location.hash = '#blog';
+      window.dispatchEvent(new Event('popstate'));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    if (href === '#projects') {
+      window.history.pushState(null, '', '/projects');
+      window.location.hash = '#projects';
+      window.dispatchEvent(new Event('popstate'));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    // In-page section anchors
+    if (window.location.pathname !== '/') {
+      window.history.pushState(null, '', `/${href}`);
+      window.dispatchEvent(new Event('popstate'));
+    }
     window.location.hash = href;
 
-    if (href === '#top' || href === '#' || href === '#blog' || href === '#projects') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (href.startsWith('#')) {
+    if (href.startsWith('#')) {
       const targetEl = document.querySelector(href);
       if (targetEl) {
         const topOffset = targetEl.getBoundingClientRect().top + window.scrollY - 80;

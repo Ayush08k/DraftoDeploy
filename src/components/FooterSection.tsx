@@ -9,7 +9,7 @@
 import { FaLinkedinIn } from "react-icons/fa";
 import { SiFiverr, SiFreelancer, SiUpwork, SiIndeed } from "react-icons/si";
 
-// â”€â”€â”€ Navigation Links â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Navigation Links ─────────────────────────────────────────────────────────
 const NAV_LINKS = [
   { label: "Home", href: "#top" },
   { label: "About", href: "#about" },
@@ -21,7 +21,7 @@ const NAV_LINKS = [
   { label: "Contact", href: "#contact" },
 ];
 
-// â”€â”€â”€ Trust Signals â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Trust Signals ──────────────────────────────────────────────────────────
 const TRUST_BADGES = [
   { icon: HiOutlineCheckCircle, label: "150+ Projects Delivered" },
   { icon: HiOutlineShieldCheck, label: "99.9% Client Satisfaction" },
@@ -29,7 +29,7 @@ const TRUST_BADGES = [
   { icon: HiOutlineGlobeAlt, label: "40+ Countries Served" },
 ];
 
-// â”€â”€â”€ Technology Tags â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Technology Tags ────────────────────────────────────────────────────────
 const TECH_TAGS = [
   "Vibe Coding", "AI Velocity", "React 19", "Next.js 15", "Node.js",
   "TypeScript", "Three.js", "WebGL", "React Native", "Flutter",
@@ -69,7 +69,7 @@ export function FooterSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* â”€â”€ TOP SECTION: Trust Badges â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── TOP SECTION: Trust Badges ──────────────────────────────────── */}
         <div className="py-8 border-b border-white/10">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {TRUST_BADGES.map(({ icon: Icon, label }) => (
@@ -84,7 +84,7 @@ export function FooterSection() {
           </div>
         </div>
 
-        {/* â”€â”€ MAIN FOOTER CONTENT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── MAIN FOOTER CONTENT ─────────────────────────────────────────── */}
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
 
           {/* Column 1: Brand & About */}
@@ -97,7 +97,7 @@ export function FooterSection() {
             <a
               href="#top"
               onClick={(e) => handleNavClick(e, "#top")}
-              aria-label="DraftoDeploy â€” Go to homepage"
+              aria-label="DraftoDeploy — Go to homepage"
               itemProp="url"
             >
               <img
@@ -134,7 +134,7 @@ export function FooterSection() {
               ))}
             </div>
 
-            {/* Contact Info â€” Address schema for local SEO */}
+            {/* Contact Info — Address schema for local SEO */}
             <address
               className="not-italic space-y-2"
               itemScope
@@ -153,7 +153,7 @@ export function FooterSection() {
               <div className="flex items-center gap-2 text-sm text-zinc-400">
                 <HiOutlineGlobeAlt className="w-4 h-4 flex-shrink-0 text-zinc-500" />
                 <span itemProp="addressCountry">India</span>
-                <span className="text-zinc-600">Â·</span>
+                <span className="text-zinc-600">·</span>
                 <span className="text-zinc-500">Serving Worldwide</span>
               </div>
             </address>
@@ -197,8 +197,8 @@ export function FooterSection() {
                   href="https://www.linkedin.com/company/draftodeploy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="DraftoDeploy on LinkedIn â€” Freelance Web Development Agency Page"
-                  title="DraftoDeploy LinkedIn Page â€” Freelance Web Developer & Startup Agency"
+                  aria-label="DraftoDeploy on LinkedIn — Freelance Web Development Agency Page"
+                  title="DraftoDeploy LinkedIn Page — Freelance Web Developer & Startup Agency"
                   itemProp="sameAs"
                   className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-[#0A66C2]/10 border border-[#0A66C2]/30 hover:bg-[#0A66C2]/20 hover:border-[#0A66C2]/60 transition-all"
                 >
@@ -211,8 +211,8 @@ export function FooterSection() {
                   href="https://www.fiverr.com/ayush08k"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="DraftoDeploy on Fiverr â€” Hire Top Rated Budget Friendly Freelance Developer"
-                  title="DraftoDeploy Fiverr Profile â€” Hire React & Next.js Freelancer"
+                  aria-label="DraftoDeploy on Fiverr — Hire Top Rated Budget Friendly Freelance Developer"
+                  title="DraftoDeploy Fiverr Profile — Hire React & Next.js Freelancer"
                   itemProp="sameAs"
                   className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-[#1DBF73]/10 border border-[#1DBF73]/30 hover:bg-[#1DBF73]/20 hover:border-[#1DBF73]/60 transition-all"
                 >
@@ -225,8 +225,8 @@ export function FooterSection() {
                   href="https://www.freelancer.in/u/ayush08k?sb=t"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="DraftoDeploy on Freelancer â€” Top Rated Full Stack Web Developer"
-                  title="DraftoDeploy Freelancer.in Profile â€” Budget Startup MVPs & AI Engineering"
+                  aria-label="DraftoDeploy on Freelancer — Top Rated Full Stack Web Developer"
+                  title="DraftoDeploy Freelancer.in Profile — Budget Startup MVPs & AI Engineering"
                   itemProp="sameAs"
                   className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-[#29B2FE]/10 border border-[#29B2FE]/30 hover:bg-[#29B2FE]/20 hover:border-[#29B2FE]/60 transition-all"
                 >
@@ -239,8 +239,8 @@ export function FooterSection() {
                   href="https://www.upwork.com/freelancers/~018562aba5c499b197?mp_source=share"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="DraftoDeploy on Upwork â€” Top Rated Remote Web Developer & Vibe Coder"
-                  title="DraftoDeploy Upwork Profile â€” Hire Freelance Full Stack Developer"
+                  aria-label="DraftoDeploy on Upwork — Top Rated Remote Web Developer & Vibe Coder"
+                  title="DraftoDeploy Upwork Profile — Hire Freelance Full Stack Developer"
                   itemProp="sameAs"
                   className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-[#6FDA44]/10 border border-[#6FDA44]/30 hover:bg-[#6FDA44]/20 hover:border-[#6FDA44]/60 transition-all"
                 >
@@ -253,8 +253,8 @@ export function FooterSection() {
                   href="https://profile.indeed.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="DraftoDeploy on Indeed â€” Remote Work From Home Web Development Agency"
-                  title="DraftoDeploy Indeed Profile â€” Remote Contract & Job Hiring Company"
+                  aria-label="DraftoDeploy on Indeed — Remote Work From Home Web Development Agency"
+                  title="DraftoDeploy Indeed Profile — Remote Contract & Job Hiring Company"
                   itemProp="sameAs"
                   className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-[#2164f3]/10 border border-[#2164f3]/30 hover:bg-[#2164f3]/20 hover:border-[#2164f3]/60 transition-all"
                 >
@@ -266,11 +266,11 @@ export function FooterSection() {
               {/* Remote-first badge */}
               <div
                 className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10"
-                title="100% Remote â€” Our team works fully remote from home, serving clients worldwide"
+                title="100% Remote — Our team works fully remote from home, serving clients worldwide"
               >
                 <HiOutlineHome className="w-4 h-4 text-[#00ffc6] flex-shrink-0" />
                 <span className="text-[11px] font-semibold text-zinc-300">
-                  100% Remote Â· Work From Home
+                  100% Remote · Work From Home
                 </span>
               </div>
             </div>
@@ -322,7 +322,7 @@ export function FooterSection() {
           </div>
         </div>
 
-        {/* â”€â”€ BOTTOM BAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* ── BOTTOM BAR ──────────────────────────────────────────────────── */}
         <div className="py-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
 
           {/* Copyright */}
@@ -341,15 +341,15 @@ export function FooterSection() {
           {/* Keywords / Trust Tags */}
           <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px] text-zinc-600">
             <span>Freelance Web Developer</span>
-            <span className="text-zinc-800">Â·</span>
+            <span className="text-zinc-800">·</span>
             <span>Vibe Coding Agency</span>
-            <span className="text-zinc-800">Â·</span>
+            <span className="text-zinc-800">·</span>
             <span>Remote Job & Contract Hiring</span>
-            <span className="text-zinc-800">Â·</span>
+            <span className="text-zinc-800">·</span>
             <span>Budget Friendly Agency</span>
-            <span className="text-zinc-800">Â·</span>
+            <span className="text-zinc-800">·</span>
             <span>Startup MVP Builder</span>
-            <span className="text-zinc-800">Â·</span>
+            <span className="text-zinc-800">·</span>
             <span>React & Next.js Expert</span>
           </div>
         </div>

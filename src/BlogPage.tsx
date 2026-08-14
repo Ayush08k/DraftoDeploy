@@ -1,4 +1,4 @@
-﻿import { useEffect } from "react";
+import { useEffect } from "react";
 import BlogSection from "./components/BlogSection";
 import AuroraBackground from "./components/aurora-background";
 
@@ -7,18 +7,18 @@ export default function BlogPage() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     document.title =
-      "Tech Blog â€” Web Dev, React, AI & Startup Engineering Guides | DraftoDeploy";
+      "Tech Blog — Web Dev, React, AI & Startup Engineering Guides | DraftoDeploy";
     const metaDesc = document.querySelector<HTMLMetaElement>(
       'meta[name="description"]'
     );
     if (metaDesc) {
       metaDesc.content =
-        "DraftoDeploy's tech blog features 35+ in-depth articles on React architecture, Next.js, Three.js 3D development, AI integrations, SaaS engineering, mobile app development, and startup tech strategy.";
+        "DraftoDeploy's tech blog features 38+ in-depth articles on React architecture, Next.js, Three.js 3D development, AI integrations, SaaS engineering, mobile app development, and startup tech strategy.";
     }
     return () => {
       // Restore homepage title on unmount
       document.title =
-        "DraftoDeploy â€” #1 Freelance Developer & Budget-Friendly Web Development Agency for Startups";
+        "DraftoDeploy — #1 Freelance AI & Web Developer | Budget-Friendly Agency for Startups";
     };
   }, []);
 
@@ -28,7 +28,7 @@ export default function BlogPage() {
       itemScope
       itemType="https://schema.org/Blog"
     >
-      {/* Blog page breadcrumb â€” hidden visually but crawlable */}
+      {/* Blog page breadcrumb — hidden visually but crawlable */}
       <nav
         aria-label="Breadcrumb"
         className="sr-only"

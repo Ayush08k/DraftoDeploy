@@ -1,7 +1,7 @@
-﻿# robots.txt for DraftoDeploy â€” https://draftodeploy.vercel.app
+﻿# robots.txt for DraftoDeploy — https://draftodeploy.vercel.app
 # Last updated: August 2026
 
-# â”€â”€â”€ Allow all good crawlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ─── Allow all good crawlers ───────────────────────────────────────
 User-agent: *
 Allow: /
 Allow: /projects
@@ -13,7 +13,7 @@ Disallow: /_next/
 Disallow: /admin/
 Disallow: /private/
 
-# â”€â”€â”€ Google-specific rules â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ─── Google-specific rules ─────────────────────────────────────────
 User-agent: Googlebot
 Allow: /
 Allow: /projects
@@ -27,12 +27,12 @@ Allow: /*.jpg$
 Allow: /*.svg$
 Allow: /*.webp$
 
-# â”€â”€â”€ Bing rules â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ─── Bing rules ────────────────────────────────────────────────────
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 2
 
-# â”€â”€â”€ AI crawlers (allow for discoverability) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ─── AI crawlers (allow for discoverability) ───────────────────────
 User-agent: GPTBot
 Allow: /
 
@@ -48,5 +48,5 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-# â”€â”€â”€ Sitemap â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ─── Sitemap ───────────────────────────────────────────────────────
 Sitemap: https://draftodeploy.vercel.app/sitemap.xml

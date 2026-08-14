@@ -1,7 +1,7 @@
-﻿import { useEffect } from "react";
+import { useEffect } from "react";
 
 /**
- * SeoHead â€” Dynamic per-page SEO meta updater
+ * SeoHead — Dynamic per-page SEO meta updater
  *
  * Updates document.title, meta description, canonical URL,
  * Open Graph, and Twitter Card tags dynamically when the user
@@ -23,12 +23,12 @@ interface SeoHeadProps {
 const SEO_CONFIG = {
   home: {
     title:
-      "DraftoDeploy â€” #1 Freelance Developer & Budget-Friendly Web Development Agency for Startups",
+      "DraftoDeploy — #1 Freelance AI & Web Developer | Budget-Friendly Agency for Startups",
     description:
       "DraftoDeploy is a top-rated freelance web development agency. We build high-quality, budget-friendly web apps, mobile apps, SaaS MVPs, 3D landing pages & AI integrations for startups worldwide. 150+ projects delivered.",
     canonical: "https://draftodeploy.vercel.app/",
     ogTitle:
-      "DraftoDeploy â€” Best Freelance Developer & Low-Cost Web Agency for Startups",
+      "DraftoDeploy — Best Freelance Developer & Low-Cost Web Agency for Startups",
     ogDescription:
       "Hire top freelance developers for budget-friendly web apps, mobile apps, SaaS MVPs, and 3D websites. Premium quality at affordable rates. 150+ startup projects delivered worldwide.",
     ogImage: "https://draftodeploy.vercel.app/logo.png",
@@ -36,11 +36,11 @@ const SEO_CONFIG = {
   },
   projects: {
     title:
-      "Projects Portfolio â€” 150+ Delivered Web Apps, Mobile Apps & AI Platforms | DraftoDeploy",
+      "Projects Portfolio — 150+ Delivered Web Apps, Mobile Apps & AI Platforms | DraftoDeploy",
     description:
       "Explore DraftoDeploy's portfolio of 150+ successfully delivered projects including React SaaS platforms, 3D WebGL landing pages, AI-powered dashboards, mobile apps, and e-commerce stores built for startups worldwide.",
     canonical: "https://draftodeploy.vercel.app/projects",
-    ogTitle: "DraftoDeploy Projects Portfolio â€” 150+ Successful Deliveries",
+    ogTitle: "DraftoDeploy Projects Portfolio — 150+ Successful Deliveries",
     ogDescription:
       "Browse our portfolio of 150+ delivered projects: SaaS MVPs, 3D interactive websites, AI integrations, mobile apps and e-commerce stores built for global startups.",
     ogImage: "https://draftodeploy.vercel.app/logo.png",
@@ -48,14 +48,14 @@ const SEO_CONFIG = {
   },
   blog: {
     title:
-      "Tech Blog â€” Web Development, React, AI & Startup Engineering Guides | DraftoDeploy",
+      "Tech Blog — Web Development, React, AI & Startup Engineering Guides | DraftoDeploy",
     description:
-      "DraftoDeploy's tech blog features 35+ in-depth articles on React architecture, Next.js, Three.js 3D development, AI integrations, SaaS engineering, mobile app development, and startup tech strategy.",
+      "DraftoDeploy's tech blog features 38+ in-depth articles on React architecture, Next.js, Three.js 3D development, AI integrations, SaaS engineering, mobile app development, and startup tech strategy.",
     canonical: "https://draftodeploy.vercel.app/blog",
     ogTitle:
-      "DraftoDeploy Tech Blog â€” React, AI, SaaS & Web Dev Engineering Guides",
+      "DraftoDeploy Tech Blog — React, AI, SaaS & Web Dev Engineering Guides",
     ogDescription:
-      "35+ in-depth technical articles covering React 19, Next.js 15, Three.js WebGL, LangChain AI, SaaS architecture, mobile development and startup engineering best practices.",
+      "38+ in-depth technical articles covering React 19, Next.js 15, Three.js WebGL, LangChain AI, SaaS architecture, mobile development and startup engineering best practices.",
     ogImage: "https://draftodeploy.vercel.app/logo.png",
     ogType: "blog",
   },
@@ -131,7 +131,7 @@ function setArticleSchema(props: SeoHeadProps) {
   document.head.appendChild(script);
 }
 
-function setBreadcrumbSchema(page: SeoHeadProps["page"], articleTitle?: string) {
+function setBreadcrumbSchema(page: SeoHeadProps["page"], articleTitle?: string, articleSlug?: string) {
   const existingScript = document.querySelector("#dynamic-breadcrumb-schema");
   if (existingScript) existingScript.remove();
 
@@ -150,7 +150,7 @@ function setBreadcrumbSchema(page: SeoHeadProps["page"], articleTitle?: string) 
     items.push({ name: "Blog", item: "https://draftodeploy.vercel.app/blog" });
     items.push({
       name: articleTitle,
-      item: `https://draftodeploy.vercel.app/blog`,
+      item: `https://draftodeploy.vercel.app/blog/${articleSlug || ''}`,
     });
   }
 
@@ -219,7 +219,7 @@ export function SeoHead(props: SeoHeadProps) {
 
     // Inject dynamic schemas
     setArticleSchema(props);
-    setBreadcrumbSchema(page, articleTitle);
+    setBreadcrumbSchema(page, articleTitle, articleSlug);
 
   }, [page, articleSlug, articleTitle, articleDescription, articlePublishDate, articleAuthor, props]);
 
