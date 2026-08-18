@@ -86,8 +86,12 @@ function App() {
 
   return (
     <>
-      {/* Dynamic per-page SEO meta updater */}
-      <SeoHead page={seoPage} />
+
+      {/* Dynamic per-page SEO — only for home & projects; blog pages manage their own SeoHead */}
+      {(seoPage === "home" || seoPage === "projects") && (
+        <SeoHead page={seoPage} />
+      )}
+
 
       <div
         className="w-full min-h-screen bg-zinc-950 text-white overflow-x-hidden relative"

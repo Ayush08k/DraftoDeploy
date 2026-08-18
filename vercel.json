@@ -1,5 +1,391 @@
 {
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/projects",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/projects>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/blog",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/blog/google-astra-gemini-2-developer-ai-agent-architecture",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/google-astra-gemini-2-developer-ai-agent-architecture>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/xai-grok-code-developer-ai-agent-architecture",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/xai-grok-code-developer-ai-agent-architecture>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/meta-ai-llama-3-open-source-enterprise-architecture",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/meta-ai-llama-3-open-source-enterprise-architecture>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/figma-ai-studio-intelligent-design-to-code-architecture",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/figma-ai-studio-intelligent-design-to-code-architecture>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/ai-business-analytics-predictive-intelligence",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/ai-business-analytics-predictive-intelligence>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/headless-ecommerce-performance-scale",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/headless-ecommerce-performance-scale>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/ai-code-reviewer-devsecops-automation",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/ai-code-reviewer-devsecops-automation>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/web3-crypto-telemetry-architecture",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/web3-crypto-telemetry-architecture>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/cloud-workstations-ephemeral-devdock",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/cloud-workstations-ephemeral-devdock>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/agency-portfolio-webgl-shaders-creative-engineering",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/agency-portfolio-webgl-shaders-creative-engineering>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/ai-content-copy-generator-llm-multimodal",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/ai-content-copy-generator-llm-multimodal>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/ai-predictive-intelligence-demand-forecasting",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/ai-predictive-intelligence-demand-forecasting>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/ai-smart-travel-planner-geospatial-routes",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/ai-smart-travel-planner-geospatial-routes>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/apex-financial-operations-ledger-routing",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/apex-financial-operations-ledger-routing>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/assethub-digital-asset-management-cdn-distribution",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/assethub-digital-asset-management-cdn-distribution>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/bookself-interactive-library-pwa-offline",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/bookself-interactive-library-pwa-offline>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/chatbot-ecommerce-conversational-ai-support",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/chatbot-ecommerce-conversational-ai-support>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/coding-sandbox-browser-compiler-wasm",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/coding-sandbox-browser-compiler-wasm>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/collabedit-realtime-crdt-sync-workspaces",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/collabedit-realtime-crdt-sync-workspaces>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/customer-sentiment-intelligence-nlp",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/customer-sentiment-intelligence-nlp>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/docusigner-electronic-signature-cryptography",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/docusigner-electronic-signature-cryptography>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/modern-retail-storefront-performance",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/modern-retail-storefront-performance>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/ecotrack-carbon-footprint-monitor-telemetry",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/ecotrack-carbon-footprint-monitor-telemetry>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/expense-tracker-ocr-finance-architecture",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/expense-tracker-ocr-finance-architecture>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/feedo-customer-feedback-roadmap-architecture",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/feedo-customer-feedback-roadmap-architecture>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/formforge-dynamic-form-builder-architecture",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/formforge-dynamic-form-builder-architecture>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/gitvisual-repository-commit-graph-explorer",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/gitvisual-repository-commit-graph-explorer>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/gymtrack-fitness-workout-logging-architecture",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/gymtrack-fitness-workout-logging-architecture>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/habitforge-daily-streak-engine-gamification",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/habitforge-daily-streak-engine-gamification>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/invoiceflow-automated-billing-stripe-architecture",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/invoiceflow-automated-billing-stripe-architecture>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/kube-cluster-management-console-devops",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/kube-cluster-management-console-devops>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/learnloom-interactive-lms-streaming-architecture",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/learnloom-interactive-lms-streaming-architecture>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/localbite-gourmet-food-delivery-geospatial",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/localbite-gourmet-food-delivery-geospatial>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/mailblast-email-marketing-automation-scale",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/mailblast-email-marketing-automation-scale>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/medical-diagnosis-ai-clinical-imaging-support",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/medical-diagnosis-ai-clinical-imaging-support>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/mindmap-infinite-canvas-architecture-zustand",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/mindmap-infinite-canvas-architecture-zustand>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/soundsphere-audio-streaming-studio-web-audio",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/soundsphere-audio-streaming-studio-web-audio>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/pagepulse-web-vitals-seo-monitoring-puppeteer",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/pagepulse-web-vitals-seo-monitoring-puppeteer>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/parksmart-iot-parking-management-mqtt",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/parksmart-iot-parking-management-mqtt>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/siteguard-web-application-firewall-ddos-protection",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/siteguard-web-application-firewall-ddos-protection>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/smart-product-recommendation-engine-fastapi",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/smart-product-recommendation-engine-fastapi>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/connectverse-social-community-hub-websockets",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/connectverse-social-community-hub-websockets>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/orderexpress-coffee-retail-mobile-app-architecture",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/orderexpress-coffee-retail-mobile-app-architecture>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/statlink-realtime-data-telemetry-threejs",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/statlink-realtime-data-telemetry-threejs>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/super-app-ecosystem-suite-microservices",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/super-app-ecosystem-suite-microservices>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/omnichannel-customer-support-desk-architecture",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/omnichannel-customer-support-desk-architecture>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/taskflow-agile-project-management-kanban",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/taskflow-agile-project-management-kanban>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/tasksync-distributed-workflow-automation-redis",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/tasksync-distributed-workflow-automation-redis>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/whisperchat-encrypted-messaging-web-crypto-api",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/whisperchat-encrypted-messaging-web-crypto-api>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/blog/zenith-enterprise-erp-cloud-architecture",
+      "headers": [
+        { "key": "Link", "value": "<https://draftodeploy.vercel.app/blog/zenith-enterprise-erp-cloud-architecture>; rel=\"canonical\"" },
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large, max-snippet:-1" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+      ]
+    }
   ]
 }

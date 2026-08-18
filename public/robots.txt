@@ -1,24 +1,31 @@
-﻿# robots.txt for DraftoDeploy — https://draftodeploy.vercel.app
-# Last updated: August 2026
+# robots.txt for DraftoDeploy — https://draftodeploy.vercel.app
+# Last updated: 2026-08-18
 
 # ─── Allow all good crawlers ───────────────────────────────────────
 User-agent: *
 Allow: /
 Allow: /projects
 Allow: /blog
+Allow: /blog/
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /logo.png
+Allow: /favicon.svg
 
 # Disallow internal/admin paths
 Disallow: /api/
 Disallow: /_next/
 Disallow: /admin/
 Disallow: /private/
+Disallow: /*.json$
 
 # ─── Google-specific rules ─────────────────────────────────────────
 User-agent: Googlebot
 Allow: /
 Allow: /projects
 Allow: /blog
-Crawl-delay: 1
+Allow: /blog/
+Allow: /sitemap.xml
 
 User-agent: Googlebot-Image
 Allow: /
@@ -26,13 +33,15 @@ Allow: /*.png$
 Allow: /*.jpg$
 Allow: /*.svg$
 Allow: /*.webp$
+Allow: /*.avif$
 
 # ─── Bing rules ────────────────────────────────────────────────────
 User-agent: Bingbot
 Allow: /
+Allow: /blog/
 Crawl-delay: 2
 
-# ─── AI crawlers (allow for discoverability) ───────────────────────
+# ─── AI crawlers (allow for discoverability & citations) ───────────
 User-agent: GPTBot
 Allow: /
 
@@ -48,5 +57,11 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-# ─── Sitemap ───────────────────────────────────────────────────────
+User-agent: YouBot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+# ─── Sitemaps ──────────────────────────────────────────────────────
 Sitemap: https://draftodeploy.vercel.app/sitemap.xml

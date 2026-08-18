@@ -19,11 +19,13 @@
     <meta name="rating" content="general" />
     <meta name="revisit-after" content="1 days" />
     <meta name="language" content="English" />
-    <meta name="copyright" content="DraftoDeploy 2024" />
+    <meta name="copyright" content="DraftoDeploy 2026" />
     <meta name="category" content="Web Development, Freelance, Software Agency" />
     <meta name="classification" content="Business" />
     <meta name="google-site-verification" content="ylfQTEyQG7TTtzGqEzJ3ig-mCaxzXiHP_0UpT5R0OdY" />
-    <link rel="canonical" href="https://draftodeploy.vercel.app/" />
+    <!-- Canonical is set dynamically per-page by SeoHead.tsx + Vercel HTTP Link headers -->
+    <!-- DO NOT add a static canonical here — it would make all sub-pages point to / -->
+    <link id="canonical-tag" rel="canonical" href="https://draftodeploy.vercel.app/" />
 
     <!-- ═══════════════════════════════════════════════════════════════
          GEOGRAPHIC & LOCAL SEO
@@ -41,6 +43,8 @@
     <link rel="alternate" hreflang="en-IN" href="https://draftodeploy.vercel.app/" />
     <link rel="alternate" hreflang="en-GB" href="https://draftodeploy.vercel.app/" />
     <link rel="alternate" hreflang="x-default" href="https://draftodeploy.vercel.app/" />
+    <!-- Sitemap reference in head for faster discovery -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
     <!-- ═══════════════════════════════════════════════════════════════
          THEME & APPEARANCE
